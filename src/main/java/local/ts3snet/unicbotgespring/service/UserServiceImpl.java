@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserEntity> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
     public UserEntity findByUserTelegramId(Long userTelegramId) {
         return userRepository.findByUserTelegramId(userTelegramId);
     }

@@ -9,4 +9,5 @@ public interface UserService {
     void update(UserEntity user);
     UserEntity findByUserTelegramId(Long userid);
     List<UserEntity> findAllSubscribers();
+    List<UserEntity> findAll();
 }

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class UtilsWebServiceTukeroORGImpl implements Runnable, UtilsWebServiceTukeroORG{
     @Getter
     @Setter
-    private static boolean loophole = true;
+    private static volatile boolean loophole = true;
 
     TelegramBotService telegramBotService;
     @Autowired

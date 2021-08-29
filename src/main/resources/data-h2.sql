@@ -1,0 +1,1 @@
+INSERT INTO users (subscriber, user_name, user_telegram_id) VALUES (true, 'erlihdevinson', 255397596);

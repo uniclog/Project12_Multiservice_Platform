@@ -11,4 +11,6 @@ import org.springframework.context.annotation.PropertySource;
 public class WebConfig {
     @Value("${web.chat.url}")
     private String url;
+    @Value("${web.chat.update}")
+    private Boolean updateLoop;
 }

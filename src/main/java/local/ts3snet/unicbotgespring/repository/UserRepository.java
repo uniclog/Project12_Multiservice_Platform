@@ -8,5 +8,4 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByUserTelegramId(Long userTelegramId);
     List<UserEntity> findAllBySubscriber(boolean subscriber);
-
 }

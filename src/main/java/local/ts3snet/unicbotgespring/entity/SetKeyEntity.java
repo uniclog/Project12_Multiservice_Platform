@@ -4,33 +4,32 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
-@Table(name = "users")
-public class UserEntity {
-    @Id
+@Entity(name = "keys")
+public class SetKeyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long userTelegramId;
-    private String userName;
-    private Boolean subscriber;
+    String id;
+    @Id
+    String key;
+    private Date date;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        UserEntity that = (UserEntity) o;
+        SetKeyEntity that = (SetKeyEntity) o;
 
         return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return 1838525018;
+        return 903267378;
     }
 }

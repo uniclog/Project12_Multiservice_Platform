@@ -13,4 +13,6 @@ public class WebConfig {
     private String url;
     @Value("${web.chat.update}")
     private Boolean updateLoop;
+    @Value("${web.chat.key.pattern}")
+    private String keyPattern;
 }

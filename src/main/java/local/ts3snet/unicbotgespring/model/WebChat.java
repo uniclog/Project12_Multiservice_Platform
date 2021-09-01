@@ -25,11 +25,15 @@ public class WebChat {
         this.parser = parser;
     }
 
+    public List<String> parseKey(String text) {
+        return parser.parceKey(text, webConfig.getKeyPattern());
+    }
+
     public List<WebChatNode> update() {
         List<WebChatNode> newMessages = new ArrayList<>();
         if (Boolean.FALSE.equals(webConfig.getUpdateLoop()))
             return newMessages;
-        List<WebChatNode> parseNodes = parser.parser(webConfig.getUrl());
+        List<WebChatNode> parseNodes = parser.messageParser(webConfig.getUrl());
         if (chatNodes.isEmpty()) {
             chatNodes = parseNodes;
             return parseNodes;

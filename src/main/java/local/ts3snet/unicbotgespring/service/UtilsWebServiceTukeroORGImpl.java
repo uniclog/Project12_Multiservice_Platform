@@ -58,12 +58,9 @@ public class UtilsWebServiceTukeroORGImpl implements Runnable, UtilsWebServiceTu
                         keys.forEach(key -> {
                             SetKeyEntity keyEntity = new SetKeyEntity();
                             keyEntity.setKey(key);
-                            Date date = new Date(System.currentTimeMillis());
-                            keyEntity.setDate(date);
+
                             setKeyService.save(keyEntity);
                         });
-
-                        setKeyService.save(new SetKeyEntity());
                     }
                 });
 

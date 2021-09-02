@@ -3,33 +3,37 @@ package local.ts3snet.unicbotgespring.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 import java.util.Objects;
+
 
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @Entity(name = "keys")
 public class SetKeyEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    String id;
     @Id
     String key;
+
     private Date date;
+
+    public SetKeyEntity() {
+        this.setDate(new Date(System.currentTimeMillis()));
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        SetKeyEntity that = (SetKeyEntity) o;
+        SetKeyEntity keyEntity = (SetKeyEntity) o;
 
-        return Objects.equals(id, that.id);
+        return Objects.equals(key, keyEntity.key);
     }
 
     @Override
     public int hashCode() {
-        return 903267378;
+        return 1996676398;
     }
 }

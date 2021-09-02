@@ -2,6 +2,7 @@ package local.ts3snet.unicbotgespring.service;
 
 import local.ts3snet.unicbotgespring.entity.UserEntity;
 import local.ts3snet.unicbotgespring.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,8 +11,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Slf4j
 @DataJpaTest
-class DataBaseServiceTest {
+class DataBaseUserServiceTest {
     @Autowired
     private UserRepository userRepository;
 
@@ -28,7 +30,7 @@ class DataBaseServiceTest {
         user.setUserTelegramId((long)123456789);
         userRepository.save(user);
         List<UserEntity> subscribers = (List<UserEntity>) userRepository.findAllBySubscriber(true);
-        System.out.println(subscribers);
+        log.debug(subscribers.toString());
         assertFalse(subscribers.isEmpty());
 
         user = new UserEntity();
@@ -37,7 +39,7 @@ class DataBaseServiceTest {
         user.setUserTelegramId((long)987654321);
         userRepository.save(user);
         subscribers = (List<UserEntity>) userRepository.findAllBySubscriber(false);
-        System.out.println(subscribers);
+        log.debug(subscribers.toString());
         assertFalse(subscribers.isEmpty());
     }
     @Test

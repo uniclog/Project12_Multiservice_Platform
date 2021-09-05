@@ -1,5 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.impl;
 
+import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.config.KeyModuleWebConfig;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity.KeyDataEntity;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.model.WebChat;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
@@ -10,14 +11,14 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class UtilsWebChatServiceImpl implements Runnable, UtilsWebChatService {
+public class UtilsWebChatServiceImpl implements UtilsWebChatService {
     @Getter
     @Setter
     private static volatile boolean loophole = true;
@@ -40,36 +41,34 @@ public class UtilsWebChatServiceImpl implements Runnable, UtilsWebChatService {
         this.webChat = webChat;
     }
 
-    @Override
-    public void registerUtilsKeyModuleService() {
-        this.run();
-        log.info("UtilsWebParserService registered...");
+    private final KeyModuleWebConfig keyModuleWebConfig;
+    public UtilsWebChatServiceImpl(KeyModuleWebConfig keyModuleWebConfig) {
+        this.keyModuleWebConfig = keyModuleWebConfig;
     }
 
     @Override
-    public void run() {
-        while (loophole) {
-            try {
-                webChat.update().forEach(e -> {
-                    log.info(e.toString());
-                    unicBotTORGTelegramBotService.sendMessageForAllSubscribers(e.toString());
+    public void registerUtilsKeyModuleService() {
+        log.info("UtilsWebParserService registered...");
+    }
 
-                    List<String> keys = webChat.parseKey(e.toString());
-                    if (!keys.isEmpty()) {
-                        keys.forEach(key -> {
-                            KeyDataEntity keyEntity = new KeyDataEntity();
-                            keyEntity.setKey(key);
 
-                            keyDataService.save(keyEntity);
-                        });
-                    }
+    //@Scheduled(fixedRateString = "${web.chat.update.rate:30}000")
+    @Scheduled(fixedRateString = "#{@keyModuleWebConfig.getUpdateRate()}")
+    private void serviceUpdateRate() {
+        log.info("serviceUpdateRate()");
+        webChat.update().forEach(e -> {
+            log.info(e.toString());
+            unicBotTORGTelegramBotService.sendMessageForAllSubscribers(e.toString());
+
+            List<String> keys = webChat.parseKey(e.toString());
+            if (!keys.isEmpty()) {
+                keys.forEach(key -> {
+                    KeyDataEntity keyEntity = new KeyDataEntity();
+                    keyEntity.setKey(key);
+
+                    keyDataService.save(keyEntity);
                 });
-
-                TimeUnit.SECONDS.sleep(30);
-            } catch (InterruptedException e) {
-                log.error(e.getMessage());
-                Thread.currentThread().interrupt();
             }
-        }
+        });
     }
 }

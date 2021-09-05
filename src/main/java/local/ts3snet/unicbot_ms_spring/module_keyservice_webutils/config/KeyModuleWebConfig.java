@@ -15,4 +15,6 @@ public class KeyModuleWebConfig {
     private Boolean updateLoop;
     @Value("${web.chat.key.pattern}")
     private String keyPattern;
+    @Value("${web.chat.update.rate}")
+    private String updateRate;
 }

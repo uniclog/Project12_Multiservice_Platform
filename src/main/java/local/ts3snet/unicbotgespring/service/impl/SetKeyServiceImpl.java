@@ -1,8 +1,9 @@
-package local.ts3snet.unicbotgespring.service;
+package local.ts3snet.unicbotgespring.service.impl;
 
 import local.ts3snet.unicbotgespring.entity.SetKeyEntity;
 import local.ts3snet.unicbotgespring.entity.UserEntity;
 import local.ts3snet.unicbotgespring.repository.SetKeyRepository;
+import local.ts3snet.unicbotgespring.service.SetKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,10 @@
-package local.ts3snet.unicbotgespring.service;
+package local.ts3snet.unicbotgespring.service.impl;
 
 import local.ts3snet.unicbotgespring.entity.SetKeyEntity;
 import local.ts3snet.unicbotgespring.model.WebChat;
+import local.ts3snet.unicbotgespring.service.SetKeyService;
+import local.ts3snet.unicbotgespring.service.TelegramBotService;
+import local.ts3snet.unicbotgespring.service.UtilsWebTukeroORGService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -9,14 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class UtilsWebServiceTukeroORGImpl implements Runnable, UtilsWebServiceTukeroORG{
+public class UtilsWebTukeroORGServiceImpl implements Runnable, UtilsWebTukeroORGService {
     @Getter
     @Setter
     private static volatile boolean loophole = true;

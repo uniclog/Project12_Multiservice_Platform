@@ -1,7 +1,8 @@
-package local.ts3snet.unicbotgespring.service;
+package local.ts3snet.unicbotgespring.service.impl;
 
 import local.ts3snet.unicbotgespring.entity.UserEntity;
 import local.ts3snet.unicbotgespring.repository.UserRepository;
+import local.ts3snet.unicbotgespring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

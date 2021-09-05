@@ -1,6 +1,6 @@
 package local.ts3snet.unicbotgespring.api;
 
-import local.ts3snet.unicbotgespring.service.UtilsWebServiceTukeroORG;
+import local.ts3snet.unicbotgespring.service.UtilsWebTukeroORGService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ParcerThreadInitializer  {
 
-    private UtilsWebServiceTukeroORG parserService;
+    private UtilsWebTukeroORGService parserService;
     @Autowired
-    private void setParserService(UtilsWebServiceTukeroORG parserService) {
+    private void setParserService(UtilsWebTukeroORGService parserService) {
         this.parserService = parserService;
     }
 

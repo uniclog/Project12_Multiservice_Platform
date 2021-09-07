@@ -15,7 +15,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 public class ApiUnicBotTORGTelegramBotInitializer {
-    UnicBotTORGTelegramBotService bot;
+    private UnicBotTORGTelegramBotService bot;
     @Autowired
     public void setTelegramBot(@Qualifier("UnicBotTORGTelegramBotServiceImpl") UnicBotTORGTelegramBotService bot) {
         this.bot = bot;

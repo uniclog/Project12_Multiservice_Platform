@@ -40,4 +40,9 @@ public class KeyDataServiceImpl implements KeyDataService {
     public List<KeyDataEntity> findByDate() {
         return null;
     }
+
+    @Override
+    public List<KeyDataEntity> findAll() {
+        return repository.findAll();
+    }
 }

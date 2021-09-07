@@ -12,13 +12,14 @@ import org.springframework.stereotype.Component;
 public class Help extends UnicBotTORGMessageAbstract {
     @Override
     public void execute(UnicBotTORGTelegramBotService bot, String... param) {
-        log.debug("-> default");
-
         bot.sendMessage(this.getUserId(), convertToUTF8(
                         "ну давай"
                                 + "\n /sub подписаться на уведомления от бота"
-                                + "\n /unsub отписаться")
+                                + "\n /unsub отписаться"
+                                + "\n /getkeys показать сохраненные ключи")
         );
+
+        log.debug("-> help");
     }
 
     @Override

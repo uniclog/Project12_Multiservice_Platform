@@ -48,29 +48,6 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         msg.setUserName(authorSignature);
 
         msg.execute(this);
-
-        /*switch (text) {
-            case "/sub": {
-                CoreUserEntity user = new CoreUserEntity();
-                user.setUserTelegramId(userId);
-                user.setSubscriber(true);
-                user.setUserName(authorSignature);
-
-                coreUserService.save(user);
-                break;
-            }
-            case "/unsub": {
-                CoreUserEntity user = new CoreUserEntity();
-                user.setUserTelegramId(userId);
-                user.setSubscriber(false);
-                user.setUserName(authorSignature);
-
-                coreUserService.update(user);
-                break;
-            }
-            default:
-                sendMessage(userId, "Привет ...");
-        }*/
     }
 
     public void sendMessageForAllSubscribers(String text) {

@@ -41,9 +41,7 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
         this.webChat = webChat;
     }
 
-    private final KeyModuleWebConfig keyModuleWebConfig;
-    public UtilsWebChatServiceImpl(KeyModuleWebConfig keyModuleWebConfig) {
-        this.keyModuleWebConfig = keyModuleWebConfig;
+    public UtilsWebChatServiceImpl() {
         log.info("UtilsWebParserService registered...");
     }
 

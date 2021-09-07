@@ -1,7 +1,7 @@
-package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.impl;
+package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.UnicBotTORGMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;

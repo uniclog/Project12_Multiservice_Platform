@@ -10,8 +10,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotTORGTelegramBotConfig;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.UnicBotTORGMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.impl.Default;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.impl.Default;
 
 import java.util.List;
 import java.util.Map;

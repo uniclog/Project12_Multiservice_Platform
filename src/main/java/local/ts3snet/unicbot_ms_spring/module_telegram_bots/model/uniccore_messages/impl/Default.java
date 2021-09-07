@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Lazy
-@Component
+@Component(value = "unicCoreMessageDefault")
 public class Default extends UnicBotCoreMessageAbstract {
     @Override
     public void execute(UnicBotCoreTeamspeakTelegramBotService bot, String... msg) {

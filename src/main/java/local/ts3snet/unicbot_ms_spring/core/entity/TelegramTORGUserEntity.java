@@ -11,7 +11,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "telegramtorgusers")
+@Table(name = "telegramTorgUsers")
 public class TelegramTORGUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

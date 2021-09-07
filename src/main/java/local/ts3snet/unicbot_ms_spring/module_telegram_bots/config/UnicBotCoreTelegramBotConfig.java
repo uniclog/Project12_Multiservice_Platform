@@ -8,10 +8,10 @@ import org.springframework.context.annotation.PropertySource;
 @Data
 @Configuration
 @PropertySource("classpath:application.properties")
-public class UnicBotTORGTelegramBotConfig {
-    @Value("${telegram.bot.torg.name}")
+public class UnicBotCoreTelegramBotConfig {
+    @Value("${telegram.bot.uniccore.name}")
     private String telegramBotName;
 
-    @Value("${telegram.bot.torg.token}")
+    @Value("${telegram.bot.uniccore.token}")
     private String token;
 }

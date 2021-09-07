@@ -11,7 +11,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "teamspeakusers")
+@Table(name = "teamspeakUsers")
 public class TeamspeakUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

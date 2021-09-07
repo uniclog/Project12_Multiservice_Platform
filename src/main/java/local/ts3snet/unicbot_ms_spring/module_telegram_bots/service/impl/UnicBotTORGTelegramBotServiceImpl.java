@@ -30,7 +30,7 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         this.config = config;
         this.messages = messages.stream().collect(toMap(UnicBotTORGMessageAbstract::messageType, Function.identity()));
 
-        log.info("TelegramBotService init...");
+        log.info("UnicBotTORGTelegramBotService init...");
     }
 
 
@@ -76,10 +76,12 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         }
     }
 
+    @Override
     public String getBotUsername() {
         return config.getTelegramBotName();
     }
 
+    @Override
     public String getBotToken() {
         return config.getToken();
     }

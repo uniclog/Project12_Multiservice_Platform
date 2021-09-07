@@ -44,18 +44,20 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
     private final KeyModuleWebConfig keyModuleWebConfig;
     public UtilsWebChatServiceImpl(KeyModuleWebConfig keyModuleWebConfig) {
         this.keyModuleWebConfig = keyModuleWebConfig;
+        log.info("UtilsWebParserService registered...");
     }
 
     @Override
     public void registerUtilsKeyModuleService() {
-        log.info("UtilsWebParserService registered...");
+        log.info("UtilsWebParserService entry task");
+        // something here ...
     }
 
 
     //@Scheduled(fixedRateString = "${web.chat.update.rate:30}000")
     @Scheduled(fixedRateString = "#{@keyModuleWebConfig.getUpdateRate()}")
     private void serviceUpdateRate() {
-        log.info("serviceUpdateRate()");
+        log.debug("UtilsWebParserService.serviceUpdateRate() get new messages...");
         webChat.update().forEach(e -> {
             log.info(e.toString());
             unicBotTORGTelegramBotService.sendMessageForAllSubscribers(e.toString());

@@ -44,7 +44,7 @@ public class WebChat {
     }
 
     /**
-     * Return new messages list
+     * Return new message list
      * @return new messages
      */
     public List<WebChatNode> update() {

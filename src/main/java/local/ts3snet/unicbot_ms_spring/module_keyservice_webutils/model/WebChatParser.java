@@ -36,7 +36,7 @@ public class WebChatParser {
     }
 
     /**
-     * Massage parser use Jsoup lib
+     * Message parser use Jsoup lib
      * @param url web address
      * @return list chat nodes
      */

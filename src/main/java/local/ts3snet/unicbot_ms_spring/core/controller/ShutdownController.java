@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ShutdownController {
-    @Autowired
     private ApplicationContext context;
+    @Autowired
+    public void setApplicationContext(ApplicationContext context) {
+        this.context = context;
+    }
 
     public void initiateAppShutdown(int returnCode) {
-        //SpringApplication.exit(context, () -> returnCode);
-        //System.exit(0);
         System.exit(SpringApplication.exit(context, () -> returnCode));
     }
 

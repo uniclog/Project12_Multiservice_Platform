@@ -1,7 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -9,36 +8,48 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.CoreUserEntity;
-import local.ts3snet.unicbot_ms_spring.core.service.CoreUserService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotTORGTelegramBotConfig;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotTORGTelegramBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.UnicBotTORGMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.impl.Default;
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+
+import static java.util.stream.Collectors.toMap;
+
 
 @Slf4j
 @Component("UnicBotTORGTelegramBotServiceImpl")
 public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotTORGTelegramBotService {
     final UnicBotTORGTelegramBotConfig config;
+    private final Map<String, UnicBotTORGMessageAbstract> messages;
 
-    private CoreUserService coreUserService;
-    @Autowired
-    public void setCoreUserService(CoreUserService coreUserService) {
-        this.coreUserService = coreUserService;
-    }
-
-
-    public UnicBotTORGTelegramBotServiceImpl(UnicBotTORGTelegramBotConfig config) {
+    public UnicBotTORGTelegramBotServiceImpl(UnicBotTORGTelegramBotConfig config, List<UnicBotTORGMessageAbstract> messages) {
         this.config = config;
+        this.messages = messages.stream().collect(toMap(UnicBotTORGMessageAbstract::messageType, Function.identity()));
+
         log.info("TelegramBotService init...");
     }
+
 
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
         log.info("Received: " + message);
         String text = message.getText();
-        String authorSignature = message.getForwardSenderName();
+        String authorSignature = message.getFrom().getUserName();
         Long userId = message.getChatId();
-        switch (text) {
+
+        UnicBotTORGMessageAbstract msg = messages.getOrDefault(text, new Default());
+        msg.setTextMessage(text);
+        msg.setUserId(userId);
+        msg.setUserName(authorSignature);
+
+        msg.execute(this);
+
+        /*switch (text) {
             case "/sub": {
                 CoreUserEntity user = new CoreUserEntity();
                 user.setUserTelegramId(userId);
@@ -59,13 +70,11 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
             }
             default:
                 sendMessage(userId, "Привет ...");
-        }
+        }*/
     }
 
-    public void sendMessageForAllSubscribers(String msg) {
-        coreUserService.findAllSubscribers().forEach(e ->
-            sendMessage(e.getUserTelegramId(), msg)
-        );
+    public void sendMessageForAllSubscribers(String text) {
+        messages.get("messageForAllSubscribers").execute(this, text);
     }
 
     public void sendMessage(String chatId, String msg) {

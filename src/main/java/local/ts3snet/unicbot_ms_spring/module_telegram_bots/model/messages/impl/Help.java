@@ -9,17 +9,21 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Lazy
 @Component
-public class Default extends UnicBotTORGMessageAbstract {
+public class Help extends UnicBotTORGMessageAbstract {
     @Override
     public void execute(UnicBotTORGTelegramBotService bot, String... param) {
         log.debug("-> default");
 
-        bot.sendMessage(this.getUserId(),
-                "Привет ... \nПосмотри что умею: /help");
+        bot.sendMessage(this.getUserId(), convertToUTF8(
+                        "ну давай"
+                                + "\n /sub подписаться на уведомления от бота"
+                                + "\n /unsub отписаться")
+        );
     }
 
     @Override
     public String messageType() {
-        return "default";
+        return "/help";
     }
 }
+

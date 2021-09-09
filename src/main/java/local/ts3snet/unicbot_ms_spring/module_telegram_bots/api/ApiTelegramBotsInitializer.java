@@ -1,6 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.api;
 
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTeamspeakTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 public class ApiTelegramBotsInitializer {
-    private UnicBotCoreTeamspeakTelegramBotService unicBotCore;
+    private UnicBotCoreTelegramBotService unicBotCore;
     @Autowired
-    public void setTelegramBot(@Qualifier("unicBotCoreTeamspeakTelegramBotServiceImpl") UnicBotCoreTeamspeakTelegramBotService bot) {
+    public void setTelegramBot(@Qualifier("unicBotCoreTeamspeakTelegramBotServiceImpl") UnicBotCoreTelegramBotService bot) {
         this.unicBotCore = bot;
     }
 

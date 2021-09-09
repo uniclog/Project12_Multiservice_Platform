@@ -1,10 +1,9 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotCoreTelegramBotConfig;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.UnicBotCoreMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTeamspeakTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,16 +19,16 @@ import java.util.function.Function;
 import static java.util.stream.Collectors.toMap;
 
 @Slf4j
-@Component("unicBotCoreTeamspeakTelegramBotServiceImpl")
-public class UnicBotCoreTeamspeakTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotCoreTeamspeakTelegramBotService {
+@Component("unicBotCoreTelegramBotServiceImpl")
+public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotCoreTelegramBotService {
     final UnicBotCoreTelegramBotConfig config;
     private final Map<String, UnicBotCoreMessageAbstract> messages;
 
-    public UnicBotCoreTeamspeakTelegramBotServiceImpl(UnicBotCoreTelegramBotConfig config, List<UnicBotCoreMessageAbstract> messages) {
+    public UnicBotCoreTelegramBotServiceImpl(UnicBotCoreTelegramBotConfig config, List<UnicBotCoreMessageAbstract> messages) {
         this.config = config;
         this.messages = messages.stream().collect(toMap(UnicBotCoreMessageAbstract::messageType, Function.identity()));
 
-        log.info("UnicBotCoreTeamspeakTelegramBotService init...");
+        log.info("UnicBotCoreTelegramBotServiceImpl init...");
     }
 
     @Override

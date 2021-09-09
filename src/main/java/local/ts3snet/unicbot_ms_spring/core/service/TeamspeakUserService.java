@@ -8,5 +8,6 @@ public interface TeamspeakUserService {
     void save(TeamspeakUserEntity user);
     void update(TeamspeakUserEntity user);
     TeamspeakUserEntity findByTeamspeakToken(String token);
+    List<TeamspeakUserEntity> findAllSubscribers();
     List<TeamspeakUserEntity> findAll();
 }

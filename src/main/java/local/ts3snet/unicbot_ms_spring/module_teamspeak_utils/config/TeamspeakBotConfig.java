@@ -16,5 +16,5 @@ public class TeamspeakBotConfig {
     @Value("${teamspeak.bot.server.ip_address}")
     private String ipAddress;
     @Value("${teamspeak.bot.server.port}")
-    private String port;
+    private int port;
 }

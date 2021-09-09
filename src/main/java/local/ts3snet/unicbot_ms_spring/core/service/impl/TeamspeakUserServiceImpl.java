@@ -41,6 +41,11 @@ public class TeamspeakUserServiceImpl implements TeamspeakUserService {
     }
 
     @Override
+    public List<TeamspeakUserEntity> findAllSubscribers() {
+        return teamspeakUserRepository.findAllBySubscriber(true);
+    }
+
+    @Override
     public List<TeamspeakUserEntity> findAll() {
         return teamspeakUserRepository.findAll();
     }

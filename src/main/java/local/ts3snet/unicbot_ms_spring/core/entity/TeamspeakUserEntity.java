@@ -17,6 +17,7 @@ public class TeamspeakUserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String teamspeakToken;
+    private Boolean subscriber = true;
 
     @Override
     public boolean equals(Object o) {

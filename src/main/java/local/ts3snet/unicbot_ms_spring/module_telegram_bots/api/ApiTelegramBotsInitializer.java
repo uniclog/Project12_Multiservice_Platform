@@ -18,7 +18,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 public class ApiTelegramBotsInitializer {
     private UnicBotCoreTelegramBotService unicBotCore;
     @Autowired
-    public void setTelegramBot(@Qualifier("unicBotCoreTeamspeakTelegramBotServiceImpl") UnicBotCoreTelegramBotService bot) {
+    public void setTelegramBot(@Qualifier("unicBotCoreTelegramBotServiceImpl") UnicBotCoreTelegramBotService bot) {
         this.unicBotCore = bot;
     }
 

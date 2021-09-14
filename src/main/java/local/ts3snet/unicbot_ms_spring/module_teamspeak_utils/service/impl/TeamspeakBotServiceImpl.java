@@ -11,7 +11,6 @@ import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.utils.Team
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,12 +19,13 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     private String address;
     private String password;
     private String login;
-    @Setter
-    private static volatile int clientId;
 
+    private final TeamspeakUtils teamspeakUtils;
     private final TeamspeakBotConfig config;
-    public TeamspeakBotServiceImpl(TeamspeakBotConfig config) {
+
+    public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakUtils teamspeakUtils) {
         this.config = config;
+        this.teamspeakUtils = teamspeakUtils;
     }
 
     @EventListener({ContextRefreshedEvent.class})
@@ -48,7 +48,6 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
             public void onConnect(TS3Api api) {
                 stuffThatNeedsToRunEveryTimeTheQueryConnects(api);
             }
-
             @Override
             public void onDisconnect(TS3Query ts3Query) {
                 // Nothing
@@ -62,22 +61,23 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     }
 
     private void stuffThatNeedsToRunEveryTimeTheQueryConnects(TS3Api api) {
-        api.login(this.login, this.password);
+        api.login(login, password);
         api.selectVirtualServerById(1);
         api.setNickname(login);
+        int clientId = api.whoAmI().getId();
         api.moveClient(clientId, 32);
         api.registerAllEvents();
         // may be this case TS3EventType.TEXT_CHANNEL
-        clientId = api.whoAmI().getId();
     }
 
-    private static void stuffThatOnlyEverNeedsToBeRunOnce(final TS3Api api) {
+    private void stuffThatOnlyEverNeedsToBeRunOnce(TS3Api api) {
         // We only want to greet people once
         api.sendChannelMessage(" is online!");
 
         // On the API side of things, you only need to register your TS3Listeners once!
         // These are not affected when the query disconnects.
-        api.addTS3Listeners(new TeamspeakUtils(api));
+        teamspeakUtils.setApi(api);
+        api.addTS3Listeners(teamspeakUtils);
     }
 
 }

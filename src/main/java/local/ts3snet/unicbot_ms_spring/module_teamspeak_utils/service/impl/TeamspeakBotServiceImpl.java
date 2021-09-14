@@ -10,8 +10,11 @@ import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.TeamspeakB
 import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.utils.TeamspeakUtils;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.logging.Level;
 
 @Slf4j
 @Service
@@ -26,14 +29,17 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakUtils teamspeakUtils) {
         this.config = config;
         this.teamspeakUtils = teamspeakUtils;
+
+        address = config.getIpAddress();
+        login = config.getLogin();
+        password = config.getPassword();
+
+        log.info("TeamspeakBotService init");
+        log.debug("address=" + address + "; password=" + password + "; login=" + login);
     }
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() {
-        this.address = config.getIpAddress();
-        this.login = config.getLogin();
-        this.password = config.getPassword();
-
         this.register();
     }
 
@@ -41,13 +47,14 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     public void register() {
         final TS3Config cfg = new TS3Config();
         cfg.setHost(address);
-        cfg.setEnableCommunicationsLogging(true);
+        cfg.setDebugLevel(Level.ALL);
         cfg.setReconnectStrategy(ReconnectStrategy.constantBackoff());
         cfg.setConnectionHandler(new ConnectionHandler() {
             @Override
-            public void onConnect(TS3Api api) {
-                stuffThatNeedsToRunEveryTimeTheQueryConnects(api);
+            public void onConnect(TS3Query ts3Query) {
+                stuffThatNeedsToRunEveryTimeTheQueryConnects(ts3Query.getApi());
             }
+
             @Override
             public void onDisconnect(TS3Query ts3Query) {
                 // Nothing
@@ -55,18 +62,17 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         });
         final TS3Query query = new TS3Query(cfg);
         query.connect();
-
         stuffThatOnlyEverNeedsToBeRunOnce(query.getApi());
         query.exit();
     }
 
     private void stuffThatNeedsToRunEveryTimeTheQueryConnects(TS3Api api) {
-        api.login(login, password);
         api.selectVirtualServerById(1);
-        api.setNickname(login);
+        api.login(login, password);
         int clientId = api.whoAmI().getId();
         api.moveClient(clientId, 32);
         api.registerAllEvents();
+        api.setNickname(login);
         // may be this case TS3EventType.TEXT_CHANNEL
     }
 

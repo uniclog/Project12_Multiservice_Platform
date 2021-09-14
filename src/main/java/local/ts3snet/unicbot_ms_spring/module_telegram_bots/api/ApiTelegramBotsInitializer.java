@@ -16,17 +16,16 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 public class ApiTelegramBotsInitializer {
-    private UnicBotCoreTelegramBotService unicBotCore;
-    @Autowired
-    public void setTelegramBot(@Qualifier("unicBotCoreTelegramBotServiceImpl") UnicBotCoreTelegramBotService bot) {
-        this.unicBotCore = bot;
+    private final UnicBotCoreTelegramBotService unicBotCore;
+    private final UnicBotTORGTelegramBotService botTorg;
+
+    public ApiTelegramBotsInitializer(
+            @Qualifier("unicBotCoreTelegramBotServiceImpl") UnicBotCoreTelegramBotService coreBot,
+            @Qualifier("UnicBotTORGTelegramBotServiceImpl") UnicBotTORGTelegramBotService torgBot) {
+        this.unicBotCore = coreBot;
+        this.botTorg = torgBot;
     }
 
-    private UnicBotTORGTelegramBotService botTorg;
-    @Autowired
-    public void setTelegramBot(@Qualifier("UnicBotTORGTelegramBotServiceImpl") UnicBotTORGTelegramBotService bot) {
-        this.botTorg = bot;
-    }
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {

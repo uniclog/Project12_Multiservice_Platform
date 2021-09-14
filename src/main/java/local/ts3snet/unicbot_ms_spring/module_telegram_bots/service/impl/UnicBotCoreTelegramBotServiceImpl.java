@@ -74,6 +74,7 @@ public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot im
 
     @Override
     public void sendMessageForAllSubscribers(String msg) {
+        messages.get("messageForAllSubscribers").execute(this, msg);
         // actions
     }
 

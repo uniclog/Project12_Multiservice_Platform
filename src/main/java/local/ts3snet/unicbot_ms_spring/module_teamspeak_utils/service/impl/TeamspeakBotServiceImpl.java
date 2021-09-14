@@ -19,15 +19,13 @@ import java.util.logging.Level;
 @Slf4j
 @Service
 public class TeamspeakBotServiceImpl implements TeamspeakBotService {
-    private String address;
-    private String password;
-    private String login;
+    private final String address;
+    private final String password;
+    private final String login;
 
     private final TeamspeakUtils teamspeakUtils;
-    private final TeamspeakBotConfig config;
 
     public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakUtils teamspeakUtils) {
-        this.config = config;
         this.teamspeakUtils = teamspeakUtils;
 
         address = config.getIpAddress();
@@ -63,7 +61,7 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         final TS3Query query = new TS3Query(cfg);
         query.connect();
         stuffThatOnlyEverNeedsToBeRunOnce(query.getApi());
-        query.exit();
+        // query.exit();
     }
 
     private void stuffThatNeedsToRunEveryTimeTheQueryConnects(TS3Api api) {

@@ -1,6 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages;
 
 import local.ts3snet.unicbot_ms_spring.core.service.TelegramTORGUserService;
+import local.ts3snet.unicbot_ms_spring.core.service.TelegramUnicBotCoreUserService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,10 +13,10 @@ public abstract class UnicBotCoreMessageAbstract implements UnicBotCoreMessageIn
     private Long userId;
     private String userName;
 
-    private TelegramTORGUserService telegramTORGUserService;
+    private TelegramUnicBotCoreUserService telegramUnicBotCoreUserService;
     @Autowired
-    public void setTelegramTORGUserService(TelegramTORGUserService telegramTORGUserService) {
-        this.telegramTORGUserService = telegramTORGUserService;
+    public void setTelegramTORGUserService(TelegramUnicBotCoreUserService telegramUnicBotCoreUserService) {
+        this.telegramUnicBotCoreUserService = telegramUnicBotCoreUserService;
     }
 
     public String convertToUTF8(String text) {

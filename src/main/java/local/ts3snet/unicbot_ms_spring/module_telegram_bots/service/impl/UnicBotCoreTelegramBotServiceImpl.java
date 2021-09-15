@@ -1,5 +1,9 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.impl;
 
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotCoreTelegramBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.impl.Default;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.UnicBotCoreMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -8,31 +12,24 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotTORGTelegramBotConfig;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.impl.Default;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
-
 @Slf4j
-@Component("UnicBotTORGTelegramBotServiceImpl")
-public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotTORGTelegramBotService {
-    final UnicBotTORGTelegramBotConfig config;
-    private final Map<String, UnicBotTORGMessageAbstract> messages;
+@Component("unicBotCoreTelegramBotServiceImpl")
+public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotCoreTelegramBotService {
+    final UnicBotCoreTelegramBotConfig config;
+    private final Map<String, UnicBotCoreMessageAbstract> messages;
 
-    public UnicBotTORGTelegramBotServiceImpl(UnicBotTORGTelegramBotConfig config, List<UnicBotTORGMessageAbstract> messages) {
+    public UnicBotCoreTelegramBotServiceImpl(UnicBotCoreTelegramBotConfig config, List<UnicBotCoreMessageAbstract> messages) {
         this.config = config;
-        this.messages = messages.stream().collect(toMap(UnicBotTORGMessageAbstract::messageType, Function.identity()));
+        this.messages = messages.stream().collect(toMap(UnicBotCoreMessageAbstract::messageType, Function.identity()));
 
-        log.info("UnicBotTORGTelegramBotService init...");
+        log.info("UnicBotCoreTelegramBotServiceImpl init...");
     }
-
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -42,7 +39,7 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         String authorSignature = message.getFrom().getUserName();
         Long userId = message.getChatId();
 
-        UnicBotTORGMessageAbstract msg = messages.getOrDefault(text, new Default());
+        UnicBotCoreMessageAbstract msg = messages.getOrDefault(text, new Default());
         msg.setTextMessage(text);
         msg.setUserId(userId);
         msg.setUserName(authorSignature);
@@ -50,10 +47,7 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         msg.execute(this);
     }
 
-    public void sendMessageForAllSubscribers(String text) {
-        messages.get("messageForAllSubscribers").execute(this, text);
-    }
-
+    @Override
     public void sendMessage(String chatId, String msg) {
         try {
             SendMessage message = new SendMessage();
@@ -64,6 +58,8 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
             log.error(e.getMessage());
         }
     }
+
+    @Override
     public void sendMessage(Long chatId, String msg) {
         try {
             SendMessage message = new SendMessage();
@@ -74,6 +70,11 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
         }
+    }
+
+    @Override
+    public void sendMessageForAllSubscribers(String msg) {
+        messages.get("messageForAllSubscribers").execute(this, msg);
     }
 
     @Override

@@ -11,8 +11,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "users")
-public class CoreUserEntity {
+@Table(name = "telegramUnicBotCoreUsers")
+public class TelegramUnicBotCoreUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,13 +24,13 @@ public class CoreUserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CoreUserEntity that = (CoreUserEntity) o;
+        TelegramUnicBotCoreUserEntity that = (TelegramUnicBotCoreUserEntity) o;
 
         return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return 1838525018;
+        return 353605777;
     }
 }

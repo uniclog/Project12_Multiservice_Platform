@@ -7,10 +7,9 @@ import com.github.theholywaffle.teamspeak3.api.reconnect.ConnectionHandler;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.config.TeamspeakBotConfig;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.TeamspeakBotService;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.utils.TeamspeakUtils;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.impl.utils.TeamspeakEventAdapter;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,10 +22,10 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     private final String password;
     private final String login;
 
-    private final TeamspeakUtils teamspeakUtils;
+    private final TeamspeakEventAdapter teamspeakEventAdapter;
 
-    public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakUtils teamspeakUtils) {
-        this.teamspeakUtils = teamspeakUtils;
+    public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakEventAdapter teamspeakEventAdapter) {
+        this.teamspeakEventAdapter = teamspeakEventAdapter;
 
         address = config.getIpAddress();
         login = config.getLogin();
@@ -36,16 +35,12 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         log.debug("address=" + address + "; password=" + password + "; login=" + login);
     }
 
-    @EventListener({ContextRefreshedEvent.class})
-    public void init() {
-        this.register();
-    }
-
     @Override
+    @EventListener({ContextRefreshedEvent.class})
     public void register() {
         final TS3Config cfg = new TS3Config();
         cfg.setHost(address);
-        cfg.setDebugLevel(Level.ALL);
+        cfg.setDebugLevel(Level.OFF);
         cfg.setReconnectStrategy(ReconnectStrategy.constantBackoff());
         cfg.setConnectionHandler(new ConnectionHandler() {
             @Override
@@ -76,12 +71,12 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
 
     private void stuffThatOnlyEverNeedsToBeRunOnce(TS3Api api) {
         // We only want to greet people once
-        api.sendChannelMessage(" is online!");
+        // api.sendChannelMessage(" is online!");
 
         // On the API side of things, you only need to register your TS3Listeners once!
         // These are not affected when the query disconnects.
-        teamspeakUtils.setApi(api);
-        api.addTS3Listeners(teamspeakUtils);
+        teamspeakEventAdapter.setApi(api);
+        api.addTS3Listeners(teamspeakEventAdapter);
     }
 
 }

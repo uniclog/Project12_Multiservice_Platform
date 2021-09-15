@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.utils;
+package local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.impl.utils;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.TextMessageTargetMode;
@@ -6,26 +6,39 @@ import com.github.theholywaffle.teamspeak3.api.event.ClientJoinEvent;
 import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
+import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Component
-public class TeamspeakUtils extends TS3EventAdapter {
+public class TeamspeakEventAdapter extends TS3EventAdapter {
     private int clientId;
     private TS3Api api;
+    private final Map<Integer, ClientInfo> clients = new HashMap<>();
 
     public void setApi(TS3Api api) {
         this.api = api;
         this.clientId = api.whoAmI().getId();
+        this.api.getClients()
+                .forEach(c -> clients.put(c.getId(), api.getClientInfo(c.getId())));
+
+        String info = clients
+                .entrySet()
+                .stream()
+                .map(c -> c.getKey() + " - " + c.getValue().getNickname())
+                .collect(Collectors.joining(", "));
+        log.info("Clients on server: " + info);
     }
 
-    private UnicBotCoreTelegramBotService telegramUnicBotCoreUserService;
-    @Autowired
-    public void setUnicBotCoreTelegramBotService(@Qualifier(value = "unicBotCoreTelegramBotServiceImpl") UnicBotCoreTelegramBotService tg) {
+    private final UnicBotCoreTelegramBotService telegramUnicBotCoreUserService;
+    public TeamspeakEventAdapter(@Qualifier(value = "unicBotCoreTelegramBotServiceImpl") UnicBotCoreTelegramBotService tg) {
         this.telegramUnicBotCoreUserService = tg;
     }
 
@@ -39,12 +52,18 @@ public class TeamspeakUtils extends TS3EventAdapter {
                         "\n !wakeup");
         // send to telegram
         telegramUnicBotCoreUserService.sendMessageForAllSubscribers(e.getClientNickname() + " joined server");
-        log.info(e.getClientNickname() + " joined server");
+        ClientInfo client = api.getClientInfo(e.getClientId());
+        log.info(client.getNickname() + " joined server");
+
+        clients.put(e.getClientId(), client);
     }
     @Override
     public void onClientLeave(ClientLeaveEvent e) {
-        //telegramUnicBotCoreUserService.sendMessageForAllSubscribers(user.getuName() + " left server");
-        //log.info(e.getClientNickname() + " joined server");
+        ClientInfo clientInfo = clients.get(e.getClientId());
+        telegramUnicBotCoreUserService.sendMessageForAllSubscribers(clientInfo.getNickname() + " left server");
+        log.info(clientInfo.getNickname() + " left server");
+
+        clients.remove(e.getClientId());
     }
     @Override
     public void onTextMessage(TextMessageEvent e) {

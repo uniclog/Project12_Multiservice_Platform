@@ -1,5 +1,9 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.impl;
 
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotTORGTelegramBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.impl.Default;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -7,11 +11,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotTORGTelegramBotConfig;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.impl.Default;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +20,8 @@ import static java.util.stream.Collectors.toMap;
 
 
 @Slf4j
-@Component("UnicBotTORGTelegramBotServiceImpl")
-public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotTORGTelegramBotService {
+@Component("unicBotTORGTelegramBotServiceImpl")
+public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
     final UnicBotTORGTelegramBotConfig config;
     private final Map<String, UnicBotTORGMessageAbstract> messages;
 

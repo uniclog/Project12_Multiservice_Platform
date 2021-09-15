@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Data
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:client.keystore.properties")
 public class UnicBotTORGTelegramBotConfig {
     @Value("${telegram.bot.torg.name}")
     private String telegramBotName;

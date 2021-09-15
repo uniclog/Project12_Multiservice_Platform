@@ -3,7 +3,7 @@ package local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.impl;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.config.UnicBotCoreTelegramBotConfig;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.UnicBotCoreMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toMap;
 
 @Slf4j
 @Component("unicBotCoreTelegramBotServiceImpl")
-public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements UnicBotCoreTelegramBotService {
+public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
     final UnicBotCoreTelegramBotConfig config;
     private final Map<String, UnicBotCoreMessageAbstract> messages;
 

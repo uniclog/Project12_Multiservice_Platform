@@ -2,7 +2,7 @@ package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages
 
 import local.ts3snet.unicbot_ms_spring.core.entity.TelegramTORGUserEntity;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Sub extends UnicBotTORGMessageAbstract {
     @Override
-    public void execute(UnicBotTORGTelegramBotService bot, String... param) {
+    public void execute(TelegramBotService bot, String... param) {
         TelegramTORGUserEntity user = new TelegramTORGUserEntity();
         user.setUserTelegramId(this.getUserId());
         user.setSubscriber(true);

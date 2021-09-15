@@ -7,7 +7,7 @@ import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -37,8 +37,8 @@ public class TeamspeakEventAdapter extends TS3EventAdapter {
         log.info("Clients on server: " + info);
     }
 
-    private final UnicBotCoreTelegramBotService telegramUnicBotCoreUserService;
-    public TeamspeakEventAdapter(@Qualifier(value = "unicBotCoreTelegramBotServiceImpl") UnicBotCoreTelegramBotService tg) {
+    private final TelegramBotService telegramUnicBotCoreUserService;
+    public TeamspeakEventAdapter(@Qualifier(value = "unicBotCoreTelegramBotServiceImpl") TelegramBotService tg) {
         this.telegramUnicBotCoreUserService = tg;
     }
 

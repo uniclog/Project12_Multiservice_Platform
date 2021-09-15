@@ -1,11 +1,8 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.impl;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TelegramTORGUserEntity;
 import local.ts3snet.unicbot_ms_spring.core.entity.TelegramUnicBotCoreUserEntity;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.uniccore_messages.UnicBotCoreMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotCoreTelegramBotService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -15,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component(value = "unicCoreMessageSub")
 public class Sub extends UnicBotCoreMessageAbstract {
     @Override
-    public void execute(UnicBotCoreTelegramBotService bot, String... msg) {
+    public void execute(TelegramBotService bot, String... msg) {
         TelegramUnicBotCoreUserEntity user = new TelegramUnicBotCoreUserEntity();
         user.setUserTelegramId(this.getUserId());
         user.setSubscriber(true);

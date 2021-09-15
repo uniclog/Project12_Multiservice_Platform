@@ -49,26 +49,27 @@ public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot im
 
     @Override
     public void sendMessage(String chatId, String msg) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(msg);
         try {
-            SendMessage message = new SendMessage();
-            message.setChatId(chatId);
-            message.setText(msg);
             execute( message );
+            log.info(message.toString());
         } catch (TelegramApiException e) {
-            log.error(e.getMessage());
+            log.error("chatId=" + chatId + ": " + e.getMessage());
         }
     }
 
     @Override
     public void sendMessage(Long chatId, String msg) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId.toString());
+        message.setText(msg);
         try {
-            SendMessage message = new SendMessage();
-            message.setChatId(chatId.toString());
-            message.setText(msg);
             execute( message );
             log.info(message.toString());
         } catch (TelegramApiException e) {
-            log.error(e.getMessage());
+            log.error("chatId=" + chatId + ": " + e.getMessage());
         }
     }
 

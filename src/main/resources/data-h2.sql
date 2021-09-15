@@ -1,1 +1,2 @@
-INSERT INTO users (subscriber, user_name, user_telegram_id) VALUES (true, 'erlihdevinson', 255397596);
+INSERT INTO telegram_Torg_Users (subscriber, user_name, user_telegram_id) VALUES (true, 'erlihdevinson', 255397596);
+INSERT INTO telegram_Unic_Bot_Core_Users (subscriber, user_name, user_telegram_id) VALUES (true, 'erlihdevinson', 255397596);

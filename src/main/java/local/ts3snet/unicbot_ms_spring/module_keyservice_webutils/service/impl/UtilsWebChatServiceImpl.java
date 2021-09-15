@@ -1,11 +1,10 @@
 package local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.config.KeyModuleWebConfig;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity.KeyDataEntity;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.model.WebChat;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.UtilsWebChatService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +22,9 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
     @Setter
     private static volatile boolean loophole = true;
 
-    private UnicBotTORGTelegramBotService unicBotTORGTelegramBotService;
+    private TelegramBotService unicBotTORGTelegramBotService;
     @Autowired
-    public void setUnicBotTORGTelegramBotService(@Qualifier("UnicBotTORGTelegramBotServiceImpl") UnicBotTORGTelegramBotService bot) {
+    public void setUnicBotTORGTelegramBotService(@Qualifier("unicBotTORGTelegramBotServiceImpl") TelegramBotService bot) {
         this.unicBotTORGTelegramBotService = bot;
     }
 
@@ -41,9 +40,7 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
         this.webChat = webChat;
     }
 
-    private final KeyModuleWebConfig keyModuleWebConfig;
-    public UtilsWebChatServiceImpl(KeyModuleWebConfig keyModuleWebConfig) {
-        this.keyModuleWebConfig = keyModuleWebConfig;
+    public UtilsWebChatServiceImpl() {
         log.info("UtilsWebParserService registered...");
     }
 

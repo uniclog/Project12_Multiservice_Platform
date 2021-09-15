@@ -1,8 +1,8 @@
-package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.impl;
+package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.messages.UnicBotTORGMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.UnicBotTORGTelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages.UnicBotTORGMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class GetKeys extends UnicBotTORGMessageAbstract {
     }
 
     @Override
-    public void execute(UnicBotTORGTelegramBotService bot, String... param) {
+    public void execute(TelegramBotService bot, String... param) {
         log.debug("-> getkeys");
         StringBuilder keys = new StringBuilder();
         keyDataService.findAll().forEach(k -> keys.append("\n").append(k.getKey()));

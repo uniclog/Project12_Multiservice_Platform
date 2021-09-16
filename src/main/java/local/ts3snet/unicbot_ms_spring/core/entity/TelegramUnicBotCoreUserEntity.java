@@ -1,17 +1,18 @@
 package local.ts3snet.unicbot_ms_spring.core.entity;
 
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "telegramUnicBotCoreUsers")
+@Table(name = "telegram_unic_bot_core_users")
 public class TelegramUnicBotCoreUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,9 @@ public class TelegramUnicBotCoreUserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         TelegramUnicBotCoreUserEntity that = (TelegramUnicBotCoreUserEntity) o;
-
-        return Objects.equals(id, that.id);
+        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId) && userName.equals(that.userName) && subscriber.equals(that.subscriber);
     }
 
     @Override

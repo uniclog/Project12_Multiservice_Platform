@@ -1,12 +1,12 @@
 package local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity;
 
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.sql.Date;
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 /**
  * Key Entity from web chat
@@ -19,19 +19,18 @@ import java.util.Objects;
 public class KeyDataEntity {
     @Id
     private String key;
-    private Date date;
+    private LocalDateTime date;
 
     public KeyDataEntity() {
-        this.setDate(new Date(System.currentTimeMillis()));
+        this.setDate(LocalDateTime.now());
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        KeyDataEntity keyEntity = (KeyDataEntity) o;
-
-        return Objects.equals(key, keyEntity.key);
+        if (o == null || getClass() != o.getClass()) return false;
+        KeyDataEntity that = (KeyDataEntity) o;
+        return key.equals(that.key);
     }
 
     @Override

@@ -22,6 +22,8 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     private final String password;
     private final String login;
 
+    private TS3Api api;
+
     private final TeamspeakEventAdapter teamspeakEventAdapter;
 
     public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakEventAdapter teamspeakEventAdapter) {
@@ -35,7 +37,7 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         log.debug("address=" + address + "; password=" + password + "; login=" + login);
     }
 
-    @Override
+
     @EventListener({ContextRefreshedEvent.class})
     public void register() {
         final TS3Config cfg = new TS3Config();
@@ -47,7 +49,6 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
             public void onConnect(TS3Query ts3Query) {
                 stuffThatNeedsToRunEveryTimeTheQueryConnects(ts3Query.getApi());
             }
-
             @Override
             public void onDisconnect(TS3Query ts3Query) {
                 // Nothing
@@ -56,7 +57,6 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         final TS3Query query = new TS3Query(cfg);
         query.connect();
         stuffThatOnlyEverNeedsToBeRunOnce(query.getApi());
-        // query.exit();
     }
 
     private void stuffThatNeedsToRunEveryTimeTheQueryConnects(TS3Api api) {
@@ -66,17 +66,19 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         api.moveClient(clientId, 32);
         api.registerAllEvents();
         api.setNickname(login);
-        // may be this case TS3EventType.TEXT_CHANNEL
+
     }
 
     private void stuffThatOnlyEverNeedsToBeRunOnce(TS3Api api) {
-        // We only want to greet people once
-        // api.sendChannelMessage(" is online!");
-
-        // On the API side of things, you only need to register your TS3Listeners once!
+        // On the API side of things
         // These are not affected when the query disconnects.
+        this.api = api;
         teamspeakEventAdapter.setApi(api);
         api.addTS3Listeners(teamspeakEventAdapter);
     }
 
+    @Override
+    public TS3Api getApi() {
+        return this.api;
+    }
 }

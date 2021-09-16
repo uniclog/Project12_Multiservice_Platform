@@ -7,13 +7,13 @@ import org.springframework.context.annotation.PropertySource;
 
 @Data
 @Configuration
-@PropertySource("classpath:client.keystore.properties")
+@PropertySource("classpath:app.config.properties")
 public class KeyModuleWebConfig {
     @Value("${web.chat.url}")
     private String url;
     @Value("${web.chat.update}")
     private Boolean updateLoop;
-    @Value("${web.chat.key.pattern}")
+    @Value("${web.chat.key.pattern.regexp}")
     private String keyPattern;
     @Value("${web.chat.update.rate}")
     private String updateRate;

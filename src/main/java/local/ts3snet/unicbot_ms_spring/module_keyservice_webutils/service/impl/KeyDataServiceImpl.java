@@ -5,6 +5,7 @@ import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.repository.Key
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,7 +15,6 @@ public class KeyDataServiceImpl implements KeyDataService {
     public KeyDataServiceImpl(KeyDataRepository repository) {
         this.repository = repository;
     }
-
 
     @Override
     public void save(KeyDataEntity key) {
@@ -37,8 +37,8 @@ public class KeyDataServiceImpl implements KeyDataService {
     }
 
     @Override
-    public List<KeyDataEntity> findByDate() {
-        return null;
+    public List<KeyDataEntity> findByDateAfter(LocalDateTime date) {
+        return repository.findByDateAfter(date);
     }
 
     @Override

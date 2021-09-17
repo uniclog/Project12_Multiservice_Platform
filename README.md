@@ -1,3 +1,4 @@
+![Alt text](icon.svg?raw=true "Uniclog Multiservice Platform")
 # Uniclog Multiservice Platform 
 
 Uniclog Multiservice Platform
@@ -7,3 +8,4 @@ Uniclog Multiservice Platform
 Платформа включает в себя модули Telegram ботов, Teamspeak ботов, слой взаимодействия с базой данных, слой взаимодействия с web.
 
 На Dashboard платформы представлена информация о модулях, нагрузка на память и процессорное время. Имеет упорядоченные информационные логи работы частей платформы. Информационные ссылки с ресурсами.
+

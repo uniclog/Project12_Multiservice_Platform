@@ -1,4 +1,5 @@
-# Uniclog Multiservice Platform
+![Alt text](icon.svg?"Uniclog Multiservice Platform")
+# Uniclog Multiservice Platform 
 
 Uniclog Multiservice Platform
 
@@ -8,7 +9,3 @@ Uniclog Multiservice Platform
 
 На Dashboard платформы представлена информация о модулях, нагрузка на память и процессорное время. Имеет упорядоченные информационные логи работы частей платформы. Информационные ссылки с ресурсами.
 
-
-<div style="text-align:center">
-    <img src="https://github.com/birewallg/Uniclog_Multiservice_Platform/data/icon.svg"  alt="Uniclog Multiservice Platform"/>
-</div>

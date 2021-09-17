@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.config;
+package local.ts3snet.unicbot_ms_spring.module_teamspeak.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

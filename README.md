@@ -1,4 +1,4 @@
-![Alt text](icon.svg?"Uniclog Multiservice Platform")
+![Alt text](icon.svg?raw=true "Uniclog Multiservice Platform")
 # Uniclog Multiservice Platform 
 
 Uniclog Multiservice Platform

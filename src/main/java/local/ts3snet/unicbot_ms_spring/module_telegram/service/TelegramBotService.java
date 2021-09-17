@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.module_telegram_bots.service;
+package local.ts3snet.unicbot_ms_spring.module_telegram.service;
 
 import org.telegram.telegrambots.meta.generics.LongPollingBot;
 

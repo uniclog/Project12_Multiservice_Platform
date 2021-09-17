@@ -4,7 +4,7 @@ import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity.KeyData
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.model.WebChat;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
 import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.UtilsWebChatService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

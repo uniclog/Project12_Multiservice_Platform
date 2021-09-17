@@ -1,6 +1,6 @@
-package local.ts3snet.unicbot_ms_spring.module_telegram_bots.api;
+package local.ts3snet.unicbot_ms_spring.module_telegram.api;
 
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.service.TelegramBotService;
+import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;

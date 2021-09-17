@@ -1,7 +1,7 @@
-package local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.torg_messages;
+package local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages;
 
 import local.ts3snet.unicbot_ms_spring.core.service.TelegramTORGUserService;
-import local.ts3snet.unicbot_ms_spring.module_telegram_bots.model.MessageInterface;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageInterface;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 

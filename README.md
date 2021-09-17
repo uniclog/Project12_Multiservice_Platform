@@ -1,4 +1,4 @@
-# Uniclog Multiservice Platform 
+# Uniclog Multiservice Platform
 
 Uniclog Multiservice Platform
 
@@ -10,5 +10,5 @@ Uniclog Multiservice Platform
 
 
 <div style="text-align:center">
-    <img src="icon.svg"  alt="Uniclog Multiservice Platform"/>
+    <img src="https://github.com/birewallg/Uniclog_Multiservice_Platform/data/icon.svg"  alt="Uniclog Multiservice Platform"/>
 </div>

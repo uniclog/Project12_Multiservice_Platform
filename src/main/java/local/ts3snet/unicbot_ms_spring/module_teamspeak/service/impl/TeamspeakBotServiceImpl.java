@@ -1,13 +1,13 @@
-package local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.impl;
+package local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl;
 
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.TS3Config;
 import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ConnectionHandler;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.config.TeamspeakBotConfig;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.TeamspeakBotService;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak_utils.service.impl.utils.TeamspeakEventAdapter;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.config.TeamspeakBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.TeamspeakBotService;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakEventAdapter;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;

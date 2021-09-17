@@ -17,6 +17,9 @@ import java.util.EnumMap;
 
 import static com.github.theholywaffle.teamspeak3.api.ChannelProperty.CHANNEL_NAME;
 
+/**
+ * Scheduled Events for Teamspeak3 server
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -32,6 +35,10 @@ public class ScheduledEvents {
         api = teamspeakBotServiceA.getApi();
     }
 
+    /**
+     * Task for time update (rate = 60 sec.)
+     * Set time channel tittle = time now
+     */
     @Scheduled(fixedRate = 60000, initialDelay = 10000)
     public void timeUpdate() {
         Date date = new Date();

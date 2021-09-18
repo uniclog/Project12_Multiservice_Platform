@@ -1,6 +1,6 @@
-package local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.repository;
+package local.ts3snet.unicbot_ms_spring.module_webutils.repository;
 
-import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity.KeyDataEntity;
+import local.ts3snet.unicbot_ms_spring.module_webutils.entity.KeyDataEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

@@ -1,8 +1,8 @@
-package local.ts3snet.unicbot_ms_spring.module_webutils.service.impl;
+package local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_webutils.entity.KeyDataEntity;
-import local.ts3snet.unicbot_ms_spring.module_webutils.repository.KeyDataRepository;
-import local.ts3snet.unicbot_ms_spring.module_webutils.service.KeyDataService;
+import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity.KeyDataEntity;
+import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.repository.KeyDataRepository;
+import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

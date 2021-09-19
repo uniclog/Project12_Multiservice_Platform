@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.entity;
+package local.ts3snet.unicbot_ms_spring.module_webutils.entity;
 
 import lombok.Getter;
 import lombok.Setter;

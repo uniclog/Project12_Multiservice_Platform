@@ -1,6 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_keyservice_webutils.service.KeyDataService;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service.KeyDataService;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.UnicBotTORGMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.EqualsAndHashCode;

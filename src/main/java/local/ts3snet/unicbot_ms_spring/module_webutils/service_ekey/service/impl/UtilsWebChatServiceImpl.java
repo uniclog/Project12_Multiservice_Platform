@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Slf4j
@@ -40,16 +41,10 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
         this.webChat = webChat;
     }
 
-    public UtilsWebChatServiceImpl() {
+    @PostConstruct
+    public void utilsWebChatServiceImplInit() {
         log.info("UtilsWebParserService registered...");
     }
-
-    @Override
-    public void registerUtilsKeyModuleService() {
-        log.info("UtilsWebParserService entry task");
-        // something here ...
-    }
-
 
     //@Scheduled(fixedRateString = "${web.chat.update.rate:30}000")
     @Scheduled(fixedRateString = "#{@keyModuleWebConfig.getUpdateRate()}")

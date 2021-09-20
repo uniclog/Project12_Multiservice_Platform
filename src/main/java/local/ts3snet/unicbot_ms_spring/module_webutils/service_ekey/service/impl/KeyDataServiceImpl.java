@@ -32,6 +32,11 @@ public class KeyDataServiceImpl implements KeyDataService {
     }
 
     @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Override
     public void update(KeyDataEntity key) {
         repository.save(key);
     }

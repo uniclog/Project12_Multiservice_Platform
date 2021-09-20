@@ -8,6 +8,7 @@ import java.util.List;
 public interface KeyDataService {
     void save(KeyDataEntity key);
     void delete(KeyDataEntity key);
+    void deleteAll();
     void update(KeyDataEntity key);
     List<KeyDataEntity> findByDateAfter(LocalDateTime date);
     List<KeyDataEntity> findAll();

@@ -1,9 +1,9 @@
-package local.ts3snet.unicbot_ms_spring.module_webutils.service.impl;
+package local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_webutils.entity.KeyDataEntity;
-import local.ts3snet.unicbot_ms_spring.module_webutils.model.WebChat;
-import local.ts3snet.unicbot_ms_spring.module_webutils.service.KeyDataService;
-import local.ts3snet.unicbot_ms_spring.module_webutils.service.UtilsWebChatService;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.entity.KeyDataEntity;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.model.WebChat;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.service.KeyDataService;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.service.UtilsWebChatService;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.Getter;
 import lombok.Setter;

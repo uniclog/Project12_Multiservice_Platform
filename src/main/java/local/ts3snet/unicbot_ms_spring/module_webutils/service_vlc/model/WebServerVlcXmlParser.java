@@ -1,12 +1,15 @@
 package local.ts3snet.unicbot_ms_spring.module_webutils.service_vlc.model;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * Parser Vlc metadata
@@ -16,23 +19,22 @@ import java.io.IOException;
 public class WebServerVlcXmlParser {
     /**
      * Parse xml from url
-     * @param url base url
-     * @param key key
-     * @param value key value
+     * @param options base jsoup options
+     * @param key attribute name
+     * @param value attribute value
      * @return parse text
      */
-    public String xmlParserByAttributeValue(String url, String key, String value) {
-        Document doc = null;
+    public String xmlParserByAttributeValue(JsoupOptions options, String key, String value) {
+        Document doc;
         try {
-            doc = Jsoup
-                    .connect(url)
-                    .header("Content-Type", "application/x-www-form-urlencoded")
-                    .header("Authorization", "Basic " + DatatypeConverter.printBase64Binary(":1".getBytes()))
-                    .postDataCharset("UTF-8")
-                    .get();
+            Connection connection = Jsoup.connect(options.getUrl());
+            connection.postDataCharset(options.getDataCharset());
+            options.getHeaders()
+                    .forEach(connection::header);
+            doc = connection.get();
 
             String text = doc.getElementsByAttributeValue(key, value).text();
-            log.debug(text);
+            log.info(text);
             return text;
         } catch (IOException e) {
             log.error(e.getMessage());

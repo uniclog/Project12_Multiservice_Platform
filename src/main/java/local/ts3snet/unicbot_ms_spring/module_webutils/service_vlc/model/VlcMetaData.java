@@ -4,8 +4,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.FieldNameConstants;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

@@ -4,12 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
-import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Vector;
 
 /**
  * Parser Vlc metadata
@@ -34,11 +33,11 @@ public class WebServerVlcXmlParser {
             doc = connection.get();
 
             String text = doc.getElementsByAttributeValue(key, value).text();
-            log.info(text);
+            log.debug(text);
             return text;
         } catch (IOException e) {
             log.error(e.getMessage());
+            return "null";
         }
-        return "null";
     }
 }

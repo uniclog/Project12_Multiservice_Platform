@@ -1,8 +1,8 @@
-package local.ts3snet.unicbot_ms_spring.module_webutils.service.impl;
+package local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_webutils.entity.KeyDataEntity;
-import local.ts3snet.unicbot_ms_spring.module_webutils.repository.KeyDataRepository;
-import local.ts3snet.unicbot_ms_spring.module_webutils.service.KeyDataService;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.entity.KeyDataEntity;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.repository.KeyDataRepository;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.service.KeyDataService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -29,6 +29,11 @@ public class KeyDataServiceImpl implements KeyDataService {
     @Override
     public void delete(KeyDataEntity key) {
         repository.delete(key);
+    }
+
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 
     @Override

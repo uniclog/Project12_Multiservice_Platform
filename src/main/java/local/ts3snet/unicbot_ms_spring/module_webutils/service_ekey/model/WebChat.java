@@ -1,6 +1,6 @@
-package local.ts3snet.unicbot_ms_spring.module_webutils.model;
+package local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.model;
 
-import local.ts3snet.unicbot_ms_spring.module_webutils.config.KeyModuleWebConfig;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.config.KeyModuleWebConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

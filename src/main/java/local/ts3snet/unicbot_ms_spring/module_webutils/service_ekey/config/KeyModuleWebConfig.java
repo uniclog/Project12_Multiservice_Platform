@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.module_webutils.config;
+package local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

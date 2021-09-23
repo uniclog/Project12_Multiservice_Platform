@@ -1,7 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.service;
 
-import local.ts3snet.unicbot_ms_spring.module_webutils.entity.KeyDataEntity;
-import local.ts3snet.unicbot_ms_spring.module_webutils.repository.KeyDataRepository;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.entity.KeyDataEntity;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.repository.KeyDataRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

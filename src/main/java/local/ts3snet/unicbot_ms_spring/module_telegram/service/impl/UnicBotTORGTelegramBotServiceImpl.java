@@ -12,6 +12,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -28,7 +29,10 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
     public UnicBotTORGTelegramBotServiceImpl(UnicBotTORGTelegramBotConfig config, List<UnicBotTORGMessageAbstract> messages) {
         this.config = config;
         this.messages = messages.stream().collect(toMap(UnicBotTORGMessageAbstract::messageType, Function.identity()));
+    }
 
+    @PostConstruct
+    private void init() {
         log.info("UnicBotTORGTelegramBotService init...");
     }
 

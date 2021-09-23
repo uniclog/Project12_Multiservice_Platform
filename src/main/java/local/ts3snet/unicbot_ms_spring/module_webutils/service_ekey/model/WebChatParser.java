@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.module_webutils.model;
+package local.ts3snet.unicbot_ms_spring.module_webutils.service_ekey.model;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;

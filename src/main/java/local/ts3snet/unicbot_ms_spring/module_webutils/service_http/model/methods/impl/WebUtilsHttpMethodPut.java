@@ -1,7 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_webutils.service_http.model.methods.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_webutils.service_http.model.HttpOptions;
-import local.ts3snet.unicbot_ms_spring.module_webutils.service_http.model.methods.WebUtilsHttpMethodInterface;
+import local.ts3snet.unicbot_ms_spring.module_webutils.service_http.model.methods.WebUtilsHttpMethodAbstract;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Lazy
 @Component("webUtilsHttpMethodPut")
-public class WebUtilsHttpMethodPut implements WebUtilsHttpMethodInterface {
+public class WebUtilsHttpMethodPut extends WebUtilsHttpMethodAbstract {
     @Override
     public void execute(HttpOptions options) {
         log.info("-------------------- action http PUT");

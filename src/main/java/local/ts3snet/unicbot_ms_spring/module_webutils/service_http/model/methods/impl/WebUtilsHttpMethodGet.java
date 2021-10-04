@@ -7,20 +7,34 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.UnknownHostException;
 
 @Slf4j
 @Lazy
 @Component("webUtilsHttpMethodGet")
 public class WebUtilsHttpMethodGet extends WebUtilsHttpMethodAbstract {
     @Override
-    public void execute(HttpOptions options) {
-        final HttpHeaders headers = new HttpHeaders();
-        options.getHeaders().forEach(headers::set);
-        final HttpEntity<String> entity = new HttpEntity<>(headers);
-        getRestTemplate().exchange(options.getUrl(), HttpMethod.GET, entity, String.class);
-        // ResponseEntity<String> response =
-        // response.getBody()
-        log.debug("-------------------- action http GET: " + options);
+    public ResponseEntity<String> execute(HttpOptions options) {
+
+        final StringBuilder url = new StringBuilder();
+        url.append(options.getUrl());
+        options.getParameters().forEach((key, value) -> {
+            url.append((url.toString().contains("?")) ? '&' : '?');
+            url.append(key).append("=").append(value);
+        });
+        try {
+            log.info(url.toString());
+            ResponseEntity<String> response = getRestTemplate().exchange(url.toString(), HttpMethod.GET, options.getHeaders(), String.class);
+            log.debug("-------------------- action http GET: " + options);
+            return response;
+        } catch (ResourceAccessException e) {
+            log.error(e.getMessage());
+        }
+        return ResponseEntity.notFound().build();
     }
 }

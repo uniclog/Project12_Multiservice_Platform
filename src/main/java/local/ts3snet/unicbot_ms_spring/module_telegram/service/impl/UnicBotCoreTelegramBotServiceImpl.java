@@ -1,6 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.service.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram.config.UnicBotCoreTelegramBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.CommandLet;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl.Default;
@@ -26,10 +27,15 @@ import static java.util.stream.Collectors.toMap;
 public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
     final UnicBotCoreTelegramBotConfig config;
     private final Map<String, UnicBotCoreMessageAbstract> messages;
+    private final CommandLet commandLet;
 
-    public UnicBotCoreTelegramBotServiceImpl(UnicBotCoreTelegramBotConfig config, List<UnicBotCoreMessageAbstract> messages) {
+    public UnicBotCoreTelegramBotServiceImpl(
+            UnicBotCoreTelegramBotConfig config,
+            List<UnicBotCoreMessageAbstract> messages,
+            CommandLet commandLet) {
         this.config = config;
         this.messages = messages.stream().collect(toMap(UnicBotCoreMessageAbstract::messageType, Function.identity()));
+        this.commandLet = commandLet;
 
         log.info("UnicBotCoreTelegramBotServiceImpl init...");
     }
@@ -42,24 +48,14 @@ public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot im
         String authorSignature = message.getFrom().getUserName();
         Long userId = message.getChatId();
 
+        commandLet.update(text);
         UnicBotCoreMessageAbstract msg =
-                messages.getOrDefault(getCommandLet(text), new Default());
+                messages.getOrDefault(commandLet.getCmd(), new Default());
         msg.setTextMessage(text);
         msg.setUserId(userId);
         msg.setUserName(authorSignature);
 
-        msg.execute(this);
-    }
-
-    /**
-     * Find /command pattern in line
-     * @param msg source message
-     * @return text command
-     */
-    private String getCommandLet(String msg) {
-        String regex = "/\\S+";
-        Matcher matcher = Pattern.compile(regex).matcher(msg);
-        return matcher.find() ? matcher.group(0) : MessageType.DEFAULT;
+        msg.execute(this, commandLet.getFirstParameter(), commandLet.getAllMessage());
     }
 
     @Override

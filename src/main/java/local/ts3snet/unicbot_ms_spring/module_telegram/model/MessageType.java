@@ -7,6 +7,7 @@ public class MessageType {
     public static final String TRACK = "/track";
     public static final String NEXT = "/next";
     public static final String PREV = "/prev";
+    public static final String PLAY_BY_ID = "/goto";
 
     private MessageType() {}
 }

@@ -1,8 +1,10 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.service.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram.config.UnicBotCoreTelegramBotConfig;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl.Default;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.CommandLet;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -23,10 +27,15 @@ import static java.util.stream.Collectors.toMap;
 public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
     final UnicBotCoreTelegramBotConfig config;
     private final Map<String, UnicBotCoreMessageAbstract> messages;
+    private final CommandLet commandLet;
 
-    public UnicBotCoreTelegramBotServiceImpl(UnicBotCoreTelegramBotConfig config, List<UnicBotCoreMessageAbstract> messages) {
+    public UnicBotCoreTelegramBotServiceImpl(
+            UnicBotCoreTelegramBotConfig config,
+            List<UnicBotCoreMessageAbstract> messages,
+            CommandLet commandLet) {
         this.config = config;
         this.messages = messages.stream().collect(toMap(UnicBotCoreMessageAbstract::messageType, Function.identity()));
+        this.commandLet = commandLet;
 
         log.info("UnicBotCoreTelegramBotServiceImpl init...");
     }
@@ -39,12 +48,14 @@ public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot im
         String authorSignature = message.getFrom().getUserName();
         Long userId = message.getChatId();
 
-        UnicBotCoreMessageAbstract msg = messages.getOrDefault(text, new Default());
+        commandLet.update(text);
+        UnicBotCoreMessageAbstract msg =
+                messages.getOrDefault(commandLet.getCmd(), new Default());
         msg.setTextMessage(text);
         msg.setUserId(userId);
         msg.setUserName(authorSignature);
 
-        msg.execute(this);
+        msg.execute(this, commandLet.getFirstParameter(), commandLet.getAllMessage());
     }
 
     @Override

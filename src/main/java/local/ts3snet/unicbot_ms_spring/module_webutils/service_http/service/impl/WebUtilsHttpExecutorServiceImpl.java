@@ -52,6 +52,10 @@ public class WebUtilsHttpExecutorServiceImpl implements WebUtilsHttpExecutorServ
                 methodPut.execute(options);
                 break;
             }
+            default: {
+                log.warn("Method not define ..");
+                break;
+            }
         }
     }
 }

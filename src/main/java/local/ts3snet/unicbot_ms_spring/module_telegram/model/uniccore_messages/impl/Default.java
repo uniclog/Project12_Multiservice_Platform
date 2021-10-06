@@ -1,5 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl;
 
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import org.springframework.context.annotation.Lazy;
@@ -15,6 +16,6 @@ public class Default extends UnicBotCoreMessageAbstract {
 
     @Override
     public String messageType() {
-        return "default";
+        return MessageType.DEFAULT;
     }
 }

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @EqualsAndHashCode(callSuper = false)
 @Lazy
-@Component(value = "unicVlcGetTrackTitle")
-public class VlcGetTrackTitle extends UnicBotCoreMessageAbstract {
+@Component(value = "unicVlcGetStationTitle")
+public class VlcGetStationTitle extends UnicBotCoreMessageAbstract {
 
     private VlcControlService vlc;
     @Autowired
@@ -21,17 +21,17 @@ public class VlcGetTrackTitle extends UnicBotCoreMessageAbstract {
     }
 
     /**
-     * Get track title from vlc server
+     * Get station title from vlc server
      * @param bot bot signature
      * @param msg user messages
      */
     @Override
     public void execute(TelegramBotService bot, String... msg) {
-        bot.sendMessage(this.getUserId(), "Track: " + vlc.getTrackName());
+        bot.sendMessage(this.getUserId(), "Station: " + vlc.getStationName());
     }
 
     @Override
     public String messageType() {
-        return MessageType.TRACK;
+        return MessageType.STATION;
     }
 }

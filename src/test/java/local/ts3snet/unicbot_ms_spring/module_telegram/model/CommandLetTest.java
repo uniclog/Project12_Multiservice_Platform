@@ -14,6 +14,14 @@ class CommandLetTest {
     private CommandLet commandLet;
 
     @Test
+    void updateEntryTest() {
+        String testMsg = "";
+        commandLet.update(testMsg);
+        log.info("getCmd = " + commandLet.getCmd());
+        assertEquals(MessageType.DEFAULT, commandLet.getCmd());
+    }
+
+    @Test
     void updateTest() {
         String testMsg = MessageType.NEXT;
         commandLet.update(testMsg);

@@ -1,5 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl;
 
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import local.ts3snet.unicbot_ms_spring.module_webutils.service_vlc.service.VlcControlService;
@@ -13,9 +14,17 @@ import org.springframework.stereotype.Component;
 @Component(value = "unicVlcGetTrackTitle")
 public class VlcGetTrackTitle extends UnicBotCoreMessageAbstract {
 
-    @Autowired
     private VlcControlService vlc;
+    @Autowired
+    private void setVlcService(VlcControlService vlc) {
+        this.vlc = vlc;
+    }
 
+    /**
+     * Get track title from vlc server
+     * @param bot bot signature
+     * @param msg user messages
+     */
     @Override
     public void execute(TelegramBotService bot, String... msg) {
         bot.sendMessage(this.getUserId(), "Track: " + vlc.getTrackName());
@@ -23,6 +32,6 @@ public class VlcGetTrackTitle extends UnicBotCoreMessageAbstract {
 
     @Override
     public String messageType() {
-        return "/track";
+        return MessageType.TRACK;
     }
 }

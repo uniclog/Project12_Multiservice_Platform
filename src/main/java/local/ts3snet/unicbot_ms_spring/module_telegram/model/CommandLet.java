@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,10 @@ public class CommandLet {
     private String cmd = MessageType.DEFAULT;
     private String firstParameter = MessageType.DEFAULT;
     private String allMessage = MessageType.DEFAULT;
+
+    public String getCmd() {
+        return cmd.toLowerCase(Locale.ROOT);
+    }
 
     /**
      * Find /command pattern in line

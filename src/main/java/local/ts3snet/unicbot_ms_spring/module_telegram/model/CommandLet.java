@@ -25,7 +25,8 @@ public class CommandLet {
         if (matcher.find()) {
             this.setCmd( matcher.group("cmd") );
             this.setFirstParameter( matcher.group("value") );
-        }
+        } else this.setCmd( MessageType.DEFAULT );
+
         regex = "(?<cmd>/\\w+)(\\s+)(?<value>.*)";
         matcher = Pattern.compile(regex).matcher(msg);
         this.setAllMessage(matcher.find() ? matcher.group("value") : MessageType.DEFAULT);

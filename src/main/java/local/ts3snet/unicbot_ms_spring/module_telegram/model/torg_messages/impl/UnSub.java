@@ -15,7 +15,7 @@ public class UnSub extends UnicBotTORGMessageAbstract {
     public void execute(TelegramBotService bot, String... param) {
         TelegramTORGUserEntity user = new TelegramTORGUserEntity();
         user.setUserTelegramId(this.getUserId());
-        user.setSubscriber(true);
+        user.setSubscriber(false);
         user.setUserName(this.getUserName());
 
         getTelegramTORGUserService().update(user);

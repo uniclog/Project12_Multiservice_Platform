@@ -4,6 +4,7 @@ public class MessageType {
     public static final String DEFAULT = "default";
     public static final String MESSAGE_FOR_ALL_SUBSCRIBERS = "messageForAllSubscribers";
     public static final String SUB = "/sub";
+    public static final String UNSUB = "/unsub";
     public static final String TRACK = "/track";
     public static final String STATION = "/station";
     public static final String NEXT = "/next";

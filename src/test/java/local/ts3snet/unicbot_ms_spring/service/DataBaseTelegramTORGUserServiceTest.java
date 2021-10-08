@@ -29,7 +29,7 @@ class DataBaseTelegramTORGUserServiceTest {
         user.setSubscriber(true);
         user.setUserTelegramId((long)123456789);
         telegramTORGUserRepository.save(user);
-        List<TelegramTORGUserEntity> subscribers = (List<TelegramTORGUserEntity>) telegramTORGUserRepository.findAllBySubscriber(true);
+        List<TelegramTORGUserEntity> subscribers = telegramTORGUserRepository.findAllBySubscriber(true);
         log.debug(subscribers.toString());
         assertFalse(subscribers.isEmpty());
 
@@ -38,7 +38,7 @@ class DataBaseTelegramTORGUserServiceTest {
         user.setSubscriber(false);
         user.setUserTelegramId((long)987654321);
         telegramTORGUserRepository.save(user);
-        subscribers = (List<TelegramTORGUserEntity>) telegramTORGUserRepository.findAllBySubscriber(false);
+        subscribers = telegramTORGUserRepository.findAllBySubscriber(false);
         log.debug(subscribers.toString());
         assertFalse(subscribers.isEmpty());
     }
@@ -49,7 +49,7 @@ class DataBaseTelegramTORGUserServiceTest {
         user.setSubscriber(true);
         user.setUserTelegramId((long)123456789);
         telegramTORGUserRepository.save(user);
-        List<TelegramTORGUserEntity> users = (List<TelegramTORGUserEntity>) telegramTORGUserRepository.findAll();
+        List<TelegramTORGUserEntity> users = telegramTORGUserRepository.findAll();
         assertFalse(users.isEmpty());
 
         Long telegramId = (long) 123456789;

@@ -2,7 +2,6 @@ package local.ts3snet.unicbot_ms_spring.module_telegram.service.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram.config.UnicBotCoreTelegramBotConfig;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.CommandLet;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
@@ -17,8 +16,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toMap;
 

@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Data
-@Component
+@Component("moduleTeamspeakCommandLet")
 @Scope("prototype")
 public class CommandLet {
     private MessageType cmd = MessageType.DEFAULT;

@@ -6,12 +6,14 @@ import com.github.theholywaffle.teamspeak3.TS3Query;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ConnectionHandler;
 import com.github.theholywaffle.teamspeak3.api.reconnect.ReconnectStrategy;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.config.TeamspeakBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.TeamspeakMessageInterface;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.TeamspeakBotService;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakEventAdapter;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakMessageSender;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.logging.Level;
 
@@ -25,9 +27,14 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
     private TS3Api api;
 
     private final TeamspeakEventAdapter teamspeakEventAdapter;
+    private final TeamspeakMessageSender teamspeakMessageSender;
 
-    public TeamspeakBotServiceImpl(TeamspeakBotConfig config, TeamspeakEventAdapter teamspeakEventAdapter) {
+    public TeamspeakBotServiceImpl(
+            TeamspeakBotConfig config,
+            TeamspeakEventAdapter teamspeakEventAdapter,
+            TeamspeakMessageSender teamspeakMessageSender) {
         this.teamspeakEventAdapter = teamspeakEventAdapter;
+        this.teamspeakMessageSender = teamspeakMessageSender;
 
         address = config.getIpAddress();
         login = config.getLogin();
@@ -51,7 +58,7 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
             }
             @Override
             public void onDisconnect(TS3Query ts3Query) {
-                // Nothing
+                log.info("Teamspeak server is offline");
             }
         });
         final TS3Query query = new TS3Query(cfg);
@@ -67,18 +74,24 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         api.registerAllEvents();
         api.setNickname(login);
 
+        teamspeakEventAdapter.setApi(api);
+        teamspeakMessageSender.setApi(api);
     }
 
     private void stuffThatOnlyEverNeedsToBeRunOnce(TS3Api api) {
         // On the API side of things
         // These are not affected when the query disconnects.
         this.api = api;
-        teamspeakEventAdapter.setApi(api);
         api.addTS3Listeners(teamspeakEventAdapter);
     }
 
     @Override
     public TS3Api getApi() {
         return this.api;
+    }
+
+    @Override
+    public void sendChannelMessage(Integer channelId, TeamspeakMessageInterface message) {
+        teamspeakMessageSender.sendChannelMessage(channelId, message);
     }
 }

@@ -5,6 +5,7 @@ import local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.UnicB
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -26,9 +27,13 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
     final UnicBotTORGTelegramBotConfig config;
     private final Map<String, UnicBotTORGMessageAbstract> messages;
 
-    public UnicBotTORGTelegramBotServiceImpl(UnicBotTORGTelegramBotConfig config, List<UnicBotTORGMessageAbstract> messages) {
+    public UnicBotTORGTelegramBotServiceImpl(
+            UnicBotTORGTelegramBotConfig config,
+            @Qualifier("torgMessageMap")
+            Map<String, UnicBotTORGMessageAbstract> messages) {
         this.config = config;
-        this.messages = messages.stream().collect(toMap(UnicBotTORGMessageAbstract::messageType, Function.identity()));
+        this.messages = messages;
+                //messages.stream().collect(toMap(UnicBotTORGMessageAbstract::messageType, Function.identity()));
     }
 
     @PostConstruct

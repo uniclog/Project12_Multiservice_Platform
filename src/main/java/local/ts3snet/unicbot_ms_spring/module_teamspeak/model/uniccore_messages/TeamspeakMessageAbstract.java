@@ -13,12 +13,13 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public abstract class TeamspeakMessageAbstract implements TeamspeakMessageInterface {
     private String textMessage;
-    private Long userId;
+    private Integer userId;
     private String userName;
+    private String userToken;
 
     private TeamspeakUserService teamspeakUserService;
     @Autowired
-    public void setTelegramTORGUserService(TeamspeakUserService teamspeakUserService) {
+    public void setTeamspeakUserService(TeamspeakUserService teamspeakUserService) {
         this.teamspeakUserService = teamspeakUserService;
     }
 

@@ -6,4 +6,6 @@ import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.TeamspeakMessageIn
 public interface TeamspeakMessageSender {
     void setApi(TS3Api api);
     void sendChannelMessage(Integer channelId, TeamspeakMessageInterface message);
+    void sendChannelMessage(TeamspeakMessageInterface message);
+    void sendPrivateMessage(Integer clientId, TeamspeakMessageInterface message);
 }

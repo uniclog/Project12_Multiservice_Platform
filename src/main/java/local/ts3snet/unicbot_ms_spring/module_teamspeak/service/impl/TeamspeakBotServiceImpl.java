@@ -90,8 +90,15 @@ public class TeamspeakBotServiceImpl implements TeamspeakBotService {
         return this.api;
     }
 
-    @Override
+    /*@Override
     public void sendChannelMessage(Integer channelId, TeamspeakMessageInterface message) {
+        if (channelId == null)
+            teamspeakMessageSender.sendChannelMessage(message);
         teamspeakMessageSender.sendChannelMessage(channelId, message);
     }
+
+    @Override
+    public void sendPrivateMessage(Integer channelId, TeamspeakMessageInterface message) {
+        teamspeakMessageSender.sendPrivateMessage(channelId, message);
+    }*/
 }

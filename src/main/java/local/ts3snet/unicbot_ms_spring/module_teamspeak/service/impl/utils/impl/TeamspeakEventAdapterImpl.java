@@ -7,9 +7,13 @@ import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.TeamspeakMessageInterface;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.TeamspeakMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakEventAdapter;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakMessageSender;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.CommandLet;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +33,20 @@ public class TeamspeakEventAdapterImpl extends TS3EventAdapter implements Teamsp
 
     private final TelegramBotService telegramUnicBotCoreUserService;
     private final TeamspeakMessageSender messageSender;
+    private final Map<String, TeamspeakMessageAbstract> messages;
+    private final CommandLet commandLet;
     @Autowired
     public TeamspeakEventAdapterImpl(
             @Qualifier(value = "unicBotCoreTelegramBotServiceImpl") TelegramBotService telegramBotService,
-            TeamspeakMessageSender messageSender) {
+            TeamspeakMessageSender messageSender,
+            @Qualifier("ts3sMessageMap")
+            Map<String, TeamspeakMessageAbstract> messages,
+            @Qualifier("ts3sMessageCommandLet")
+            CommandLet commandLet) {
         this.telegramUnicBotCoreUserService = telegramBotService;
         this.messageSender = messageSender;
+        this.messages = messages;
+        this.commandLet = commandLet;
     }
 
     @Override
@@ -77,12 +89,25 @@ public class TeamspeakEventAdapterImpl extends TS3EventAdapter implements Teamsp
     }
     @Override
     public void onTextMessage(TextMessageEvent e) {
-        log.info("over if msg: " + e.getMessage());
         if (e.getTargetMode() == TextMessageTargetMode.CHANNEL && e.getInvokerId() != botId) {
-            log.info("msg: " + e.getMessage());
-            Default msg = new Default();
-            msg.setTextMessage("Hello " + e.getInvokerName() + "!");
-            messageSender.sendChannelMessage(null, msg);
+            // Default msg = new Default()
+            // msg.setTextMessage("Hello " + e.getInvokerName() + "!")
+            // messageSender.sendChannelMessage(null, msg)
+
+
+            String message = e.getMessage();
+            log.info("Received: " + message);
+            String authorSignature = e.getInvokerName();
+            Integer userId = e.getInvokerId();
+
+            commandLet.update(message);
+            TeamspeakMessageAbstract msg =
+                    messages.getOrDefault(commandLet.getCmd(), new Default());
+            msg.setTextMessage(message);
+            msg.setUserId(userId);
+            msg.setUserName(authorSignature);
+
+            msg.execute(messageSender, commandLet.getFirstParameter(), commandLet.getAllMessage());
         }
     }
 }

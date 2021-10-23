@@ -36,6 +36,6 @@ public class CommandLet {
             matcher = Pattern.compile(regex).matcher(msg);
             this.setCmd(matcher.find() ? MessageType.getType(matcher.group("cmd")) : MessageType.DEFAULT);
         }
-
+        System.out.println(this.toString());
     }
 }

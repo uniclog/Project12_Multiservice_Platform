@@ -2,7 +2,6 @@ package local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages
 
 import local.ts3snet.unicbot_ms_spring.core.service.TeamspeakUserService;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.TeamspeakMessageInterface;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.TeamspeakBotService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public abstract class TeamspeakMessageAbstract implements TeamspeakMessageInterf
     }
 
     public void printDebugLog() {
-        log.debug("msg: " + userId + " >> " + messageType());
+        log.info("msg: " + userId + " >> " + messageType());
     }
 
     public String convertToUTF8(String text) {

@@ -7,13 +7,11 @@ import com.github.theholywaffle.teamspeak3.api.event.ClientLeaveEvent;
 import com.github.theholywaffle.teamspeak3.api.event.TS3EventAdapter;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import com.github.theholywaffle.teamspeak3.api.wrapper.ClientInfo;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.TeamspeakMessageInterface;
+import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.CommandLet;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.TeamspeakMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakEventAdapter;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakMessageSender;
-import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.CommandLet;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,12 +97,14 @@ public class TeamspeakEventAdapterImpl extends TS3EventAdapter implements Teamsp
             log.info("Received: " + message);
             String authorSignature = e.getInvokerName();
             Integer userId = e.getInvokerId();
+            String invokerUniqueId = e.getInvokerUniqueId();
 
             commandLet.update(message);
             TeamspeakMessageAbstract msg =
-                    messages.getOrDefault(commandLet.getCmd(), new Default());
+                    messages.getOrDefault(commandLet.getCmd().getTextValue(), new Default());
             msg.setTextMessage(message);
             msg.setUserId(userId);
+            msg.setUserToken(invokerUniqueId);
             msg.setUserName(authorSignature);
 
             msg.execute(messageSender, commandLet.getFirstParameter(), commandLet.getAllMessage());

@@ -26,6 +26,8 @@ public class TeamspeakMessageSenderImpl implements TeamspeakMessageSender {
     @Override
     public void sendPrivateMessage(Integer clientId, TeamspeakMessageInterface message) {
         api.sendPrivateMessage(clientId, message.getMessageText());
+        System.out.println(clientId);
+        System.out.println(message);
     }
 
     @Override

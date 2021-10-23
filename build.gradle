@@ -6,7 +6,7 @@ plugins {
 
 group = 'local.ts3snet'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '1.11'
 
 repositories {
     mavenCentral()
@@ -19,7 +19,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter:2.5.5'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.5'
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.5'
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.5.4'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.5.6.Final'
@@ -30,7 +30,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-    testImplementation('org.junit.jupiter:junit-jupiter-engine:5.8.1')
+    testImplementation('org.junit.jupiter:junit-jupiter-engine:5.7.2')
 
     implementation group: 'org.telegram', name: 'telegrambots', version: '5.3.0'
     // https://mvnrepository.com/artifact/com.github.theholywaffle/teamspeak3-api

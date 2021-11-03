@@ -29,7 +29,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-    testImplementation('org.junit.jupiter:junit-jupiter-engine:5.8.1')
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.1')
 
     implementation group: 'org.telegram', name: 'telegrambots', version: '5.3.0'
     // https://mvnrepository.com/artifact/com.github.theholywaffle/teamspeak3-api

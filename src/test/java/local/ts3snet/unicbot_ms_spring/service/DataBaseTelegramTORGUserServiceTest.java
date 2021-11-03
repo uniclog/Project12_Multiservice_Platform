@@ -29,7 +29,7 @@ class DataBaseTelegramTORGUserServiceTest {
         user.setSubscriber(true);
         user.setUserTelegramId((long)123456789);
         telegramTORGUserRepository.save(user);
-        List<TelegramTORGUserEntity> subscribers = (List<TelegramTORGUserEntity>) telegramTORGUserRepository.findAllBySubscriber(true);
+        List<TelegramTORGUserEntity> subscribers = telegramTORGUserRepository.findAllBySubscriber(true);
         log.debug(subscribers.toString());
         assertFalse(subscribers.isEmpty());
 
@@ -38,7 +38,7 @@ class DataBaseTelegramTORGUserServiceTest {
         user.setSubscriber(false);
         user.setUserTelegramId((long)987654321);
         telegramTORGUserRepository.save(user);
-        subscribers = (List<TelegramTORGUserEntity>) telegramTORGUserRepository.findAllBySubscriber(false);
+        subscribers = telegramTORGUserRepository.findAllBySubscriber(false);
         log.debug(subscribers.toString());
         assertFalse(subscribers.isEmpty());
     }
@@ -49,19 +49,24 @@ class DataBaseTelegramTORGUserServiceTest {
         user.setSubscriber(true);
         user.setUserTelegramId((long)123456789);
         telegramTORGUserRepository.save(user);
-        List<TelegramTORGUserEntity> users = (List<TelegramTORGUserEntity>) telegramTORGUserRepository.findAll();
+        List<TelegramTORGUserEntity> users = telegramTORGUserRepository.findAll();
         assertFalse(users.isEmpty());
 
         Long telegramId = (long) 123456789;
         String name = "Test";
-        TelegramTORGUserEntity user1 = telegramTORGUserRepository.findById(users.get(0).getId()).get();
+        TelegramTORGUserEntity user1 = telegramTORGUserRepository.findById(users.get(0).getId()).orElse(null);
+        assertNotNull(user1);
         user1.setUserTelegramId(telegramId);
         user1.setUserName(name);
         telegramTORGUserRepository.save(user1);
 
-        user = telegramTORGUserRepository.findById(user1.getId()).get();
-        assertEquals(user.getUserTelegramId(), telegramId);
-        assertEquals(user.getUserName(), name);
+        user = telegramTORGUserRepository.findById(user1.getId()).orElse(null);
+        assertNotNull(user);
+        final TelegramTORGUserEntity assertUser = user;
+        assertAll("User properties",
+                () -> assertEquals(assertUser.getUserTelegramId(), telegramId),
+                () -> assertEquals(assertUser.getUserName(), name)
+        );
     }
     @Test
     void deleteUserFromDB() {

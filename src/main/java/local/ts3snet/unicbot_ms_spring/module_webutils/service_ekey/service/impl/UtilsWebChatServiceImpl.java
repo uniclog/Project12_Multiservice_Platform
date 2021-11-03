@@ -47,7 +47,7 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
     }
 
     //@Scheduled(fixedRateString = "${web.chat.update.rate:30}000")
-    @Scheduled(fixedRateString = "#{@keyModuleWebConfig.getUpdateRate()}")
+    @Scheduled(fixedRateString = "#{@keyModuleWebConfig.getUpdateRate()}", initialDelay = 10000)
     private void serviceUpdateRate() {
         log.debug("UtilsWebParserService.serviceUpdateRate() get new messages...");
         webChat.update().forEach(e -> {

@@ -4,7 +4,6 @@ import local.ts3snet.unicbot_ms_spring.core.service.TelegramUnicBotCoreUserServi
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageInterface;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.nio.charset.StandardCharsets;

@@ -2,11 +2,12 @@ package local.ts3snet.unicbot_ms_spring.module_telegram.service.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram.config.UnicBotCoreTelegramBotConfig;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.CommandLet;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageInterface;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -17,8 +18,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -31,10 +30,11 @@ public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot im
 
     public UnicBotCoreTelegramBotServiceImpl(
             UnicBotCoreTelegramBotConfig config,
-            List<UnicBotCoreMessageAbstract> messages,
+            @Qualifier("unicCoreMessageMap")
+            Map<String, UnicBotCoreMessageAbstract> messages,
             CommandLet commandLet) {
         this.config = config;
-        this.messages = messages.stream().collect(toMap(UnicBotCoreMessageAbstract::messageType, Function.identity()));
+        this.messages = messages;
         this.commandLet = commandLet;
 
         log.info("UnicBotCoreTelegramBotServiceImpl init...");

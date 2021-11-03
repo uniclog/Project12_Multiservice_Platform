@@ -4,8 +4,7 @@ import lombok.Data;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +16,10 @@ public class CommandLet {
     private String firstParameter = MessageType.DEFAULT;
     private String allMessage = MessageType.DEFAULT;
 
+    public String getCmd() {
+        return cmd.toLowerCase(Locale.ROOT);
+    }
+
     /**
      * Find /command pattern in line
      * @param msg source message
@@ -27,7 +30,8 @@ public class CommandLet {
         if (matcher.find()) {
             this.setCmd( matcher.group("cmd") );
             this.setFirstParameter( matcher.group("value") );
-        }
+        } else this.setCmd( MessageType.DEFAULT );
+
         regex = "(?<cmd>/\\w+)(\\s+)(?<value>.*)";
         matcher = Pattern.compile(regex).matcher(msg);
         this.setAllMessage(matcher.find() ? matcher.group("value") : MessageType.DEFAULT);

@@ -35,7 +35,7 @@ public class VlcPrevStation extends TeamspeakMessageAbstract {
         } catch (InterruptedException e) {
             log.error(e.getMessage());
         }
-        bot.sendChannelMessage("Next: " + vlc.getStationName());
+        bot.sendChannelMessage("Prev: " + vlc.getStationName());
     }
 
     @Override

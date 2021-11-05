@@ -29,7 +29,7 @@ public class TeamspeakBotConfig {
 
     @Bean
     @Qualifier("ts3sMessageMap")
-    public Map<String, TeamspeakMessageAbstract> unicCoreMessageBean(List<TeamspeakMessageAbstract> messages) {
+    public Map<String, TeamspeakMessageAbstract> ts3sMessageBean(List<TeamspeakMessageAbstract> messages) {
         return messages.stream().collect(
                 Collectors.toMap(
                         TeamspeakMessageInterface::messageType,

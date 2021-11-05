@@ -54,14 +54,19 @@ class DataBaseTelegramTORGUserServiceTest {
 
         Long telegramId = (long) 123456789;
         String name = "Test";
-        TelegramTORGUserEntity user1 = telegramTORGUserRepository.findById(users.get(0).getId()).get();
+        TelegramTORGUserEntity user1 = telegramTORGUserRepository.findById(users.get(0).getId()).orElse(null);
+        assertNotNull(user1);
         user1.setUserTelegramId(telegramId);
         user1.setUserName(name);
         telegramTORGUserRepository.save(user1);
 
-        user = telegramTORGUserRepository.findById(user1.getId()).get();
-        assertEquals(user.getUserTelegramId(), telegramId);
-        assertEquals(user.getUserName(), name);
+        user = telegramTORGUserRepository.findById(user1.getId()).orElse(null);
+        assertNotNull(user);
+        final TelegramTORGUserEntity assertUser = user;
+        assertAll("User properties",
+                () -> assertEquals(assertUser.getUserTelegramId(), telegramId),
+                () -> assertEquals(assertUser.getUserName(), name)
+        );
     }
     @Test
     void deleteUserFromDB() {

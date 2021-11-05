@@ -1,7 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.config;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageInterface;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.UniclogMyFitnessMessageAbstract;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,16 +18,16 @@ import java.util.stream.Collectors;
 @Configuration
 //@PropertySource("classpath:application.properties")
 @PropertySource("classpath:app.config.properties")
-public class UnicBotCoreTelegramBotConfig {
-    @Value("${telegram.bot.uniccore.name}")
+public class UniclogMyFitnessTelegramBotConfig {
+    @Value("${telegram.bot.myfitness.name}")
     private String telegramBotName;
 
-    @Value("${telegram.bot.uniccore.token}")
+    @Value("${telegram.bot.myfitness.token}")
     private String token;
 
     @Bean
-    @Qualifier("unicCoreMessageMap")
-    public Map<String, UnicBotCoreMessageAbstract> unicCoreMessageBean(List<UnicBotCoreMessageAbstract> messages) {
+    @Qualifier("myFitnessMessageMap")
+    public Map<String, UniclogMyFitnessMessageAbstract> myFitnessMessageBean(List<UniclogMyFitnessMessageAbstract> messages) {
         return messages.stream().collect(
                          Collectors.toMap(
                                  MessageInterface::messageType,

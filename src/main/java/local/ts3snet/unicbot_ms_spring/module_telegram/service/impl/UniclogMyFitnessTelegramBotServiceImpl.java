@@ -1,43 +1,38 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_telegram.config.UnicBotCoreTelegramBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_telegram.config.UniclogMyFitnessTelegramBotConfig;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.CommandLet;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageInterface;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.UnicBotCoreMessageAbstract;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.uniccore_messages.impl.Default;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.UniclogMyFitnessMessageAbstract;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-
-import static java.util.stream.Collectors.toMap;
 
 @Slf4j
-@Component("unicBotCoreTelegramBotServiceImpl")
-public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
-    final UnicBotCoreTelegramBotConfig config;
-    private final Map<String, UnicBotCoreMessageAbstract> messages;
+@Service("uniclogMyFitnessTelegramBotServiceImpl")
+public class UniclogMyFitnessTelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
+    final UniclogMyFitnessTelegramBotConfig config;
+    private final Map<String, UniclogMyFitnessMessageAbstract> messages;
     private final CommandLet commandLet;
 
-    public UnicBotCoreTelegramBotServiceImpl(
-            UnicBotCoreTelegramBotConfig config,
-            @Qualifier("unicCoreMessageMap")
-            Map<String, UnicBotCoreMessageAbstract> messages,
+    public UniclogMyFitnessTelegramBotServiceImpl(
+            UniclogMyFitnessTelegramBotConfig config,
+            @Qualifier("myFitnessMessageMap")
+            Map<String, UniclogMyFitnessMessageAbstract> messages,
             CommandLet commandLet) {
         this.config = config;
         this.messages = messages;
         this.commandLet = commandLet;
 
-        log.info("UnicBotCoreTelegramBotServiceImpl init...");
+        log.info("UniclogMyFitnessTelegramBotServiceImpl init...");
     }
 
     @Override
@@ -49,7 +44,7 @@ public class UnicBotCoreTelegramBotServiceImpl extends TelegramLongPollingBot im
         Long userId = message.getChatId();
 
         commandLet.update(text);
-        UnicBotCoreMessageAbstract msg =
+        UniclogMyFitnessMessageAbstract msg =
                 messages.getOrDefault(commandLet.getCmd(), new Default());
         msg.setTextMessage(text);
         msg.setUserId(userId);

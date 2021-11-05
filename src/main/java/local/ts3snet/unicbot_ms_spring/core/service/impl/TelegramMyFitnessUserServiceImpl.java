@@ -1,0 +1,52 @@
+package local.ts3snet.unicbot_ms_spring.core.service.impl;
+
+import local.ts3snet.unicbot_ms_spring.core.entity.TelegramMyFitnessUserEntity;
+import local.ts3snet.unicbot_ms_spring.core.repository.TelegramMyFitnessUserRepository;
+import local.ts3snet.unicbot_ms_spring.core.service.TelegramMyFitnessUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@Transactional
+public class TelegramMyFitnessUserServiceImpl implements TelegramMyFitnessUserService {
+    private TelegramMyFitnessUserRepository telegramMyFitnessUserRepository;
+    @Autowired
+    public void setTelegramTORGUserRepository(TelegramMyFitnessUserRepository telegramMyFitnessUserRepository) {
+        this.telegramMyFitnessUserRepository = telegramMyFitnessUserRepository;
+    }
+
+    @Override
+    public void save(TelegramMyFitnessUserEntity user) {
+        TelegramMyFitnessUserEntity userFromBD = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
+        if(userFromBD != null) {
+            update(user);
+            return;
+        }
+        telegramMyFitnessUserRepository.save(user);
+    }
+
+    @Override
+    public void update(TelegramMyFitnessUserEntity user) {
+        TelegramMyFitnessUserEntity userFromDB = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
+        userFromDB.setSubscriber(user.getSubscriber());
+        telegramMyFitnessUserRepository.save(userFromDB);
+    }
+
+    @Override
+    public TelegramMyFitnessUserEntity findByUserTelegramId(Long userTelegramId) {
+        return telegramMyFitnessUserRepository.findByUserTelegramId(userTelegramId);
+    }
+
+    @Override
+    public List<TelegramMyFitnessUserEntity> findAllSubscribers() {
+        return telegramMyFitnessUserRepository.findBySubscriber(true);
+    }
+
+    @Override
+    public List<TelegramMyFitnessUserEntity> findAll() {
+        return telegramMyFitnessUserRepository.findAll();
+    }
+}

@@ -20,19 +20,16 @@ public class Sub extends TeamspeakMessageAbstract {
      */
     @Override
     public void execute(TeamspeakMessageSender bot, String... msg) {
-        TeamspeakUserEntity user = getTeamspeakUserService().findByTeamspeakToken(this.getUserToken());
+        TeamspeakUserEntity user = this.getTeamspeakUserService().findByTeamspeakToken(this.getUserToken());
         if(user == null) {
             user = new TeamspeakUserEntity();
             user.setTeamspeakToken(this.getUserToken());
-            user.setSubscriber(false);
+            user.setSubscriber(true);
         }
-
-        user.setSubscriber(! user.getSubscriber());
-
-        getTeamspeakUserService().save(user);
+        user.setSubscriber(!user.getSubscriber());
+        this.getTeamspeakUserService().save(user);
         // sendPrivateMessage to client
-        this.setTextMessage("-> sub on channel: " + user.getSubscriber());
-        bot.sendPrivateMessage(this.getUserId(), this);
+        bot.sendPrivateMessage(this.getUserId(), "-> sub on channel: " + user.getSubscriber());
 
         printDebugLog();
     }

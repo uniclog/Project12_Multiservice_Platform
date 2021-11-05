@@ -31,8 +31,11 @@ public class TeamspeakUserServiceImpl implements TeamspeakUserService {
     @Override
     public void update(TeamspeakUserEntity user) {
         TeamspeakUserEntity userEntity = teamspeakUserRepository.findByTeamspeakToken(user.getTeamspeakToken());
-        // business logic
-        teamspeakUserRepository.save(userEntity);
+        if (userEntity == null) {
+            save(user);
+            return;
+        }
+        teamspeakUserRepository.save(user);
     }
 
     @Override

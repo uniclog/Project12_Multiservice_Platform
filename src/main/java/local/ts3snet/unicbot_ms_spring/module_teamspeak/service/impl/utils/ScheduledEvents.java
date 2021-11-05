@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.github.theholywaffle.teamspeak3.api.ChannelProperty.CHANNEL_NAME;
@@ -38,6 +37,10 @@ public class ScheduledEvents {
     @EventListener({ContextRefreshedEvent.class})
     public void init() {
         api = teamspeakBotServiceA.getApi();
+    }
+
+    public void setApi(TS3Api api) {
+        this.api = api;
     }
 
     /**

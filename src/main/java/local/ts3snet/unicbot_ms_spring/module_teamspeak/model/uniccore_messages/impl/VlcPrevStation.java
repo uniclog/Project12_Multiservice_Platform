@@ -4,6 +4,7 @@ import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.TeamspeakMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakMessageSender;
 import local.ts3snet.unicbot_ms_spring.module_webutils.service_vlc.service.VlcControlService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -27,14 +28,11 @@ public class VlcPrevStation extends TeamspeakMessageAbstract {
      * @param bot bot sender service
      * @param msg station number
      */
+    @SneakyThrows(InterruptedException.class)
     @Override
     public void execute(TeamspeakMessageSender bot, String... msg) {
         vlc.prevStation();
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            log.error(e.getMessage());
-        }
+        TimeUnit.SECONDS.sleep(2);
         bot.sendChannelMessage("Prev: " + vlc.getStationName());
     }
 

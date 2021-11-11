@@ -1,6 +1,6 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.impl;
 
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.UniclogMyFitnessMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,12 @@ public class MessageForAllSubscribers extends UniclogMyFitnessMessageAbstract {
     }
 
     @Override
+    public boolean serviceMessage() {
+        return true;
+    }
+
+    @Override
     public String messageType() {
-        return MessageType.MESSAGE_FOR_ALL_SUBSCRIBERS;
+        return MessageType.MESSAGE_FOR_ALL_SUBSCRIBERS.getTextValue();
     }
 }

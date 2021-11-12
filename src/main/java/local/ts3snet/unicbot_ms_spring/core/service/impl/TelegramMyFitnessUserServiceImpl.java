@@ -20,8 +20,8 @@ public class TelegramMyFitnessUserServiceImpl implements TelegramMyFitnessUserSe
 
     @Override
     public void save(TelegramMyFitnessUserEntity user) {
-        TelegramMyFitnessUserEntity userFromBD = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
-        if(userFromBD != null) {
+        TelegramMyFitnessUserEntity userEntity = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
+        if(userEntity != null) {
             update(user);
             return;
         }
@@ -30,9 +30,12 @@ public class TelegramMyFitnessUserServiceImpl implements TelegramMyFitnessUserSe
 
     @Override
     public void update(TelegramMyFitnessUserEntity user) {
-        TelegramMyFitnessUserEntity userFromDB = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
-        userFromDB.setSubscriber(user.getSubscriber());
-        telegramMyFitnessUserRepository.save(userFromDB);
+        TelegramMyFitnessUserEntity userEntity = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
+        if (userEntity == null) {
+            save(user);
+            return;
+        }
+        telegramMyFitnessUserRepository.save(user);
     }
 
     @Override

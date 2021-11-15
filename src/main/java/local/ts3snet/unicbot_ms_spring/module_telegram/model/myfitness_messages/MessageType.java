@@ -5,7 +5,9 @@ public enum MessageType {
     SUB ("/sub"),
     UNSUB ("/unsub"),
     HELP ("/help"),
-    INLINE_BUTTON_YES ("inline_button_yes"),
+    STATISTIC_CLEAR("/statistic_clear"),
+    INLINE_BUTTON_ACCEPT("/inline_button_accept"),
+    INLINE_BUTTON_ACCEPT_SOURCE("/inline_button_accept_source"),
     MESSAGE_FOR_ALL_SUBSCRIBERS ("message_for_all_subscribers");
 
     private final String value;

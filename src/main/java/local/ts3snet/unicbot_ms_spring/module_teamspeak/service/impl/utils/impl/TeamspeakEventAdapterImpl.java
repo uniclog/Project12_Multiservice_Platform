@@ -71,7 +71,7 @@ public class TeamspeakEventAdapterImpl extends TS3EventAdapter implements Teamsp
                         "\n !mytime" +
                         "\n !wakeup");
         // send to telegram
-        telegramUnicBotCoreUserService.sendMessageForAllSubscribers(e.getClientNickname() + " joined server");
+        telegramUnicBotCoreUserService.sendMessageForAllSubscribers(null,e.getClientNickname() + " joined server");
         ClientInfo client = api.getClientInfo(e.getClientId());
         log.info(client.getNickname() + " joined server");
 
@@ -80,7 +80,7 @@ public class TeamspeakEventAdapterImpl extends TS3EventAdapter implements Teamsp
     @Override
     public void onClientLeave(ClientLeaveEvent e) {
         ClientInfo clientInfo = clients.get(e.getClientId());
-        telegramUnicBotCoreUserService.sendMessageForAllSubscribers(clientInfo.getNickname() + " left server");
+        telegramUnicBotCoreUserService.sendMessageForAllSubscribers(null, clientInfo.getNickname() + " left server");
         log.info(clientInfo.getNickname() + " left server");
 
         clients.remove(e.getClientId());

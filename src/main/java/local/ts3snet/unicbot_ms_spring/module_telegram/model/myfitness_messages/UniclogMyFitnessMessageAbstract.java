@@ -14,6 +14,7 @@ public abstract class UniclogMyFitnessMessageAbstract implements MessageInterfac
     private String textMessage;
     private Long userId;
     private String userName;
+    private Integer messageId;
 
     private TelegramMyFitnessUserService telegramMyFitnessUserService;
     @Autowired

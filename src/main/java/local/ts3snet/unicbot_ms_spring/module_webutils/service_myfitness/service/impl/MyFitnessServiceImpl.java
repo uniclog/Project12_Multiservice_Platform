@@ -41,7 +41,7 @@ public class MyFitnessServiceImpl implements MyFitnessService {
         botService.sendInlineKeyboardForAllSubscribers(MessageType.INLINE_BUTTON_ACCEPT_SOURCE.getTextValue());
     }
 
-    @Scheduled(cron = "0 0 23 * * *")
+    @Scheduled(cron = "0 15 22 * * *")
     public void everyDayNotifyClearDay() {
         botService.sendMessageForAllSubscribers(MessageType.STATISTIC_CLEAR.getTextValue(), null);
     }

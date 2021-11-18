@@ -20,8 +20,8 @@ public class TelegramTORGUserServiceImpl implements TelegramTORGUserService {
 
     @Override
     public void save(TelegramTORGUserEntity user) {
-        TelegramTORGUserEntity userFromDB = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
-        if (userFromDB != null) {
+        TelegramTORGUserEntity userEntity = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
+        if (userEntity != null) {
             update(user);
             return;
         }
@@ -31,8 +31,11 @@ public class TelegramTORGUserServiceImpl implements TelegramTORGUserService {
     @Override
     public void update(TelegramTORGUserEntity user) {
             TelegramTORGUserEntity userFromDb = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
-            userFromDb.setSubscriber(user.getSubscriber());
-            telegramTORGUserRepository.save(userFromDb);
+            if (userFromDb == null) {
+                save(user);
+                return;
+            }
+            telegramTORGUserRepository.save(user);
     }
 
     @Override

@@ -52,7 +52,7 @@ public class UtilsWebChatServiceImpl implements UtilsWebChatService {
         log.debug("UtilsWebParserService.serviceUpdateRate() get new messages...");
         webChat.update().forEach(e -> {
             log.info(e.toString());
-            unicBotTORGTelegramBotService.sendMessageForAllSubscribers(e.toString());
+            unicBotTORGTelegramBotService.sendMessageForAllSubscribers(null, e.toString());
 
             List<String> keys = webChat.parseKey(e.toString());
             if (!keys.isEmpty()) {

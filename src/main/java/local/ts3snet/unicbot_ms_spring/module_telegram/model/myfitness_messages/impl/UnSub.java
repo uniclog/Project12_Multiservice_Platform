@@ -1,7 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.impl;
 
 import local.ts3snet.unicbot_ms_spring.core.entity.TelegramMyFitnessUserEntity;
-import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages.UniclogMyFitnessMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +26,6 @@ public class UnSub extends UniclogMyFitnessMessageAbstract {
 
     @Override
     public String messageType() {
-        return MessageType.UNSUB;
+        return MessageType.UNSUB.getTextValue();
     }
 }

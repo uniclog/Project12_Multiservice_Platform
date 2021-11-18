@@ -1,6 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.service.impl;
 
 import local.ts3snet.unicbot_ms_spring.module_telegram.config.UnicBotTORGTelegramBotConfig;
+import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.UnicBotTORGMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.impl.Default;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
@@ -16,6 +17,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
@@ -58,8 +60,9 @@ public class UnicBotTORGTelegramBotServiceImpl extends TelegramLongPollingBot im
         msg.execute(this);
     }
 
-    public void sendMessageForAllSubscribers(String text) {
-        messages.get("messageForAllSubscribers").execute(this, text);
+    @Override
+    public void sendMessageForAllSubscribers(String type, String msg) {
+        messages.get(Objects.requireNonNullElse(type, MessageType.MESSAGE_FOR_ALL_SUBSCRIBERS)).execute(this, msg);
     }
 
     public void sendMessage(String chatId, String msg) {

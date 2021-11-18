@@ -20,8 +20,8 @@ public class TelegramUnicBotCoreUserServiceImpl implements TelegramUnicBotCoreUs
 
     @Override
     public void save(TelegramUnicBotCoreUserEntity user) {
-        TelegramUnicBotCoreUserEntity userFromBD = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
-        if(userFromBD != null) {
+        TelegramUnicBotCoreUserEntity userEntity = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
+        if(userEntity != null) {
             update(user);
             return;
         }
@@ -31,8 +31,11 @@ public class TelegramUnicBotCoreUserServiceImpl implements TelegramUnicBotCoreUs
     @Override
     public void update(TelegramUnicBotCoreUserEntity user) {
         TelegramUnicBotCoreUserEntity userFromDB = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
-        userFromDB.setSubscriber(user.getSubscriber());
-        telegramUnicBotCoreRepository.save(userFromDB);
+        if (userFromDB == null) {
+            save(user);
+            return;
+        }
+        telegramUnicBotCoreRepository.save(user);
     }
 
     @Override

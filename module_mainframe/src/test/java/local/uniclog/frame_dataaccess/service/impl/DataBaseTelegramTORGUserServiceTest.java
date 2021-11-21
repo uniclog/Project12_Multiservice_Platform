@@ -1,7 +1,7 @@
-package local.ts3snet.unicbot_ms_spring.service;
+package local.uniclog.frame_dataaccess.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TelegramTORGUserEntity;
-import local.ts3snet.unicbot_ms_spring.core.repository.TelegramTORGUserRepository;
+import local.uniclog.frame_dataaccess.entity.TelegramTORGUserEntity;
+import local.uniclog.frame_dataaccess.repository.TelegramTORGUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

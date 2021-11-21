@@ -1,6 +1,6 @@
-package local.ts3snet.unicbot_ms_spring.core.service;
+package local.uniclog.frame_dataaccess.service;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_dataaccess.entity.TelegramUnicBotCoreUserEntity;
 
 import java.util.List;
 

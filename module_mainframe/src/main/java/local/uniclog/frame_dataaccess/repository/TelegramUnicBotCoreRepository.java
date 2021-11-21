@@ -1,6 +1,6 @@
-package local.ts3snet.unicbot_ms_spring.core.repository;
+package local.uniclog.frame_dataaccess.repository;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_dataaccess.entity.TelegramUnicBotCoreUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

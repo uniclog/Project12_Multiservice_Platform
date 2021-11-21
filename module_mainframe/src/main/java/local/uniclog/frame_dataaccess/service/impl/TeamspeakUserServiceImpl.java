@@ -1,8 +1,8 @@
-package local.ts3snet.unicbot_ms_spring.core.service.impl;
+package local.uniclog.frame_dataaccess.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TeamspeakUserEntity;
-import local.ts3snet.unicbot_ms_spring.core.repository.TeamspeakUserRepository;
-import local.ts3snet.unicbot_ms_spring.core.service.TeamspeakUserService;
+import local.uniclog.frame_dataaccess.entity.TeamspeakUserEntity;
+import local.uniclog.frame_dataaccess.repository.TeamspeakUserRepository;
+import local.uniclog.frame_dataaccess.service.TeamspeakUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

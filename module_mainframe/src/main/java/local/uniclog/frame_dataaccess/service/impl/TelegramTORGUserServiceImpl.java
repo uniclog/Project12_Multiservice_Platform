@@ -1,8 +1,8 @@
-package local.ts3snet.unicbot_ms_spring.core.service.impl;
+package local.uniclog.frame_dataaccess.service.impl;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TelegramTORGUserEntity;
-import local.ts3snet.unicbot_ms_spring.core.repository.TelegramTORGUserRepository;
-import local.ts3snet.unicbot_ms_spring.core.service.TelegramTORGUserService;
+import local.uniclog.frame_dataaccess.entity.TelegramTORGUserEntity;
+import local.uniclog.frame_dataaccess.repository.TelegramTORGUserRepository;
+import local.uniclog.frame_dataaccess.service.TelegramTORGUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

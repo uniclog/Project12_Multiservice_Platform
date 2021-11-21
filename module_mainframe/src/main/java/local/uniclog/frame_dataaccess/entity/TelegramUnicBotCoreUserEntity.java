@@ -1,4 +1,4 @@
-package local.ts3snet.unicbot_ms_spring.core.entity;
+package local.uniclog.frame_dataaccess.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

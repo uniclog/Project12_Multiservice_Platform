@@ -1,6 +1,6 @@
-package local.ts3snet.unicbot_ms_spring.core.repository;
+package local.uniclog.frame_dataaccess.repository;
 
-import local.ts3snet.unicbot_ms_spring.core.entity.TeamspeakUserEntity;
+import local.uniclog.frame_dataaccess.entity.TeamspeakUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

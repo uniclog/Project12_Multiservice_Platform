@@ -1,9 +1,8 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    //id 'org.springframework.boot' version '2.5.4'
+    //id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
-
 group = 'local.ts3snet'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.11'
@@ -11,7 +10,6 @@ sourceCompatibility = '1.11'
 repositories {
     mavenCentral()
 }
-
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.5.5'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.5.5'

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -26,11 +27,12 @@ public class TelegramTORGUserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TelegramTORGUserEntity that = (TelegramTORGUserEntity) o;
-        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId) && userName.equals(that.userName) && subscriber.equals(that.subscriber);
+        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId)
+                && userName.equals(that.userName) && subscriber.equals(that.subscriber);
     }
 
     @Override
     public int hashCode() {
-        return 1838525018;
+        return Objects.hash(id, userTelegramId, userName, subscriber);
     }
 }

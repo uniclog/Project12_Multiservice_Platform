@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -30,6 +31,6 @@ public class TeamspeakUserEntity {
 
     @Override
     public int hashCode() {
-        return 1281226646;
+        return Objects.hash(id, teamspeakToken, subscriber);
     }
 }

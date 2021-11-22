@@ -28,11 +28,13 @@ public class TelegramMyFitnessUserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TelegramMyFitnessUserEntity that = (TelegramMyFitnessUserEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId) && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber);
+        return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId)
+                && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber)
+                && Objects.equals(waterCount, that.waterCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userTelegramId, userName, subscriber);
+        return Objects.hash(id, userTelegramId, userName, subscriber, waterCount);
     }
 }

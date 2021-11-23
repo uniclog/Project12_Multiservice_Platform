@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
@@ -18,6 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@TestPropertySource(properties = {
+        "spring.jpa.generate-ddl=true",
+        "spring.jpa.hibernate.ddl-auto=create"
+})
 class TelegramMyFitnessUserEntityDataServiceImplTest {
     @Autowired
     private TelegramMyFitnessUserEntityDataService entityDataService;

@@ -1,4 +1,4 @@
-package local.uniclog.frame_dataaccess.entity;
+package local.uniclog.frame_data_access.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

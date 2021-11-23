@@ -1,7 +1,7 @@
 package local.uniclog.frame_dataaccess.service.impl;
 
-import local.uniclog.frame_dataaccess.entity.TelegramTORGUserEntity;
-import local.uniclog.frame_dataaccess.repository.TelegramTORGUserRepository;
+import local.uniclog.frame_data_access.entity.TelegramTORGUserEntity;
+import local.uniclog.frame_data_access.repository.TelegramTORGUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @DataJpaTest
-class DataBaseTelegramTORGUserServiceTest {
+class DataBaseTelegramTORGUserEntityDataServiceTest {
     @Autowired
     private TelegramTORGUserRepository telegramTORGUserRepository;
 

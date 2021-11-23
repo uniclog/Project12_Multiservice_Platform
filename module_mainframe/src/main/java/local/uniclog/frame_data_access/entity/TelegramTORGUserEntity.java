@@ -1,4 +1,4 @@
-package local.uniclog.frame_dataaccess.entity;
+package local.uniclog.frame_data_access.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,28 +13,26 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "telegram_my_fitness_users")
-public class TelegramMyFitnessUserEntity {
+@Table(name = "telegram_torg_users")
+public class TelegramTORGUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userTelegramId;
     private String userName;
     private Boolean subscriber;
-    private Integer waterCount;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TelegramMyFitnessUserEntity that = (TelegramMyFitnessUserEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId)
-                && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber)
-                && Objects.equals(waterCount, that.waterCount);
+        TelegramTORGUserEntity that = (TelegramTORGUserEntity) o;
+        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId)
+                && userName.equals(that.userName) && subscriber.equals(that.subscriber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userTelegramId, userName, subscriber, waterCount);
+        return Objects.hash(id, userTelegramId, userName, subscriber);
     }
 }

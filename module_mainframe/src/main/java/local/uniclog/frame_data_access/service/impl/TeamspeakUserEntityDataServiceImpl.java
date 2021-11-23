@@ -1,8 +1,8 @@
-package local.uniclog.frame_dataaccess.service.impl;
+package local.uniclog.frame_data_access.service.impl;
 
-import local.uniclog.frame_dataaccess.entity.TeamspeakUserEntity;
-import local.uniclog.frame_dataaccess.repository.TeamspeakUserRepository;
-import local.uniclog.frame_dataaccess.service.TeamspeakUserService;
+import local.uniclog.frame_data_access.entity.TeamspeakUserEntity;
+import local.uniclog.frame_data_access.repository.TeamspeakUserRepository;
+import local.uniclog.frame_data_access.service.TeamspeakUserEntityDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TeamspeakUserServiceImpl implements TeamspeakUserService {
+public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDataService {
     private TeamspeakUserRepository teamspeakUserRepository;
     @Autowired
     public void setTeamspeakUserRepository(TeamspeakUserRepository repository) {

@@ -3,7 +3,7 @@ package local.uniclog.frame_dataaccess.service.impl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class TelegramTORGUserServiceImplTest {
+class TelegramTORGUserEntityDataServiceImplTest {
 
     @BeforeEach
     void setUp() {

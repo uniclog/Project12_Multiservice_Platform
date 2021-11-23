@@ -1,8 +1,8 @@
-package local.uniclog.frame_dataaccess.service.impl;
+package local.uniclog.frame_data_access.service.impl;
 
-import local.uniclog.frame_dataaccess.entity.TelegramUnicBotCoreUserEntity;
-import local.uniclog.frame_dataaccess.repository.TelegramUnicBotCoreRepository;
-import local.uniclog.frame_dataaccess.service.TelegramUnicBotCoreUserService;
+import local.uniclog.frame_data_access.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_data_access.repository.TelegramUnicBotCoreRepository;
+import local.uniclog.frame_data_access.service.TelegramUnicBotCoreUserEntityDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TelegramUnicBotCoreUserServiceImpl implements TelegramUnicBotCoreUserService {
+public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUnicBotCoreUserEntityDataService {
     private TelegramUnicBotCoreRepository telegramUnicBotCoreRepository;
     @Autowired
     public void setTelegramTORGUserRepository(TelegramUnicBotCoreRepository telegramUnicBotCoreRepository) {

@@ -1,6 +1,6 @@
-package local.uniclog.frame_dataaccess.repository;
+package local.uniclog.frame_data_access.repository;
 
-import local.uniclog.frame_dataaccess.entity.TeamspeakUserEntity;
+import local.uniclog.frame_data_access.entity.TeamspeakUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

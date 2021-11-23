@@ -1,10 +1,10 @@
-package local.uniclog.frame_dataaccess.service;
+package local.uniclog.frame_data_access.service;
 
-import local.uniclog.frame_dataaccess.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_data_access.entity.TelegramUnicBotCoreUserEntity;
 
 import java.util.List;
 
-public interface TelegramUnicBotCoreUserService {
+public interface TelegramUnicBotCoreUserEntityDataService {
     void save(TelegramUnicBotCoreUserEntity user);
     void update(TelegramUnicBotCoreUserEntity user);
     TelegramUnicBotCoreUserEntity findByUserTelegramId(Long userTelegramId);

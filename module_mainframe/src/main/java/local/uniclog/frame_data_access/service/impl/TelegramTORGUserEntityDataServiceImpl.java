@@ -1,8 +1,8 @@
-package local.uniclog.frame_dataaccess.service.impl;
+package local.uniclog.frame_data_access.service.impl;
 
-import local.uniclog.frame_dataaccess.entity.TelegramTORGUserEntity;
-import local.uniclog.frame_dataaccess.repository.TelegramTORGUserRepository;
-import local.uniclog.frame_dataaccess.service.TelegramTORGUserService;
+import local.uniclog.frame_data_access.entity.TelegramTORGUserEntity;
+import local.uniclog.frame_data_access.repository.TelegramTORGUserRepository;
+import local.uniclog.frame_data_access.service.TelegramTORGUserEntityDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TelegramTORGUserServiceImpl implements TelegramTORGUserService {
+public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEntityDataService {
     private TelegramTORGUserRepository telegramTORGUserRepository;
     @Autowired
     public void setTelegramTORGUserRepository(TelegramTORGUserRepository telegramTORGUserRepository) {

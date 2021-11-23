@@ -1,8 +1,8 @@
-package local.uniclog.frame_dataaccess.service.impl;
+package local.uniclog.frame_data_access.service.impl;
 
-import local.uniclog.frame_dataaccess.entity.TelegramMyFitnessUserEntity;
-import local.uniclog.frame_dataaccess.repository.TelegramMyFitnessUserRepository;
-import local.uniclog.frame_dataaccess.service.TelegramMyFitnessUserService;
+import local.uniclog.frame_data_access.entity.TelegramMyFitnessUserEntity;
+import local.uniclog.frame_data_access.repository.TelegramMyFitnessUserRepository;
+import local.uniclog.frame_data_access.service.TelegramMyFitnessUserEntityDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TelegramMyFitnessUserServiceImpl implements TelegramMyFitnessUserService {
+public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFitnessUserEntityDataService {
     private TelegramMyFitnessUserRepository telegramMyFitnessUserRepository;
     @Autowired
     public void setTelegramTORGUserRepository(TelegramMyFitnessUserRepository telegramMyFitnessUserRepository) {

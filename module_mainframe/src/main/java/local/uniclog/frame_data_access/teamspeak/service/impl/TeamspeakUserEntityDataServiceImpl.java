@@ -1,8 +1,8 @@
-package local.uniclog.frame_data_access.service.impl;
+package local.uniclog.frame_data_access.teamspeak.service.impl;
 
-import local.uniclog.frame_data_access.entity.TeamspeakUserEntity;
-import local.uniclog.frame_data_access.repository.TeamspeakUserRepository;
-import local.uniclog.frame_data_access.service.TeamspeakUserEntityDataService;
+import local.uniclog.frame_data_access.teamspeak.entity.TeamspeakUserEntity;
+import local.uniclog.frame_data_access.teamspeak.repository.TeamspeakUserRepository;
+import local.uniclog.frame_data_access.teamspeak.service.TeamspeakUserEntityDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,5 +51,13 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
     @Override
     public List<TeamspeakUserEntity> findAll() {
         return teamspeakUserRepository.findAll();
+    }
+
+    @Override
+    public List<TeamspeakUserEntity> deleteByTeamspeakToken(String token) {
+        List<TeamspeakUserEntity> users = teamspeakUserRepository.findAllByTeamspeakToken(token);
+        if (users.isEmpty()) return null;
+        teamspeakUserRepository.deleteAllByTeamspeakToken(token);
+        return users;
     }
 }

@@ -1,6 +1,6 @@
-package local.uniclog.frame_data_access.repository;
+package local.uniclog.frame_data_access.telegram.repository;
 
-import local.uniclog.frame_data_access.entity.TelegramTORGUserEntity;
+import local.uniclog.frame_data_access.telegram.entity.TelegramTORGUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

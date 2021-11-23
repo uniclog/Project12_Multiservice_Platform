@@ -1,8 +1,8 @@
-package local.uniclog.frame_data_access.service.impl;
+package local.uniclog.frame_data_access.telegram.service.impl;
 
-import local.uniclog.frame_data_access.entity.TelegramUnicBotCoreUserEntity;
-import local.uniclog.frame_data_access.repository.TelegramUnicBotCoreRepository;
-import local.uniclog.frame_data_access.service.TelegramUnicBotCoreUserEntityDataService;
+import local.uniclog.frame_data_access.telegram.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_data_access.telegram.repository.TelegramUnicBotCoreRepository;
+import local.uniclog.frame_data_access.telegram.service.TelegramUnicBotCoreUserEntityDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

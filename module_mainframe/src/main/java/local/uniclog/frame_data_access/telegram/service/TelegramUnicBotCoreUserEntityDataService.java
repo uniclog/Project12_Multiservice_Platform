@@ -1,6 +1,6 @@
-package local.uniclog.frame_data_access.service;
+package local.uniclog.frame_data_access.telegram.service;
 
-import local.uniclog.frame_data_access.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_data_access.telegram.entity.TelegramUnicBotCoreUserEntity;
 
 import java.util.List;
 

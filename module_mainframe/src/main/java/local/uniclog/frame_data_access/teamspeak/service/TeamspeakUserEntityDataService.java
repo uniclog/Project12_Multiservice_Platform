@@ -1,6 +1,6 @@
-package local.uniclog.frame_data_access.service;
+package local.uniclog.frame_data_access.teamspeak.service;
 
-import local.uniclog.frame_data_access.entity.TeamspeakUserEntity;
+import local.uniclog.frame_data_access.teamspeak.entity.TeamspeakUserEntity;
 
 import java.util.List;
 
@@ -10,4 +10,5 @@ public interface TeamspeakUserEntityDataService {
     TeamspeakUserEntity findByTeamspeakToken(String token);
     List<TeamspeakUserEntity> findAllSubscribers();
     List<TeamspeakUserEntity> findAll();
+    List<TeamspeakUserEntity> deleteByTeamspeakToken(String token);
 }

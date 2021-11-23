@@ -1,7 +1,7 @@
-package local.uniclog.frame_data_access.service.impl;
+package local.uniclog.frame_data_access.teamspeak.service.impl;
 
-import local.uniclog.frame_data_access.entity.TeamspeakUserEntity;
-import local.uniclog.frame_data_access.service.TeamspeakUserEntityDataService;
+import local.uniclog.frame_data_access.teamspeak.entity.TeamspeakUserEntity;
+import local.uniclog.frame_data_access.teamspeak.service.TeamspeakUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,7 +60,7 @@ class TeamspeakUserEntityDataServiceImplTest {
         entity.setSubscriber(arguments.getBoolean(1));
         entityDataService.save(entity);
         TeamspeakUserEntity newEntity = entityDataService.findByTeamspeakToken(arguments.getString(0));
-        assertEquals(entity.getSubscriber(), newEntity.getSubscriber());
+        assertEquals(entity, newEntity);
     }
 
     @ParameterizedTest
@@ -84,10 +86,21 @@ class TeamspeakUserEntityDataServiceImplTest {
         TeamspeakUserEntity entityTestSub1 = new TeamspeakUserEntity();
         entityTestSub1.setTeamspeakToken("entityTest1");
         entityDataService.save(entityTestSub1);
-        assertEquals(1, entityDataService.findAllSubscribers().size());
+        assertEquals(1, entityDataService.findAll().size());
         TeamspeakUserEntity entityTestSub2 = new TeamspeakUserEntity();
         entityTestSub2.setTeamspeakToken("entityTest2");
         entityDataService.save(entityTestSub2);
-        assertEquals(2, entityDataService.findAllSubscribers().size());
+        assertEquals(2, entityDataService.findAll().size());
+    }
+
+    @Test
+    void deleteByTeamspeakToken() {
+        TeamspeakUserEntity user = new TeamspeakUserEntity();
+        user.setTeamspeakToken("Delete");
+        user.setSubscriber(true);
+        entityDataService.save(user);
+        TeamspeakUserEntity delUser = entityDataService.findByTeamspeakToken(user.getTeamspeakToken());
+        List<TeamspeakUserEntity> deleted = entityDataService.deleteByTeamspeakToken(delUser.getTeamspeakToken());
+        assertNotNull(deleted);
     }
 }

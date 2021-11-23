@@ -1,4 +1,4 @@
-package local.uniclog.frame_data_access.entity;
+package local.uniclog.frame_data_access.teamspeak.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

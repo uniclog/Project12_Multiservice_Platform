@@ -1,4 +1,4 @@
-package local.uniclog.frame_data_access.entity;
+package local.uniclog.frame_data_access.telegram.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "telegram_torg_users")
-public class TelegramTORGUserEntity {
+@Table(name = "telegram_unic_bot_core_users")
+public class TelegramUnicBotCoreUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,7 +26,7 @@ public class TelegramTORGUserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TelegramTORGUserEntity that = (TelegramTORGUserEntity) o;
+        TelegramUnicBotCoreUserEntity that = (TelegramUnicBotCoreUserEntity) o;
         return id.equals(that.id) && userTelegramId.equals(that.userTelegramId)
                 && userName.equals(that.userName) && subscriber.equals(that.subscriber);
     }

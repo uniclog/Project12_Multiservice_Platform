@@ -10,4 +10,5 @@ public interface TelegramUnicBotCoreUserEntityDataService {
     TelegramUnicBotCoreUserEntity findByUserTelegramId(Long userTelegramId);
     List<TelegramUnicBotCoreUserEntity> findAllSubscribers();
     List<TelegramUnicBotCoreUserEntity> findAll();
+    List<TelegramUnicBotCoreUserEntity> deleteAllByUserTelegramId(Long id);
 }

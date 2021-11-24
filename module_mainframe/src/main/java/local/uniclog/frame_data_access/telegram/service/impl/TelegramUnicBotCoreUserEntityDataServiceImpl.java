@@ -3,18 +3,20 @@ package local.uniclog.frame_data_access.telegram.service.impl;
 import local.uniclog.frame_data_access.telegram.entity.TelegramUnicBotCoreUserEntity;
 import local.uniclog.frame_data_access.telegram.repository.TelegramUnicBotCoreRepository;
 import local.uniclog.frame_data_access.telegram.service.TelegramUnicBotCoreUserEntityDataService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUnicBotCoreUserEntityDataService {
     private TelegramUnicBotCoreRepository telegramUnicBotCoreRepository;
     @Autowired
-    public void setTelegramTORGUserRepository(TelegramUnicBotCoreRepository telegramUnicBotCoreRepository) {
+    public void setTelegramUnicBotCoreRepository(TelegramUnicBotCoreRepository telegramUnicBotCoreRepository) {
         this.telegramUnicBotCoreRepository = telegramUnicBotCoreRepository;
     }
 
@@ -40,7 +42,12 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
 
     @Override
     public TelegramUnicBotCoreUserEntity findByUserTelegramId(Long userTelegramId) {
-        return telegramUnicBotCoreRepository.findByUserTelegramId(userTelegramId);
+        try {
+            return telegramUnicBotCoreRepository.findAllByUserTelegramId(userTelegramId).get(0);
+        } catch (IndexOutOfBoundsException exception) {
+            log.warn("User not found. userTelegramId={}", userTelegramId);
+            return null;
+        }
     }
 
     @Override
@@ -51,5 +58,13 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
     @Override
     public List<TelegramUnicBotCoreUserEntity> findAll() {
         return telegramUnicBotCoreRepository.findAll();
+    }
+
+    @Override
+    public List<TelegramUnicBotCoreUserEntity> deleteAllByUserTelegramId(Long id) {
+        List<TelegramUnicBotCoreUserEntity> users = telegramUnicBotCoreRepository.findAllByUserTelegramId(id);
+        if (users.isEmpty()) return null;
+        telegramUnicBotCoreRepository.deleteAllByUserTelegramId(id);
+        return users;
     }
 }

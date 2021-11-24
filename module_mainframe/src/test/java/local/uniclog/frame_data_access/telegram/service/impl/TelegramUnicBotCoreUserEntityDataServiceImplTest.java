@@ -1,7 +1,7 @@
 package local.uniclog.frame_data_access.telegram.service.impl;
 
-import local.uniclog.frame_data_access.telegram.entity.TelegramTORGUserEntity;
-import local.uniclog.frame_data_access.telegram.service.TelegramTORGUserEntityDataService;
+import local.uniclog.frame_data_access.telegram.entity.TelegramUnicBotCoreUserEntity;
+import local.uniclog.frame_data_access.telegram.service.TelegramUnicBotCoreUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,24 +23,24 @@ import static org.junit.jupiter.api.Assertions.*;
         "spring.jpa.generate-ddl=true",
         "spring.jpa.hibernate.ddl-auto=create"
 })
-class TelegramTORGUserEntityDataServiceImplTest {
+class TelegramUnicBotCoreUserEntityDataServiceImplTest {
     @Autowired
-    private TelegramTORGUserEntityDataService entityDataService;
+    private TelegramUnicBotCoreUserEntityDataService entityDataService;
 
     @Test
-    void setTelegramTORGUserRepository() {
+    void setTelegramUnicBotCoreRepository() {
         assertNotNull(entityDataService);
     }
 
     @ParameterizedTest
     @CsvSource({"123, Name1, true", "456, Name2, false"})
     void save(ArgumentsAccessor arguments) {
-        TelegramTORGUserEntity entity = new TelegramTORGUserEntity();
+        TelegramUnicBotCoreUserEntity entity = new TelegramUnicBotCoreUserEntity();
         entity.setUserTelegramId(arguments.getLong(0));
         entity.setUserName(arguments.getString(1));
         entity.setSubscriber(arguments.getBoolean(2));
         entityDataService.save(entity);
-        TelegramTORGUserEntity newEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
+        TelegramUnicBotCoreUserEntity newEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
 
 
         assertAll("User properties",
@@ -52,7 +52,7 @@ class TelegramTORGUserEntityDataServiceImplTest {
 
         newEntity.setSubscriber(!arguments.getBoolean(2));
         entityDataService.save(newEntity);
-        TelegramTORGUserEntity newEntity2 = entityDataService.findByUserTelegramId(arguments.getLong(0));
+        TelegramUnicBotCoreUserEntity newEntity2 = entityDataService.findByUserTelegramId(arguments.getLong(0));
 
         int count = entityDataService.findAll().size();
         assertAll("User properties",
@@ -67,15 +67,15 @@ class TelegramTORGUserEntityDataServiceImplTest {
     @ParameterizedTest
     @CsvSource({"123, Name1, true, false", "456, Name2, false, true"})
     void update(ArgumentsAccessor arguments) {
-        TelegramTORGUserEntity entity = new TelegramTORGUserEntity();
+        TelegramUnicBotCoreUserEntity entity = new TelegramUnicBotCoreUserEntity();
         entity.setUserTelegramId(arguments.getLong(0));
         entity.setUserName(arguments.getString(1));
         entity.setSubscriber(arguments.getBoolean(2));
         entityDataService.save(entity);
-        TelegramTORGUserEntity oldEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
+        TelegramUnicBotCoreUserEntity oldEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
         oldEntity.setSubscriber(arguments.getBoolean(3));
         entityDataService.update(oldEntity);
-        TelegramTORGUserEntity newEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
+        TelegramUnicBotCoreUserEntity newEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
         assertAll("User properties",
                 () -> assertEquals(entity.getId(), newEntity.getId()),
                 () -> assertEquals(entity.getUserName(), newEntity.getUserName()),
@@ -84,24 +84,12 @@ class TelegramTORGUserEntityDataServiceImplTest {
     }
 
     @Test
-    void findAll() {
-        TelegramTORGUserEntity entityTestSub1 = new TelegramTORGUserEntity();
-        entityTestSub1.setUserTelegramId(123L);
-        entityDataService.save(entityTestSub1);
-        assertEquals(1, entityDataService.findAll().size());
-        TelegramTORGUserEntity entityTestSub2 = new TelegramTORGUserEntity();
-        entityTestSub2.setUserTelegramId(456L);
-        entityDataService.save(entityTestSub2);
-        assertEquals(2, entityDataService.findAll().size());
-    }
-
-    @Test
     void findByUserTelegramId() {
         Long id = 123123L;
-        TelegramTORGUserEntity entity = new TelegramTORGUserEntity();
+        TelegramUnicBotCoreUserEntity entity = new TelegramUnicBotCoreUserEntity();
         entity.setUserTelegramId(id);
         entityDataService.save(entity);
-        TelegramTORGUserEntity newEntity = entityDataService.findByUserTelegramId(id);
+        TelegramUnicBotCoreUserEntity newEntity = entityDataService.findByUserTelegramId(id);
         assertEquals(id, newEntity.getUserTelegramId());
     }
 
@@ -112,10 +100,10 @@ class TelegramTORGUserEntityDataServiceImplTest {
             "true, false, 1",
             "true, true, 2"})
     void findAllSubscribers(ArgumentsAccessor arguments) {
-        TelegramTORGUserEntity entityTestSub1 = new TelegramTORGUserEntity();
+        TelegramUnicBotCoreUserEntity entityTestSub1 = new TelegramUnicBotCoreUserEntity();
         entityTestSub1.setSubscriber(arguments.getBoolean(0));
         entityDataService.save(entityTestSub1);
-        TelegramTORGUserEntity entityTestSub2 = new TelegramTORGUserEntity();
+        TelegramUnicBotCoreUserEntity entityTestSub2 = new TelegramUnicBotCoreUserEntity();
         entityTestSub2.setSubscriber(arguments.getBoolean(1));
         entityDataService.save(entityTestSub2);
         int subCount = entityDataService.findAllSubscribers().size();
@@ -123,15 +111,27 @@ class TelegramTORGUserEntityDataServiceImplTest {
     }
 
     @Test
+    void findAll() {
+        TelegramUnicBotCoreUserEntity entityTestSub1 = new TelegramUnicBotCoreUserEntity();
+        entityTestSub1.setUserTelegramId(123L);
+        entityDataService.save(entityTestSub1);
+        assertEquals(1, entityDataService.findAll().size());
+        TelegramUnicBotCoreUserEntity entityTestSub2 = new TelegramUnicBotCoreUserEntity();
+        entityTestSub2.setUserTelegramId(456L);
+        entityDataService.save(entityTestSub2);
+        assertEquals(2, entityDataService.findAll().size());
+    }
+
+    @Test
     void deleteAllByUserTelegramId() {
-        TelegramTORGUserEntity user = new TelegramTORGUserEntity();
+        TelegramUnicBotCoreUserEntity user = new TelegramUnicBotCoreUserEntity();
         user.setUserTelegramId(123L);
         entityDataService.save(user);
-        user = new TelegramTORGUserEntity();
+        user = new TelegramUnicBotCoreUserEntity();
         user.setUserTelegramId(123L);
         entityDataService.save(user);
-        TelegramTORGUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
-        List<TelegramTORGUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
+        TelegramUnicBotCoreUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
+        List<TelegramUnicBotCoreUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
         assertAll("Test case",
                 () -> assertNotNull(deleted),
                 () -> assertEquals(2, deleted.size())

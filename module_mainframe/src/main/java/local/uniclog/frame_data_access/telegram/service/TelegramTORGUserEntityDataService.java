@@ -10,4 +10,5 @@ public interface TelegramTORGUserEntityDataService {
     TelegramTORGUserEntity findByUserTelegramId(Long userid);
     List<TelegramTORGUserEntity> findAllSubscribers();
     List<TelegramTORGUserEntity> findAll();
+    List<TelegramTORGUserEntity> deleteAllByUserTelegramId(Long id);
 }

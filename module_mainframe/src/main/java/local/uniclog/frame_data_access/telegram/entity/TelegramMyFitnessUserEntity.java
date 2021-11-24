@@ -20,8 +20,8 @@ public class TelegramMyFitnessUserEntity {
     private Long id;
     private Long userTelegramId;
     private String userName;
-    private Boolean subscriber;
-    private Integer waterCount;
+    private Boolean subscriber = false;
+    private Integer waterCount = 0;
 
     @Override
     public boolean equals(Object o) {

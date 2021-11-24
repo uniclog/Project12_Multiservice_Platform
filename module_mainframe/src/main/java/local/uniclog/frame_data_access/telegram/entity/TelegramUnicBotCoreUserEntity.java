@@ -20,7 +20,7 @@ public class TelegramUnicBotCoreUserEntity {
     private Long id;
     private Long userTelegramId;
     private String userName;
-    private Boolean subscriber;
+    private Boolean subscriber = false;
 
     @Override
     public boolean equals(Object o) {

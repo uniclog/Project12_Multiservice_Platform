@@ -8,4 +8,6 @@ import java.util.List;
 public interface TelegramTORGUserRepository extends JpaRepository<TelegramTORGUserEntity, Long> {
     TelegramTORGUserEntity findByUserTelegramId(Long userTelegramId);
     List<TelegramTORGUserEntity> findAllBySubscriber(boolean subscriber);
+    List<TelegramTORGUserEntity> findAllByUserTelegramId(Long userTelegramId);
+    void deleteAllByUserTelegramId(Long id);
 }

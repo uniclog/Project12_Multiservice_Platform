@@ -77,9 +77,11 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
         entity.setSubscriber(arguments.getBoolean(2));
         entity.setWaterCount(arguments.getInteger(3));
         entityDataService.save(entity);
+        TelegramMyFitnessUserEntity oldEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
+        oldEntity.setWaterCount(arguments.getInteger(4));
+        entityDataService.update(oldEntity);
         TelegramMyFitnessUserEntity newEntity = entityDataService.findByUserTelegramId(arguments.getLong(0));
-        newEntity.setWaterCount(arguments.getInteger(4));
-        entityDataService.update(newEntity); assertAll("User properties",
+        assertAll("User properties",
                 () -> assertEquals(entity.getId(), newEntity.getId()),
                 () -> assertEquals(entity.getUserName(), newEntity.getUserName()),
                 () -> assertEquals(entity.getSubscriber(), newEntity.getSubscriber()),
@@ -95,11 +97,14 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
         entityDataService.save(entity);
         TelegramMyFitnessUserEntity newEntity = entityDataService.findByUserTelegramId(id);
         assertEquals(entity, newEntity);
+        newEntity = entityDataService.findByUserTelegramId(id+1);
+        assertNull(newEntity);
     }
 
     @ParameterizedTest
     @CsvSource({
             "123, false, 456, false, 0",
+            "123, true, , , 1",
             "123, true, 456, false, 1",
             "123, true, 456, true, 2"})
     void findAllSubscribers(ArgumentsAccessor arguments) {
@@ -132,8 +137,14 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
         TelegramMyFitnessUserEntity user = new TelegramMyFitnessUserEntity();
         user.setUserTelegramId(123L);
         entityDataService.save(user);
+        user = new TelegramMyFitnessUserEntity();
+        user.setUserTelegramId(123L);
+        entityDataService.save(user);
         TelegramMyFitnessUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
         List<TelegramMyFitnessUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
-        assertNotNull(deleted);
+        assertAll("Test case",
+                () -> assertNotNull(deleted),
+                () -> assertEquals(2, deleted.size())
+        );
     }
 }

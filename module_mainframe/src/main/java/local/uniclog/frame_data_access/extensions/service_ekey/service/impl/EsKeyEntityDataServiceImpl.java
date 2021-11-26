@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Реализация интерфейса сервиса {@link EsKeyEntityDataService}
+ * @version 0.1
+ */
 @Service
 @Transactional
 public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
@@ -39,8 +43,11 @@ public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
     }
 
     @Override
-    public void deleteByKey(String key) {
-        repository.deleteByKey(key);
+    public EsKeyEntity deleteByKey(String key) {
+        EsKeyEntity entity = repository.findByKey(key);
+        if (entity == null) return null;
+        this.delete(entity);
+        return entity;
     }
 
     @Override

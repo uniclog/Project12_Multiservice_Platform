@@ -9,18 +9,26 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 /**
- * Key Entity from web chat
- * @author erlidione
+ * Сущность для ключей
+ *         <li>Ключ, уникальное полк {@link EsKeyEntity#key}</li>
+ *         <li>Дата создание {@link EsKeyEntity#date}</li>
+ * @author uniclog
+ * @version 0.1
  */
 @Getter
 @Setter
 @ToString
 @Entity(name = "service_eskey")
 public class EsKeyEntity {
+    /** Поле ключа */
     @Id
     private String key;
+    /** Дата создания ключа (генерируется при создании сушности) */
     private LocalDateTime date;
 
+    /**
+     * Задает дату при создании ключа
+     */
     public EsKeyEntity() {
         this.setDate(LocalDateTime.now());
     }

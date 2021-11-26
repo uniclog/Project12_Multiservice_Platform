@@ -9,5 +9,4 @@ import java.util.List;
 public interface EsKeyRepository extends JpaRepository<EsKeyEntity, Long> {
     EsKeyEntity findByKey(String key);
     List<EsKeyEntity> findByDateAfter(LocalDateTime date);
-    List<EsKeyEntity> deleteByKey(String key);
 }

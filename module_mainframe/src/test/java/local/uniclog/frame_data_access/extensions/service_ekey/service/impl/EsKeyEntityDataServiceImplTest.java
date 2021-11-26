@@ -65,8 +65,9 @@ class EsKeyEntityDataServiceImplTest {
 
     @Test
     void deleteByKey() {
-        entityDataService.deleteByKey(key);
+        assertNotNull(entityDataService.deleteByKey(key));
         assertNull(entityDataService.findByKey(key));
+        assertNull(entityDataService.deleteByKey(key));
     }
 
     @Test

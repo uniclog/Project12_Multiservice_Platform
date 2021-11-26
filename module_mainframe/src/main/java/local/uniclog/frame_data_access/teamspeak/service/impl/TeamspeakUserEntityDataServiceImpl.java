@@ -3,20 +3,15 @@ package local.uniclog.frame_data_access.teamspeak.service.impl;
 import local.uniclog.frame_data_access.teamspeak.entity.TeamspeakUserEntity;
 import local.uniclog.frame_data_access.teamspeak.repository.TeamspeakUserRepository;
 import local.uniclog.frame_data_access.teamspeak.service.TeamspeakUserEntityDataService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDataService {
-    private TeamspeakUserRepository teamspeakUserRepository;
-    @Autowired
-    public void setTeamspeakUserRepository(TeamspeakUserRepository repository) {
-        this.teamspeakUserRepository = repository;
-    }
+    private final TeamspeakUserRepository teamspeakUserRepository;
 
     @Override
     public void save(TeamspeakUserEntity user) {

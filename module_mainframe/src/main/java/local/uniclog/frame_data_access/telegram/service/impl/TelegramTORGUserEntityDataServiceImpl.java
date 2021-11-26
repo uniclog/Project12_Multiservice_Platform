@@ -3,22 +3,17 @@ package local.uniclog.frame_data_access.telegram.service.impl;
 import local.uniclog.frame_data_access.telegram.entity.TelegramTORGUserEntity;
 import local.uniclog.frame_data_access.telegram.repository.TelegramTORGUserRepository;
 import local.uniclog.frame_data_access.telegram.service.TelegramTORGUserEntityDataService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEntityDataService {
-    private TelegramTORGUserRepository telegramTORGUserRepository;
-    @Autowired
-    public void setTelegramTORGUserRepository(TelegramTORGUserRepository telegramTORGUserRepository) {
-        this.telegramTORGUserRepository = telegramTORGUserRepository;
-    }
+    private final TelegramTORGUserRepository telegramTORGUserRepository;
 
     @Override
     public void save(TelegramTORGUserEntity user) {
@@ -32,12 +27,13 @@ public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEn
 
     @Override
     public void update(TelegramTORGUserEntity user) {
-            TelegramTORGUserEntity userFromDb = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
-            if (userFromDb == null) {
-                save(user);
-                return;
-            }
-            telegramTORGUserRepository.save(user);
+        TelegramTORGUserEntity userFromDb = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
+        if (userFromDb == null) {
+            save(user);
+            return;
+        }
+        user.setId(userFromDb.getId());
+        telegramTORGUserRepository.save(user);
     }
 
     @Override

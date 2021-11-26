@@ -1,29 +1,26 @@
 package local.uniclog.frame_data_access.extensions.service_ekey.service.impl;
 
+import local.uniclog.frame_data_access.DataServiceTestConfiguration;
 import local.uniclog.frame_data_access.extensions.service_ekey.entity.EsKeyEntity;
 import local.uniclog.frame_data_access.extensions.service_ekey.service.EsKeyEntityDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
-@SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@TestPropertySource(properties = {
-        "spring.jpa.generate-ddl=true",
-        "spring.jpa.hibernate.ddl-auto=create"
-})
+@DataJpaTest
+@ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class EsKeyEntityDataServiceImplTest {
     @Autowired
     private EsKeyEntityDataService entityDataService;
+
     private String key;
     private EsKeyEntity entity;
 
@@ -43,12 +40,16 @@ class EsKeyEntityDataServiceImplTest {
 
     @Test
     void save() {
-        EsKeyEntity temp = entityDataService.findByKey(key);
-        assertEquals(entity, temp);
+        assertEquals(entity, entityDataService.findByKey(key));
+        EsKeyEntity temp = new EsKeyEntity();
+        temp.setKey(key);
+        entityDataService.save(temp);
+        assertEquals(1, entityDataService.findAll().size());
     }
 
     @Test
     void delete() {
+        assertNotNull(entityDataService.findByKey(key));
         entityDataService.delete(entity);
         assertNull(entityDataService.findByKey(key));
     }
@@ -68,15 +69,6 @@ class EsKeyEntityDataServiceImplTest {
         assertNotNull(entityDataService.deleteByKey(key));
         assertNull(entityDataService.findByKey(key));
         assertNull(entityDataService.deleteByKey(key));
-    }
-
-    @Test
-    void update() {
-        String newKey = "1234-1234-1234-1234-1234";
-        entity = entityDataService.findByKey(key);
-        entity.setKey(newKey);
-        entityDataService.update(entity);
-        assertEquals(newKey, entityDataService.findByKey(newKey).getKey());
     }
 
     @Test

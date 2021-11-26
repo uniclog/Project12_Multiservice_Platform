@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Сущность для ключей
@@ -38,11 +39,11 @@ public class EsKeyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EsKeyEntity that = (EsKeyEntity) o;
-        return key.equals(that.key);
+        return key.equals(that.key) && date.equals(that.date);
     }
 
     @Override
     public int hashCode() {
-        return 1996676398;
+        return Objects.hash(key, date);
     }
 }

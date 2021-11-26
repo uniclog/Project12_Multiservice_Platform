@@ -3,6 +3,7 @@ package local.uniclog.frame_data_access.extensions.service_ekey.service.impl;
 import local.uniclog.frame_data_access.extensions.service_ekey.entity.EsKeyEntity;
 import local.uniclog.frame_data_access.extensions.service_ekey.repository.EsKeyRepository;
 import local.uniclog.frame_data_access.extensions.service_ekey.service.EsKeyEntityDataService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,20 +16,12 @@ import java.util.List;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
     private final EsKeyRepository repository;
 
-    public EsKeyEntityDataServiceImpl(EsKeyRepository repository) {
-        this.repository = repository;
-    }
-
     @Override
     public void save(EsKeyEntity key) {
-        EsKeyEntity keyEntity = this.findByKey(key.getKey());
-        if (keyEntity != null) {
-            this.update(key);
-            return;
-        }
         repository.save(key);
     }
 
@@ -48,11 +41,6 @@ public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
         if (entity == null) return null;
         this.delete(entity);
         return entity;
-    }
-
-    @Override
-    public void update(EsKeyEntity key) {
-        repository.save(key);
     }
 
     @Override

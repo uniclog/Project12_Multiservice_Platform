@@ -3,22 +3,17 @@ package local.uniclog.frame_data_access.telegram.service.impl;
 import local.uniclog.frame_data_access.telegram.entity.TelegramMyFitnessUserEntity;
 import local.uniclog.frame_data_access.telegram.repository.TelegramMyFitnessUserRepository;
 import local.uniclog.frame_data_access.telegram.service.TelegramMyFitnessUserEntityDataService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFitnessUserEntityDataService {
-    private TelegramMyFitnessUserRepository telegramMyFitnessUserRepository;
-    @Autowired
-    public void setTelegramTORGUserRepository(TelegramMyFitnessUserRepository telegramMyFitnessUserRepository) {
-        this.telegramMyFitnessUserRepository = telegramMyFitnessUserRepository;
-    }
+    private final TelegramMyFitnessUserRepository telegramMyFitnessUserRepository;
 
     @Override
     public void save(TelegramMyFitnessUserEntity user) {
@@ -37,6 +32,7 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
             save(user);
             return;
         }
+        user.setId(userEntity.getId());
         telegramMyFitnessUserRepository.save(user);
     }
 

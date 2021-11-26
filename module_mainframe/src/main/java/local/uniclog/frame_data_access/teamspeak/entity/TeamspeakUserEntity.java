@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
+@Scope("prototype")
 @Table(name = "teamspeak_users")
 public class TeamspeakUserEntity {
     @Id

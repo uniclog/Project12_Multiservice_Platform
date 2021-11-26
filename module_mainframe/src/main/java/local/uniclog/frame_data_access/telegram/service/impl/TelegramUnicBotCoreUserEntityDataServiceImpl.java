@@ -3,22 +3,17 @@ package local.uniclog.frame_data_access.telegram.service.impl;
 import local.uniclog.frame_data_access.telegram.entity.TelegramUnicBotCoreUserEntity;
 import local.uniclog.frame_data_access.telegram.repository.TelegramUnicBotCoreRepository;
 import local.uniclog.frame_data_access.telegram.service.TelegramUnicBotCoreUserEntityDataService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUnicBotCoreUserEntityDataService {
-    private TelegramUnicBotCoreRepository telegramUnicBotCoreRepository;
-    @Autowired
-    public void setTelegramUnicBotCoreRepository(TelegramUnicBotCoreRepository telegramUnicBotCoreRepository) {
-        this.telegramUnicBotCoreRepository = telegramUnicBotCoreRepository;
-    }
+    private final TelegramUnicBotCoreRepository telegramUnicBotCoreRepository;
 
     @Override
     public void save(TelegramUnicBotCoreUserEntity user) {
@@ -37,6 +32,7 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
             save(user);
             return;
         }
+        user.setId(userFromDB.getId());
         telegramUnicBotCoreRepository.save(user);
     }
 

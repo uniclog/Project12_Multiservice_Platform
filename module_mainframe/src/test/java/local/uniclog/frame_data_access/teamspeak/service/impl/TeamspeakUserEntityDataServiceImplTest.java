@@ -1,111 +1,98 @@
 package local.uniclog.frame_data_access.teamspeak.service.impl;
 
+import local.uniclog.frame_data_access.DataServiceTestConfiguration;
 import local.uniclog.frame_data_access.teamspeak.entity.TeamspeakUserEntity;
 import local.uniclog.frame_data_access.teamspeak.service.TeamspeakUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
-@SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@TestPropertySource(properties = {
-        "spring.jpa.generate-ddl=true",
-        "spring.jpa.hibernate.ddl-auto=create"
-})
+@DataJpaTest
+@ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TeamspeakUserEntityDataServiceImplTest {
     @Autowired
+    @Qualifier("beanTeamspeakUserEntityDataServiceTest")
     private TeamspeakUserEntityDataService entityDataService;
+
+    private final String token = "token";
+    private final Boolean subscriber = true;
+    private TeamspeakUserEntity entity;
+
+    @BeforeEach
+    void setUp() {
+        entity = new TeamspeakUserEntity();
+        entity.setTeamspeakToken(token);
+        entity.setSubscriber(subscriber);
+        entityDataService.save(entity);
+    }
 
     @Test
     void setTeamspeakUserRepository() {
         assertNotNull(entityDataService);
+        assertNotNull(entityDataService.findByTeamspeakToken(token));
     }
 
-    @ParameterizedTest
-    @CsvSource({"token1, true", "token2, false"})
-    void save(ArgumentsAccessor arguments) {
-        TeamspeakUserEntity entity = new TeamspeakUserEntity();
-        entity.setTeamspeakToken(arguments.getString(0));
-        entity.setSubscriber(arguments.getBoolean(1));
-        entityDataService.save(entity);
-        TeamspeakUserEntity newEntity = entityDataService.findByTeamspeakToken(arguments.getString(0));
-        assertEquals(entity.getSubscriber(), newEntity.getSubscriber());
+    @Test
+    void save() {
+        assertNotNull(entityDataService.findByTeamspeakToken(token));
+        assertEquals(entity.getSubscriber(),entityDataService.findByTeamspeakToken(token).getSubscriber());
     }
 
-    @ParameterizedTest
-    @CsvSource({"token1, true, newToken", "token2, false,"})
-    void update(ArgumentsAccessor arguments) {
-        TeamspeakUserEntity entity = new TeamspeakUserEntity();
-        entity.setTeamspeakToken(arguments.getString(0));
-        entity.setSubscriber(arguments.getBoolean(1));
-        entityDataService.save(entity);
-        TeamspeakUserEntity newEntity = entityDataService.findByTeamspeakToken(arguments.getString(0));
-        newEntity.setTeamspeakToken(arguments.getString(2));
-        entityDataService.update(newEntity);
-        assertEquals(entity.getSubscriber(), newEntity.getSubscriber());
-        assertNotEquals(entity.getTeamspeakToken(), newEntity.getTeamspeakToken());
+    @Test
+    void update() {
+        TeamspeakUserEntity temp = entityDataService.findByTeamspeakToken(token);
+        temp.setSubscriber(!subscriber);
+        entityDataService.update(temp);
+        assertNotEquals(subscriber, entityDataService.findByTeamspeakToken(token).getSubscriber());
     }
 
-    @ParameterizedTest
-    @CsvSource({"token1, true", "token2, false"})
-    void findByTeamspeakToken(ArgumentsAccessor arguments) {
-        TeamspeakUserEntity entity = new TeamspeakUserEntity();
-        entity.setTeamspeakToken(arguments.getString(0));
-        entity.setSubscriber(arguments.getBoolean(1));
-        entityDataService.save(entity);
-        TeamspeakUserEntity newEntity = entityDataService.findByTeamspeakToken(arguments.getString(0));
-        assertEquals(entity, newEntity);
+    @Test
+    void findByTeamspeakToken() {
+        TeamspeakUserEntity temp = entityDataService.findByTeamspeakToken(token);
+        assertEquals(entity, temp);
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "token1, false, token2, false, 0",
-            "token1, true, token2, false, 1",
-            "token1, true, token2, true, 2"})
-    void findAllSubscribers(ArgumentsAccessor arguments) {
-        TeamspeakUserEntity entityTestSub1 = new TeamspeakUserEntity();
-        entityTestSub1.setTeamspeakToken(arguments.getString(0));
-        entityTestSub1.setSubscriber(arguments.getBoolean(1));
-        entityDataService.save(entityTestSub1);
-        TeamspeakUserEntity entityTestSub2 = new TeamspeakUserEntity();
-        entityTestSub2.setTeamspeakToken(arguments.getString(2));
-        entityTestSub2.setSubscriber(arguments.getBoolean(3));
-        entityDataService.save(entityTestSub2);
-        int subCount = entityDataService.findAllSubscribers().size();
-        assertEquals(subCount, arguments.getInteger(4));
+    @Test
+    void findAllSubscribers() {
+        assertEquals(1, entityDataService.findAllSubscribers().size());
+        TeamspeakUserEntity temp = new TeamspeakUserEntity();
+        temp.setTeamspeakToken("otherTokenTrue");
+        temp.setSubscriber(true);
+        entityDataService.save(temp);
+        TeamspeakUserEntity tempFalse = new TeamspeakUserEntity();
+        tempFalse.setTeamspeakToken("otherTokenFalse");
+        tempFalse.setSubscriber(false);
+        entityDataService.save(tempFalse);
+        assertEquals(2, entityDataService.findAllSubscribers().size());
     }
 
     @Test
     void findAll() {
-        TeamspeakUserEntity entityTestSub1 = new TeamspeakUserEntity();
-        entityTestSub1.setTeamspeakToken("entityTest1");
-        entityDataService.save(entityTestSub1);
         assertEquals(1, entityDataService.findAll().size());
-        TeamspeakUserEntity entityTestSub2 = new TeamspeakUserEntity();
-        entityTestSub2.setTeamspeakToken("entityTest2");
-        entityDataService.save(entityTestSub2);
+        TeamspeakUserEntity temp = new TeamspeakUserEntity();
+        temp.setTeamspeakToken("temp");
+        entityDataService.save(temp);
         assertEquals(2, entityDataService.findAll().size());
     }
 
     @Test
     void deleteByTeamspeakToken() {
-        TeamspeakUserEntity user = new TeamspeakUserEntity();
-        user.setTeamspeakToken("Delete");
-        user.setSubscriber(true);
-        entityDataService.save(user);
-        TeamspeakUserEntity delUser = entityDataService.findByTeamspeakToken(user.getTeamspeakToken());
+        TeamspeakUserEntity temp = new TeamspeakUserEntity();
+        temp.setTeamspeakToken("otherTokenTrue");
+        temp.setSubscriber(true);
+        entityDataService.save(temp);
+        TeamspeakUserEntity delUser = entityDataService.findByTeamspeakToken(token);
         List<TeamspeakUserEntity> deleted = entityDataService.deleteByTeamspeakToken(delUser.getTeamspeakToken());
+        assertEquals(1, deleted.size());
         assertNotNull(deleted);
     }
 }

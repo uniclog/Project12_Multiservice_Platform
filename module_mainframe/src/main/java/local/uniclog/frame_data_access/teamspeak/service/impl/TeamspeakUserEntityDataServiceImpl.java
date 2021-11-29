@@ -30,6 +30,7 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
             save(user);
             return;
         }
+        user.setId(userEntity.getId());
         teamspeakUserRepository.save(user);
     }
 

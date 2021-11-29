@@ -86,6 +86,11 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
                 () -> assertEquals(subscriber, newEntity.getSubscriber()),
                 () -> assertNotEquals(waterCount, newEntity.getWaterCount())
         );
+
+        TelegramMyFitnessUserEntity temp = new TelegramMyFitnessUserEntity();
+        temp.setUserTelegramId(1234567890L);
+        entityDataService.update(temp);
+        assertNotNull(entityDataService.findByUserTelegramId(1234567890L));
     }
 
     @Test
@@ -132,9 +137,11 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
         entityDataService.save(user);
         TelegramMyFitnessUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
         List<TelegramMyFitnessUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
+        List<TelegramMyFitnessUserEntity> notFoundEntity = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
         assertAll("Test case",
                 () -> assertNotNull(deleted),
-                () -> assertEquals(1, deleted.size())
+                () -> assertEquals(1, deleted.size()),
+                () -> assertNull(notFoundEntity)
         );
     }
 }

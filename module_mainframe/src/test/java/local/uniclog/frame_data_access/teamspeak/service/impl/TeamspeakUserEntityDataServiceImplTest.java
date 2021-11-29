@@ -45,6 +45,13 @@ class TeamspeakUserEntityDataServiceImplTest {
     void save() {
         assertNotNull(entityDataService.findByTeamspeakToken(token));
         assertEquals(entity.getSubscriber(),entityDataService.findByTeamspeakToken(token).getSubscriber());
+
+        TeamspeakUserEntity temp = new TeamspeakUserEntity();
+        temp.setTeamspeakToken(token);
+        temp.setSubscriber(!subscriber);
+        entityDataService.save(temp);
+
+        assertEquals(!subscriber,entityDataService.findByTeamspeakToken(token).getSubscriber());
     }
 
     @Test
@@ -53,6 +60,11 @@ class TeamspeakUserEntityDataServiceImplTest {
         temp.setSubscriber(!subscriber);
         entityDataService.update(temp);
         assertNotEquals(subscriber, entityDataService.findByTeamspeakToken(token).getSubscriber());
+
+        temp = new TeamspeakUserEntity();
+        temp.setTeamspeakToken(token + token);
+        entityDataService.update(temp);
+        assertNotNull(entityDataService.findByTeamspeakToken(token + token));
     }
 
     @Test
@@ -91,8 +103,12 @@ class TeamspeakUserEntityDataServiceImplTest {
         temp.setSubscriber(true);
         entityDataService.save(temp);
         TeamspeakUserEntity delUser = entityDataService.findByTeamspeakToken(token);
-        List<TeamspeakUserEntity> deleted = entityDataService.deleteByTeamspeakToken(delUser.getTeamspeakToken());
-        assertEquals(1, deleted.size());
-        assertNotNull(deleted);
+        List<TeamspeakUserEntity> deletedList = entityDataService.deleteByTeamspeakToken(delUser.getTeamspeakToken());
+        List<TeamspeakUserEntity> notFoundEntity = entityDataService.deleteByTeamspeakToken(delUser.getTeamspeakToken());
+        assertAll(
+                () -> assertEquals(1, deletedList.size()),
+                () -> assertNotNull(deletedList),
+                () -> assertNull(notFoundEntity)
+        );
     }
 }

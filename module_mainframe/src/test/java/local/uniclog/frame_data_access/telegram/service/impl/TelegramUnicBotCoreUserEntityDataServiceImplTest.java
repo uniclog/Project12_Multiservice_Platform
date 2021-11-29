@@ -82,6 +82,11 @@ class TelegramUnicBotCoreUserEntityDataServiceImplTest {
                 () -> assertEquals(userName, newEntity.getUserName()),
                 () -> assertNotEquals(subscriber, newEntity.getSubscriber())
         );
+
+        TelegramUnicBotCoreUserEntity temp = new TelegramUnicBotCoreUserEntity();
+        temp.setUserTelegramId(1234567890L);
+        entityDataService.update(temp);
+        assertNotNull(entityDataService.findByUserTelegramId(1234567890L));
     }
 
     @Test
@@ -128,9 +133,11 @@ class TelegramUnicBotCoreUserEntityDataServiceImplTest {
         entityDataService.save(user);
         TelegramUnicBotCoreUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
         List<TelegramUnicBotCoreUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
+        List<TelegramUnicBotCoreUserEntity> notFoundEntity = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
         assertAll("Test case",
                 () -> assertNotNull(deleted),
-                () -> assertEquals(1, deleted.size())
+                () -> assertEquals(1, deleted.size()),
+                () -> assertNull(notFoundEntity)
         );
     }
 }

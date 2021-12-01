@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Реализация интерфейса сервиса {@link EsKeyEntityDataService}
+ * Реализация сервиса {@link EsKeyEntityDataService}
  * @version 0.1
  */
 @Service

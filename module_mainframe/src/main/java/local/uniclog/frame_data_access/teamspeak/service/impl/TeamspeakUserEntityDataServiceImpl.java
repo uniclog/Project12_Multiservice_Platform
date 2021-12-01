@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Реализация сервиса {@link TeamspeakUserEntityDataService}
+ * @version 0.1
+ */
 @Service
 @RequiredArgsConstructor
 public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDataService {

@@ -4,23 +4,31 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.context.annotation.Scope;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Сущность пользователя teamspeak
+ *         <li>Id (primary key) {@link TeamspeakUserEntity#id}</li>
+ *         <li>Teamspeak-token {@link TeamspeakUserEntity#teamspeakToken}</li>
+ *         <li>Является пользователь подписчиком {@link TeamspeakUserEntity#subscriber}</li>
+ * @author uniclog
+ * @version 0.1
+ */
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Scope("prototype")
 @Table(name = "teamspeak_users")
 public class TeamspeakUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    /** Teamspeak-token пользователя */
     private String teamspeakToken;
+    /** Флаг подписки на бота */
     private Boolean subscriber = true;
 
     @Override

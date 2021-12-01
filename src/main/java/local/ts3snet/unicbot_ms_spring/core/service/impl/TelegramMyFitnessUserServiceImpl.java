@@ -35,6 +35,7 @@ public class TelegramMyFitnessUserServiceImpl implements TelegramMyFitnessUserSe
             save(user);
             return;
         }
+        user.setId(userEntity.getId());
         telegramMyFitnessUserRepository.save(user);
     }
 

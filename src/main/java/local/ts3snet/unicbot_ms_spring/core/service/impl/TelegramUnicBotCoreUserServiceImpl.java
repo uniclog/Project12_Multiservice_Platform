@@ -35,6 +35,7 @@ public class TelegramUnicBotCoreUserServiceImpl implements TelegramUnicBotCoreUs
             save(user);
             return;
         }
+        user.setId(userFromDB.getId());
         telegramUnicBotCoreRepository.save(user);
     }
 

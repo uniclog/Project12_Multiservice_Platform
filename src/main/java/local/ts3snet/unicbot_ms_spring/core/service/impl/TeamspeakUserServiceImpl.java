@@ -35,6 +35,7 @@ public class TeamspeakUserServiceImpl implements TeamspeakUserService {
             save(user);
             return;
         }
+        user.setId(userEntity.getId());
         teamspeakUserRepository.save(user);
     }
 

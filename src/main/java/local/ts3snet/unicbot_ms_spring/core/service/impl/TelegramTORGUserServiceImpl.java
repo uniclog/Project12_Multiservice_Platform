@@ -35,6 +35,7 @@ public class TelegramTORGUserServiceImpl implements TelegramTORGUserService {
                 save(user);
                 return;
             }
+            user.setId(userFromDb.getId());
             telegramTORGUserRepository.save(user);
     }
 

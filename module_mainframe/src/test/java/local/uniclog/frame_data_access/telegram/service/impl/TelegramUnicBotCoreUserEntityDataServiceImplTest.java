@@ -137,7 +137,7 @@ class TelegramUnicBotCoreUserEntityDataServiceImplTest {
         assertAll("Test case",
                 () -> assertNotNull(deleted),
                 () -> assertEquals(1, deleted.size()),
-                () -> assertNull(notFoundEntity)
+                () -> assertTrue(notFoundEntity.isEmpty())
         );
     }
 }

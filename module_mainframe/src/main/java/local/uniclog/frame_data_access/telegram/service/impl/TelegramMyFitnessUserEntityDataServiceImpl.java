@@ -7,8 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Реализация сервиса {@link TelegramMyFitnessUserEntityDataService}
+ * @version 0.1
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -59,7 +64,7 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
     @Override
     public List<TelegramMyFitnessUserEntity> deleteAllByUserTelegramId(Long id) {
         List<TelegramMyFitnessUserEntity> users = telegramMyFitnessUserRepository.findAllByUserTelegramId(id);
-        if (users.isEmpty()) return null;
+        if (users.isEmpty()) return Collections.emptyList();
         telegramMyFitnessUserRepository.deleteAllByUserTelegramId(id);
         return users;
     }

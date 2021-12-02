@@ -8,6 +8,16 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Сущность пользователя MyFitnessTelegramUser
+ *         <li>Id (primary key) {@link TelegramMyFitnessUserEntity#id}</li>
+ *         <li>Telegram-Id {@link TelegramMyFitnessUserEntity#userTelegramId}</li>
+ *         <li>Имя пользователя {@link TelegramMyFitnessUserEntity#userName}</li>
+ *         <li>Флаг является ли пользователь подписчиком {@link TelegramMyFitnessUserEntity#subscriber}</li>
+ *         <li>Поле содержит количество выпитых стаканов {@link TelegramMyFitnessUserEntity#waterCount}</li>
+ * @author uniclog
+ * @version 0.1
+ */
 @Getter
 @Setter
 @ToString
@@ -18,9 +28,13 @@ public class TelegramMyFitnessUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    /** Telegram-Id пользователя */
     private Long userTelegramId;
+    /** Имя пользователя */
     private String userName;
+    /** Флаг подписки на бота */
     private Boolean subscriber = false;
+    /** Поле содержит количество выпитых стаканов */
     private Integer waterCount = 0;
 
     @Override

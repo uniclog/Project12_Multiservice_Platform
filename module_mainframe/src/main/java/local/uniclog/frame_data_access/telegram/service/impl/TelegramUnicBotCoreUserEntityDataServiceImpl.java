@@ -7,8 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Реализация сервиса {@link TelegramUnicBotCoreUserEntityDataService}
+ * @version 0.1
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -59,7 +64,7 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
     @Override
     public List<TelegramUnicBotCoreUserEntity> deleteAllByUserTelegramId(Long id) {
         List<TelegramUnicBotCoreUserEntity> users = telegramUnicBotCoreRepository.findAllByUserTelegramId(id);
-        if (users.isEmpty()) return null;
+        if (users.isEmpty()) return Collections.emptyList();
         telegramUnicBotCoreRepository.deleteAllByUserTelegramId(id);
         return users;
     }

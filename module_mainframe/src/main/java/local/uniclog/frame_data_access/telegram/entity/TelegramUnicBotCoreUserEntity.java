@@ -8,6 +8,15 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Сущность пользователя UnicBotTelegramUser
+ *         <li>Id (primary key) {@link TelegramUnicBotCoreUserEntity#id}</li>
+ *         <li>Telegram-Id {@link TelegramUnicBotCoreUserEntity#userTelegramId}</li>
+ *         <li>Имя пользователя {@link TelegramUnicBotCoreUserEntity#userName}</li>
+ *         <li>Флаг является ли пользователь подписчиком {@link TelegramUnicBotCoreUserEntity#subscriber}</li>
+ * @author uniclog
+ * @version 0.1
+ */
 @Getter
 @Setter
 @ToString
@@ -18,8 +27,11 @@ public class TelegramUnicBotCoreUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    /** Telegram-Id пользователя */
     private Long userTelegramId;
+    /** Имя пользователя */
     private String userName;
+    /** Флаг подписки на бота */
     private Boolean subscriber = false;
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Сервис работы с репозиторием
- * для сущности ключей {@link TeamspeakUserEntity}
+ * для сущности {@link TeamspeakUserEntity}
  * <li>сохранение сущности в бд {@link TeamspeakUserEntityDataService#save(TeamspeakUserEntity)}</li>
  * <li>обновление полей для записи {@link TeamspeakUserEntityDataService#update(TeamspeakUserEntity)}</li>
  * <li>возвращает запись по token {@link TeamspeakUserEntityDataService#findByTeamspeakToken(String)}</li>

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Реализация сервиса {@link TelegramMyFitnessUserEntityDataService}
+ *
  * @version 0.1
  */
 @Slf4j
@@ -23,7 +24,7 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
     @Override
     public void save(TelegramMyFitnessUserEntity user) {
         TelegramMyFitnessUserEntity userEntity = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
-        if(userEntity != null) {
+        if (userEntity != null) {
             update(user);
             return;
         }

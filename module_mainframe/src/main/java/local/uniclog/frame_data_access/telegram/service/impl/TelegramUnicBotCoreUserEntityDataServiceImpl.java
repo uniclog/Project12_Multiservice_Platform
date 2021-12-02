@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Реализация сервиса {@link TelegramUnicBotCoreUserEntityDataService}
+ *
  * @version 0.1
  */
 @Slf4j
@@ -23,7 +24,7 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
     @Override
     public void save(TelegramUnicBotCoreUserEntity user) {
         TelegramUnicBotCoreUserEntity userEntity = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
-        if(userEntity != null) {
+        if (userEntity != null) {
             update(user);
             return;
         }

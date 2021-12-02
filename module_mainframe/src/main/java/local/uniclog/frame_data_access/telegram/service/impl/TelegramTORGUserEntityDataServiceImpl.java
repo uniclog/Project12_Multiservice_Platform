@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Реализация сервиса {@link TelegramTORGUserEntityDataService}
+ *
  * @version 0.1
  */
 @Slf4j

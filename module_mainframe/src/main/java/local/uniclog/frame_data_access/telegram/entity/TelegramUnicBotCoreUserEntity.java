@@ -10,10 +10,13 @@ import java.util.Objects;
 
 /**
  * Сущность пользователя UnicBotTelegramUser
+ * <ul>
  *         <li>Id (primary key) {@link TelegramUnicBotCoreUserEntity#id}</li>
  *         <li>Telegram-Id {@link TelegramUnicBotCoreUserEntity#userTelegramId}</li>
- *         <li>Имя пользователя {@link TelegramUnicBotCoreUserEntity#userName}</li>
+ *         <li>Поле имя пользователя {@link TelegramUnicBotCoreUserEntity#userName}</li>
  *         <li>Флаг является ли пользователь подписчиком {@link TelegramUnicBotCoreUserEntity#subscriber}</li>
+ * </ul>
+ *
  * @author uniclog
  * @version 0.1
  */
@@ -27,11 +30,17 @@ public class TelegramUnicBotCoreUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /** Telegram-Id пользователя */
+    /**
+     * Telegram-Id пользователя
+     */
     private Long userTelegramId;
-    /** Имя пользователя */
+    /**
+     * Поле имя пользователя
+     */
     private String userName;
-    /** Флаг подписки на бота */
+    /**
+     * Флаг подписки на бота
+     */
     private Boolean subscriber = false;
 
     @Override

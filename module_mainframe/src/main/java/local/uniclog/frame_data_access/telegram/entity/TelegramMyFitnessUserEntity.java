@@ -10,11 +10,14 @@ import java.util.Objects;
 
 /**
  * Сущность пользователя MyFitnessTelegramUser
+ * <ul>
  *         <li>Id (primary key) {@link TelegramMyFitnessUserEntity#id}</li>
  *         <li>Telegram-Id {@link TelegramMyFitnessUserEntity#userTelegramId}</li>
- *         <li>Имя пользователя {@link TelegramMyFitnessUserEntity#userName}</li>
+ *         <li>Поле имя пользователя {@link TelegramMyFitnessUserEntity#userName}</li>
  *         <li>Флаг является ли пользователь подписчиком {@link TelegramMyFitnessUserEntity#subscriber}</li>
  *         <li>Поле содержит количество выпитых стаканов {@link TelegramMyFitnessUserEntity#waterCount}</li>
+ * </ul>
+ *
  * @author uniclog
  * @version 0.1
  */
@@ -28,13 +31,21 @@ public class TelegramMyFitnessUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /** Telegram-Id пользователя */
+    /**
+     * Telegram-Id пользователя
+     */
     private Long userTelegramId;
-    /** Имя пользователя */
+    /**
+     * Поле имя пользователя
+     */
     private String userName;
-    /** Флаг подписки на бота */
+    /**
+     * Флаг подписки на бота
+     */
     private Boolean subscriber = false;
-    /** Поле содержит количество выпитых стаканов */
+    /**
+     * Поле содержит количество выпитых стаканов
+     */
     private Integer waterCount = 0;
 
     @Override

@@ -10,9 +10,12 @@ import java.util.Objects;
 
 /**
  * Сущность пользователя teamspeak
+ * <ul>
  *         <li>Id (primary key) {@link TeamspeakUserEntity#id}</li>
  *         <li>Teamspeak-token {@link TeamspeakUserEntity#teamspeakToken}</li>
  *         <li>Является пользователь подписчиком {@link TeamspeakUserEntity#subscriber}</li>
+ * </ul>
+ *
  * @author uniclog
  * @version 0.1
  */
@@ -26,9 +29,13 @@ public class TeamspeakUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    /** Teamspeak-token пользователя */
+    /**
+     * Teamspeak-token пользователя
+     */
     private String teamspeakToken;
-    /** Флаг подписки на бота */
+    /**
+     * Флаг подписки на бота
+     */
     private Boolean subscriber = true;
 
     @Override

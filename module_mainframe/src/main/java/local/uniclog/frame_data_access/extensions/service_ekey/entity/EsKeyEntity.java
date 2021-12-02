@@ -11,8 +11,10 @@ import java.util.Objects;
 
 /**
  * Сущность для ключей
+ *      <ul>
  *         <li>Ключ (primary key) {@link EsKeyEntity#key}</li>
  *         <li>Дата создание {@link EsKeyEntity#date}</li>
+ *      </ul>
  * @author uniclog
  * @version 0.1
  */

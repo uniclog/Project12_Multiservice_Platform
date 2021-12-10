@@ -26,9 +26,12 @@ public class StatisticClear extends UniclogMyFitnessMessageAbstract {
                     bot.sendMessage(e.getUserTelegramId(),
                             "Привет.\n" +
                                     "Сегодня вы пили воду " + waterCount + " "
-                                    + ((waterCount < 2 || waterCount > 4) ? "раз\n": "раза\n")
-                                    + ((waterCount > 5) ?
-                                    "Молодец! Так держать." : "Ну что-то неважные результаты."));
+                                    + (waterCount < 2 || waterCount > 4 ? "раз\n": "раза\n")
+                                    + (waterCount > 5 ?
+                                    "Молодец! Так держать." :
+                                    waterCount > 3 ?
+                                    "Хорошо! Так держать. еше немного и суточная норма"
+                                            : "Ну что-то неважные результаты."));
 
                 }
         );

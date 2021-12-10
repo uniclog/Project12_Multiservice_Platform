@@ -24,7 +24,10 @@ public class GetKeys extends UnicBotTORGMessageAbstract {
     public void execute(TelegramBotService bot, String... param) {
         log.debug("-> getkeys");
         StringBuilder keys = new StringBuilder();
-        keyDataService.findAll().forEach(k -> keys.append("\n").append(k.getKey()));
+        keyDataService.findAll().forEach(k -> keys.append("\n")
+                .append(k.getDate().getDayOfMonth()).append(".")
+                .append(k.getDate().getMonthValue()).append(".").append(k.getDate().getYear()).append("\n")
+                .append(k.getKey()));
 
         bot.sendMessage(this.getUserId(),
                 "Ключи: \n" + (keys.toString().equals("") ? "N/D" : keys));

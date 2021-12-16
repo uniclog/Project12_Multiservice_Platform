@@ -22,7 +22,7 @@ public class EsKeyDataAccessController {
         service.save(key);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@RequestParam EsKeyEntity entity) {
         service.delete(entity);

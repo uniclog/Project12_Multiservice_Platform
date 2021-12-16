@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.4'
+    id 'org.springframework.boot' version '2.6.1'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java-library'
     id 'jacoco'
@@ -16,22 +16,22 @@ repositories {
 }
 
 dependencies {
-    api 'org.springframework.boot:spring-boot-starter-tomcat:2.5.6'
-    api 'org.springframework.boot:spring-boot-starter-web:2.5.6'
+    api 'org.springframework.boot:spring-boot-starter-tomcat:2.6.1'
+    api 'org.springframework.boot:spring-boot-starter-web:2.6.1'
 
-    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.6'
-    implementation 'org.springframework.boot:spring-boot-starter:2.5.6'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.6.1'
+    implementation 'org.springframework.boot:spring-boot-starter:2.6.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.1'
 
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.5.6'
-    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.5.8.Final'
-    implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.6.1'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.1.Final'
+    implementation group: 'com.h2database', name: 'h2', version: '2.0.202'
 
     implementation 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 
 }
 

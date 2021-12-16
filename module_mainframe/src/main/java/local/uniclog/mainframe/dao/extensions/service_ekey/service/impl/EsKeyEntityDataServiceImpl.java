@@ -37,7 +37,7 @@ public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
 
     @Override
     public EsKeyEntity deleteByKey(String key) {
-        EsKeyEntity entity = repository.findByKey(key);
+        EsKeyEntity entity = repository.findByKeyValue(key);
         if (entity == null) return null;
         this.delete(entity);
         return entity;
@@ -55,6 +55,6 @@ public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
 
     @Override
     public EsKeyEntity findByKey(String key) {
-        return repository.findByKey(key);
+        return repository.findByKeyValue(key);
     }
 }

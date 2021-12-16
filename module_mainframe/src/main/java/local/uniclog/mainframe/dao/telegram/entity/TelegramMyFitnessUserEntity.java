@@ -29,7 +29,7 @@ import java.util.Objects;
 @Table(name = "telegram_my_fitness_users")
 public class TelegramMyFitnessUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * Telegram-Id пользователя

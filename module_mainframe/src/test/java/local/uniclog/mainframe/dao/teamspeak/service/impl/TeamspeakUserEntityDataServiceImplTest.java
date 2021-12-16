@@ -1,6 +1,6 @@
-package local.uniclog.data_access.teamspeak.service.impl;
+package local.uniclog.mainframe.dao.teamspeak.service.impl;
 
-import local.uniclog.data_access.DataServiceTestConfiguration;
+import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
 import local.uniclog.mainframe.dao.teamspeak.entity.TeamspeakUserEntity;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;

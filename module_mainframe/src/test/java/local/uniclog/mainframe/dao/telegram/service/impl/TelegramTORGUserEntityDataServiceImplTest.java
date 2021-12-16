@@ -1,8 +1,8 @@
-package local.uniclog.data_access.telegram.service.impl;
+package local.uniclog.mainframe.dao.telegram.service.impl;
 
-import local.uniclog.data_access.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.telegram.entity.TelegramMyFitnessUserEntity;
-import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
+import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
+import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
+import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,25 +22,23 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @DataJpaTest
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
-class TelegramMyFitnessUserEntityDataServiceImplTest {
+class TelegramTORGUserEntityDataServiceImplTest {
     @Autowired
-    @Qualifier("beanTelegramMyFitnessUserEntityDataServiceTest")
-    private TelegramMyFitnessUserEntityDataService entityDataService;
+    @Qualifier("beanTelegramTORGUserEntityDataServiceTest")
+    private TelegramTORGUserEntityDataService entityDataService;
 
-    private TelegramMyFitnessUserEntity entity;
+    private TelegramTORGUserEntity entity;
 
     private final Long telegramId = 123L;
     private final String userName = "Name";
     private final Boolean subscriber = true;
-    private final Integer waterCount = 0;
 
     @BeforeEach
     void setUp() {
-        entity = new TelegramMyFitnessUserEntity();
+        entity = new TelegramTORGUserEntity();
         entity.setUserTelegramId(telegramId);
         entity.setUserName(userName);
         entity.setSubscriber(subscriber);
-        entity.setWaterCount(waterCount);
         entityDataService.save(entity);
     }
 
@@ -51,16 +49,15 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"123, Name1, true, 11", "456, , false, "})
+    @CsvSource({"123, Name1, true", "456, Name2, false"})
     void save(ArgumentsAccessor arguments) {
         assertEquals(entity, entityDataService.findByUserTelegramId(telegramId));
-        TelegramMyFitnessUserEntity temp = new TelegramMyFitnessUserEntity();
+        TelegramTORGUserEntity temp = new TelegramTORGUserEntity();
         temp.setUserTelegramId(arguments.getLong(0));
         temp.setUserName(arguments.getString(1));
         temp.setSubscriber(arguments.getBoolean(2));
-        temp.setWaterCount(arguments.getInteger(3));
         entityDataService.save(temp);
-        TelegramMyFitnessUserEntity check = entityDataService.findByUserTelegramId(arguments.getLong(0));
+        TelegramTORGUserEntity check = entityDataService.findByUserTelegramId(arguments.getLong(0));
 
         assertAll("User properties",
                 () -> assertEquals(temp, check),
@@ -76,28 +73,36 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
     void update() {
         assertEquals(entity, entityDataService.findByUserTelegramId(telegramId));
 
-        TelegramMyFitnessUserEntity oldEntity = entityDataService.findByUserTelegramId(telegramId);
-        oldEntity.setWaterCount(11);
+        TelegramTORGUserEntity oldEntity = entityDataService.findByUserTelegramId(telegramId);
+        oldEntity.setSubscriber(!subscriber);
         entityDataService.update(oldEntity);
-        TelegramMyFitnessUserEntity newEntity = entityDataService.findByUserTelegramId(telegramId);
+        TelegramTORGUserEntity newEntity = entityDataService.findByUserTelegramId(telegramId);
         assertAll("User properties",
                 () -> assertEquals(entity.getId(), newEntity.getId()),
                 () -> assertEquals(userName, newEntity.getUserName()),
-                () -> assertEquals(subscriber, newEntity.getSubscriber()),
-                () -> assertNotEquals(waterCount, newEntity.getWaterCount())
+                () -> assertNotEquals(subscriber, newEntity.getSubscriber())
         );
 
-        TelegramMyFitnessUserEntity temp = new TelegramMyFitnessUserEntity();
+        TelegramTORGUserEntity temp = new TelegramTORGUserEntity();
         temp.setUserTelegramId(1234567890L);
         entityDataService.update(temp);
         assertNotNull(entityDataService.findByUserTelegramId(1234567890L));
     }
 
     @Test
+    void findAll() {
+        assertEquals(1, entityDataService.findAll().size());
+        TelegramTORGUserEntity entityTestSub2 = new TelegramTORGUserEntity();
+        entityTestSub2.setUserTelegramId(456L);
+        entityDataService.save(entityTestSub2);
+        assertEquals(2, entityDataService.findAll().size());
+    }
+
+    @Test
     void findByUserTelegramId() {
-        TelegramMyFitnessUserEntity newEntity = entityDataService.findByUserTelegramId(telegramId);
+        TelegramTORGUserEntity newEntity = entityDataService.findByUserTelegramId(telegramId);
         assertEquals(entity, newEntity);
-        newEntity = entityDataService.findByUserTelegramId(telegramId+1);
+        newEntity = entityDataService.findByUserTelegramId(telegramId + 1);
         assertNull(newEntity);
     }
 
@@ -110,11 +115,11 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
     void findAllSubscribers(ArgumentsAccessor arguments) {
         assertEquals(1, entityDataService.findAllSubscribers().size());
 
-        TelegramMyFitnessUserEntity entityTestSub1 = new TelegramMyFitnessUserEntity();
+        TelegramTORGUserEntity entityTestSub1 = new TelegramTORGUserEntity();
         entityTestSub1.setUserTelegramId(arguments.getLong(0));
         entityTestSub1.setSubscriber(arguments.getBoolean(1));
         entityDataService.save(entityTestSub1);
-        TelegramMyFitnessUserEntity entityTestSub2 = new TelegramMyFitnessUserEntity();
+        TelegramTORGUserEntity entityTestSub2 = new TelegramTORGUserEntity();
         entityTestSub2.setUserTelegramId(arguments.getLong(2));
         entityTestSub2.setSubscriber(arguments.getBoolean(3));
         entityDataService.save(entityTestSub2);
@@ -122,22 +127,13 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
     }
 
     @Test
-    void findAll() {
-        assertEquals(1, entityDataService.findAll().size());
-        TelegramMyFitnessUserEntity entityTestSub2 = new TelegramMyFitnessUserEntity();
-        entityTestSub2.setUserTelegramId(456L);
-        entityDataService.save(entityTestSub2);
-        assertEquals(2, entityDataService.findAll().size());
-    }
-
-    @Test
     void deleteAllByUserTelegramId() {
-        TelegramMyFitnessUserEntity user  = new TelegramMyFitnessUserEntity();
+        TelegramTORGUserEntity user = new TelegramTORGUserEntity();
         user.setUserTelegramId(456L);
         entityDataService.save(user);
-        TelegramMyFitnessUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
-        List<TelegramMyFitnessUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
-        List<TelegramMyFitnessUserEntity> notFoundEntity = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
+        TelegramTORGUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
+        List<TelegramTORGUserEntity> deleted = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
+        List<TelegramTORGUserEntity> notFoundEntity = entityDataService.deleteAllByUserTelegramId(delUser.getUserTelegramId());
         assertAll("Test case",
                 () -> assertNotNull(deleted),
                 () -> assertEquals(1, deleted.size()),

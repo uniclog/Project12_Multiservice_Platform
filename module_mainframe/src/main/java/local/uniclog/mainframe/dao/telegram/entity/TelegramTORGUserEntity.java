@@ -28,7 +28,7 @@ import java.util.Objects;
 @Table(name = "telegram_torg_users")
 public class TelegramTORGUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * Telegram-Id пользователя

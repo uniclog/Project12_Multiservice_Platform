@@ -27,7 +27,7 @@ import java.util.Objects;
 @Table(name = "teamspeak_users")
 public class TeamspeakUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     /**
      * Teamspeak-token пользователя

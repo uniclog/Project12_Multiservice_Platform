@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EsKeyRepository extends JpaRepository<EsKeyEntity, Long> {
-    EsKeyEntity findByKey(String key);
+    EsKeyEntity findByKeyValue(String key);
     List<EsKeyEntity> findByDateAfter(LocalDateTime date);
 }

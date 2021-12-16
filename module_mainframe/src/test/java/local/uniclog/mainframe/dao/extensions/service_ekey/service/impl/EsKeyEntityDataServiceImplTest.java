@@ -1,6 +1,6 @@
-package local.uniclog.data_access.extensions.service_ekey.service.impl;
+package local.uniclog.mainframe.dao.extensions.service_ekey.service.impl;
 
-import local.uniclog.data_access.DataServiceTestConfiguration;
+import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
 import local.uniclog.mainframe.dao.extensions.service_ekey.entity.EsKeyEntity;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ class EsKeyEntityDataServiceImplTest {
     void setUp() {
         key = "QWER-ASDF-ASDQ-DSAQ-1234";
         entity = new EsKeyEntity();
-        entity.setKey(key);
+        entity.setKeyValue(key);
         entityDataService.save(entity);
     }
 
@@ -42,7 +42,7 @@ class EsKeyEntityDataServiceImplTest {
     void save() {
         assertEquals(entity, entityDataService.findByKey(key));
         EsKeyEntity temp = new EsKeyEntity();
-        temp.setKey(key);
+        temp.setKeyValue(key);
         entityDataService.save(temp);
         assertEquals(1, entityDataService.findAll().size());
     }
@@ -57,7 +57,7 @@ class EsKeyEntityDataServiceImplTest {
     @Test
     void deleteAll() {
         entity = new EsKeyEntity();
-        entity.setKey("1234-ASDF-ASDQ-DSAQ-1234");
+        entity.setKeyValue("1234-ASDF-ASDQ-DSAQ-1234");
         entityDataService.save(entity);
         assertEquals(2, entityDataService.findAll().size());
         entityDataService.deleteAll();
@@ -74,14 +74,14 @@ class EsKeyEntityDataServiceImplTest {
     @Test
     void findByDateAfter() {
         entity = new EsKeyEntity();
-        entity.setKey("1234-1234-1234-1234-1234");
+        entity.setKeyValue("1234-1234-1234-1234-1234");
         entity.setDate(LocalDateTime.now().plusDays(10)); // Now date + 10 days
         entityDataService.save(entity);
         // Entity count check in 5 days
         assertEquals(1, entityDataService.findByDateAfter(LocalDateTime.now().plusDays(5)).size());
 
         entity = new EsKeyEntity();
-        entity.setKey("9999-9999-9999-9999-9999");
+        entity.setKeyValue("9999-9999-9999-9999-9999");
         entity.setDate(LocalDateTime.now().plusDays(15)); // Now date + 15 days
         entityDataService.save(entity);
         // Entity count check in 5 days
@@ -91,7 +91,7 @@ class EsKeyEntityDataServiceImplTest {
     @Test
     void findAll() {
         entity = new EsKeyEntity();
-        entity.setKey("1234-1234-1234-1234-1234");
+        entity.setKeyValue("1234-1234-1234-1234-1234");
         entityDataService.save(entity);
         // Entity count check
         assertEquals(2, entityDataService.findAll().size());
@@ -99,6 +99,6 @@ class EsKeyEntityDataServiceImplTest {
 
     @Test
     void findByKey() {
-        assertEquals(key, entityDataService.findByKey(key).getKey());
+        assertEquals(key, entityDataService.findByKey(key).getKeyValue());
     }
 }

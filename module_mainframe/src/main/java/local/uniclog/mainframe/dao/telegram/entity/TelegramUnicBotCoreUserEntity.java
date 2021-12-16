@@ -28,7 +28,7 @@ import java.util.Objects;
 @Table(name = "telegram_unic_bot_core_users")
 public class TelegramUnicBotCoreUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * Telegram-Id пользователя

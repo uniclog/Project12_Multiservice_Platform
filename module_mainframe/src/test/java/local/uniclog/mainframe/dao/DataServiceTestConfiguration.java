@@ -1,4 +1,4 @@
-package local.uniclog.data_access;
+package local.uniclog.mainframe.dao;
 
 import local.uniclog.mainframe.dao.extensions.service_ekey.repository.EsKeyRepository;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;

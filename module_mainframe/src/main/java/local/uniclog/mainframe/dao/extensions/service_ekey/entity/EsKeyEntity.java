@@ -12,7 +12,7 @@ import java.util.Objects;
 /**
  * Сущность для ключей
  *      <ul>
- *         <li>Ключ (primary key) {@link EsKeyEntity#key}</li>
+ *         <li>Ключ (primary key) {@link EsKeyEntity#keyValue}</li>
  *         <li>Дата создание {@link EsKeyEntity#date}</li>
  *      </ul>
  * @author uniclog
@@ -25,7 +25,7 @@ import java.util.Objects;
 public class EsKeyEntity {
     /** Поле ключа */
     @Id
-    private String key;
+    private String keyValue;
     /** Дата создания ключа (генерируется при создании сушности) */
     private LocalDateTime date;
 
@@ -41,11 +41,11 @@ public class EsKeyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EsKeyEntity that = (EsKeyEntity) o;
-        return key.equals(that.key) && date.equals(that.date);
+        return keyValue.equals(that.keyValue) && date.equals(that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key, date);
+        return Objects.hash(keyValue, date);
     }
 }

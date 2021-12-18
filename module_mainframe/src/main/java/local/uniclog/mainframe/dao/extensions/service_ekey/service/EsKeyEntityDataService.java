@@ -27,8 +27,9 @@ public interface EsKeyEntityDataService {
      * Сохранение сущности в бд
      *
      * @param key {@link EsKeyEntity} сущность ключей
+     * @return {@link EsKeyEntity} сущность ключей
      */
-    void save(EsKeyEntity key);
+    EsKeyEntity save(EsKeyEntity key);
 
     /**
      * Удаление записи из бд

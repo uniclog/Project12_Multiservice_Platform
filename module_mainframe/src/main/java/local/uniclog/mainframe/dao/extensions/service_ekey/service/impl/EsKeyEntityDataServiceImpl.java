@@ -21,8 +21,8 @@ public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
     private final EsKeyRepository repository;
 
     @Override
-    public void save(EsKeyEntity key) {
-        repository.save(key);
+    public EsKeyEntity save(EsKeyEntity key) {
+        return repository.save(key);
     }
 
     @Override

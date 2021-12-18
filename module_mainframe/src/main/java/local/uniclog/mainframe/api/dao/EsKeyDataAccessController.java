@@ -16,34 +16,35 @@ import java.util.List;
 public class EsKeyDataAccessController {
     private final EsKeyEntityDataService service;
 
-    @PostMapping("/save")
-    @ResponseStatus(HttpStatus.OK)
-    public void save(@RequestParam EsKeyEntity key) {
-        service.save(key);
+    @PutMapping("/save")
+    public ResponseEntity<EsKeyEntity> save(@RequestBody EsKeyEntity entity) {
+        if ((entity = service.save(entity)) != null)
+            return new ResponseEntity<>(entity, HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@RequestParam EsKeyEntity entity) {
+    public void delete(@RequestBody EsKeyEntity entity) {
         service.delete(entity);
     }
 
-    @GetMapping("/deleteAll")
+    @DeleteMapping("/deleteAll")
     @ResponseStatus(HttpStatus.OK)
     public void deleteAll() {
         service.deleteAll();
     }
 
-    @GetMapping("/deleteByKey/{key}")
-    public ResponseEntity<EsKeyEntity> deleteByKey(@PathVariable String key) {
+    @DeleteMapping("/deleteByKey/{entity}")
+    public ResponseEntity<EsKeyEntity> deleteByKey(@PathVariable("entity") String key) {
         EsKeyEntity entity = service.deleteByKey(key);
         return (entity != null)
                 ? new ResponseEntity<>(entity, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/findByDateAfter/{date}")
-    public ResponseEntity<List<EsKeyEntity>> findByDateAfter(@PathVariable LocalDateTime date) {
+    @PostMapping("/findByDateAfter")
+    public ResponseEntity<List<EsKeyEntity>> findByDateAfter(@RequestBody LocalDateTime date) {
         List<EsKeyEntity> entityList = service.findByDateAfter(date);
         return (entityList != null)
                 ? new ResponseEntity<>(entityList, HttpStatus.OK)
@@ -59,8 +60,8 @@ public class EsKeyDataAccessController {
     }
 
     @GetMapping("/findByKey/{key}")
-    public ResponseEntity<EsKeyEntity> findByKey(@PathVariable String key) {
-        EsKeyEntity entity = service.deleteByKey(key);
+    public ResponseEntity<EsKeyEntity> findByKey(@PathVariable("key") String key) {
+        EsKeyEntity entity = service.findByKey(key);
         return (entity != null)
                 ? new ResponseEntity<>(entity, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

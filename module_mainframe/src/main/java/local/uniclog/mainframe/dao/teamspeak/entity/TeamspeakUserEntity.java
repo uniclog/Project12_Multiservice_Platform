@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -23,11 +24,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
-@Table(name = "teamspeak_users")
+@Entity(name = "teamspeak_users")
 public class TeamspeakUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer id;
     /**
      * Teamspeak-token пользователя
@@ -41,7 +41,7 @@ public class TeamspeakUserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         TeamspeakUserEntity that = (TeamspeakUserEntity) o;
         return id.equals(that.id) && teamspeakToken.equals(that.teamspeakToken) && subscriber.equals(that.subscriber);
     }

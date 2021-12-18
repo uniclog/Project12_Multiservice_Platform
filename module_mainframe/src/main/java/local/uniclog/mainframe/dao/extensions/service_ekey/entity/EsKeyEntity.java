@@ -1,6 +1,7 @@
 package local.uniclog.mainframe.dao.extensions.service_ekey.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,19 +26,12 @@ public class EsKeyEntity {
     @Id
     private String keyValue;
     /** Дата создания ключа (генерируется при создании сушности) */
-    private LocalDateTime date;
-
-    /**
-     * Задает дату при создании ключа
-     */
-    public EsKeyEntity() {
-        this.setDate(LocalDateTime.now());
-    }
+    private LocalDateTime date = LocalDateTime.now();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         EsKeyEntity that = (EsKeyEntity) o;
         return keyValue.equals(that.keyValue) && date.equals(that.date);
     }

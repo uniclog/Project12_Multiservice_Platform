@@ -24,6 +24,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.1'
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.6.1'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: '2.6.1'
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.1.Final'
     implementation group: 'com.h2database', name: 'h2', version: '2.0.202'
 

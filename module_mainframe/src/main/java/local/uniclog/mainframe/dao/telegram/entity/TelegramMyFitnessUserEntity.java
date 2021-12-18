@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -25,11 +26,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
-@Table(name = "telegram_my_fitness_users")
+@Entity(name = "telegram_my_fitness_users")
 public class TelegramMyFitnessUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     /**
      * Telegram-Id пользователя
@@ -51,7 +51,7 @@ public class TelegramMyFitnessUserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         TelegramMyFitnessUserEntity that = (TelegramMyFitnessUserEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId)
                 && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber)

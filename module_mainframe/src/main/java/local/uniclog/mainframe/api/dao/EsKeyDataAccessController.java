@@ -5,13 +5,18 @@ import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDa
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Controller
+/**
+ * Контроллер будет удален в пользу Spring Data Rest
+ */
+@Deprecated(forRemoval = true)
+
+@RestController
+@RequestMapping("/api/EsKeyDataAccessController")
 @RequiredArgsConstructor
 public class EsKeyDataAccessController {
     private final EsKeyEntityDataService service;

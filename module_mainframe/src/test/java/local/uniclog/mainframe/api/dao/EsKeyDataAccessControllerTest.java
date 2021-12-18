@@ -27,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WebMvcTest
 class EsKeyDataAccessControllerTest {
+    private static final String api = "/api/EsKeyDataAccessController";
     @MockBean
     private EsKeyEntityDataService service;
     @Autowired
@@ -50,7 +51,7 @@ class EsKeyDataAccessControllerTest {
     void save() throws Exception {
         when(service.save(any())).thenReturn(entity);
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/save")
+                        .put(api + "/save")
                         .content(objectMapper.writeValueAsString(entity))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -63,10 +64,10 @@ class EsKeyDataAccessControllerTest {
     @Test
     void save_failed_1() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/save"))
+                        .put(api + "/save"))
                 .andExpect(status().isBadRequest());
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/save")
+                        .put(api + "/save")
                         .content(objectMapper.writeValueAsString("null"))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
@@ -78,7 +79,7 @@ class EsKeyDataAccessControllerTest {
     void save_failed_2() throws Exception {
         when(service.save(any())).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders
-                        .put("/save")
+                        .put(api + "/save")
                         .content(objectMapper.writeValueAsString(entity))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
@@ -90,7 +91,7 @@ class EsKeyDataAccessControllerTest {
     @Test
     void delete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/delete")
+                        .delete(api + "/delete")
                         .content(objectMapper.writeValueAsString(entity))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -102,7 +103,7 @@ class EsKeyDataAccessControllerTest {
     @Test
     void deleteAll() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/deleteAll"))
+                        .delete(api + "/deleteAll"))
                 .andExpect(status().isOk());
 
         verify(service).deleteAll();
@@ -113,7 +114,7 @@ class EsKeyDataAccessControllerTest {
     void deleteByKey() throws Exception {
         when(service.deleteByKey(anyString())).thenReturn(entity);
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/deleteByKey/" + key))
+                        .delete(api + "/deleteByKey/" + key))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(entity)));
 
@@ -125,7 +126,7 @@ class EsKeyDataAccessControllerTest {
     void deleteByKey_Failed_1() throws Exception {
         when(service.deleteByKey(anyString())).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/deleteByKey/" + key))
+                        .delete(api + "/deleteByKey/" + key))
                 .andExpect(status().isNotFound());
 
         verify(service).deleteByKey(key);
@@ -137,7 +138,7 @@ class EsKeyDataAccessControllerTest {
         var list = of(entity);
         when(service.findByDateAfter(any())).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/findByDateAfter/")
+                        .post(api + "/findByDateAfter/")
                         .content(objectMapper.writeValueAsString(date))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -151,7 +152,7 @@ class EsKeyDataAccessControllerTest {
     void findByDateAfter_Failed_1() throws Exception {
         when(service.findByDateAfter(any())).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/findByDateAfter/")
+                        .post(api + "/findByDateAfter/")
                         .content(objectMapper.writeValueAsString(date))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
@@ -165,7 +166,7 @@ class EsKeyDataAccessControllerTest {
         var list = of(entity);
         when(service.findAll()).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/findAll/"))
+                        .get(api + "/findAll/"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(list)));
 
@@ -177,7 +178,7 @@ class EsKeyDataAccessControllerTest {
     void findAll_Failed_1() throws Exception {
         when(service.findAll()).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/findAll/"))
+                        .get(api + "/findAll/"))
                 .andExpect(status().isNotFound());
 
         verify(service).findAll();
@@ -188,7 +189,7 @@ class EsKeyDataAccessControllerTest {
     void findByKey() throws Exception {
         when(service.findByKey(anyString())).thenReturn(entity);
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/findByKey/" + key))
+                        .get(api + "/findByKey/" + key))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(entity)));
 
@@ -200,7 +201,7 @@ class EsKeyDataAccessControllerTest {
     void findByKey_Failed_1() throws Exception {
         when(service.findByKey(anyString())).thenReturn(null);
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/findByKey/" + key))
+                        .get(api + "/findByKey/" + key))
                 .andExpect(status().isNotFound());
 
         verify(service).findByKey(key);

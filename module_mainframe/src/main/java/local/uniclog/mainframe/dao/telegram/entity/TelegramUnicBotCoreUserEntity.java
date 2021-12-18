@@ -4,8 +4,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -24,11 +27,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
-@Table(name = "telegram_unic_bot_core_users")
+@Entity(name = "telegram_unic_bot_core_users")
 public class TelegramUnicBotCoreUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     /**
      * Telegram-Id пользователя
@@ -46,10 +48,9 @@ public class TelegramUnicBotCoreUserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         TelegramUnicBotCoreUserEntity that = (TelegramUnicBotCoreUserEntity) o;
-        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId)
-                && userName.equals(that.userName) && subscriber.equals(that.subscriber);
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

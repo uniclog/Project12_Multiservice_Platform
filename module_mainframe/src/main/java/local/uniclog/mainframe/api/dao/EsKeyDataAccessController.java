@@ -37,7 +37,7 @@ public class EsKeyDataAccessController {
 
     @DeleteMapping("/deleteByKey/{entity}")
     public ResponseEntity<EsKeyEntity> deleteByKey(@PathVariable("entity") String key) {
-        EsKeyEntity entity = service.deleteByKey(key);
+        var entity = service.deleteByKey(key);
         return (entity != null)
                 ? new ResponseEntity<>(entity, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -45,7 +45,7 @@ public class EsKeyDataAccessController {
 
     @PostMapping("/findByDateAfter")
     public ResponseEntity<List<EsKeyEntity>> findByDateAfter(@RequestBody LocalDateTime date) {
-        List<EsKeyEntity> entityList = service.findByDateAfter(date);
+        var entityList = service.findByDateAfter(date);
         return (entityList != null)
                 ? new ResponseEntity<>(entityList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ public class EsKeyDataAccessController {
 
     @GetMapping("/findAll")
     public ResponseEntity<List<EsKeyEntity>> findAll() {
-        List<EsKeyEntity> entityList = service.findAll();
+        var entityList = service.findAll();
         return (entityList != null)
                 ? new ResponseEntity<>(entityList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -61,7 +61,7 @@ public class EsKeyDataAccessController {
 
     @GetMapping("/findByKey/{key}")
     public ResponseEntity<EsKeyEntity> findByKey(@PathVariable("key") String key) {
-        EsKeyEntity entity = service.findByKey(key);
+        var entity = service.findByKey(key);
         return (entity != null)
                 ? new ResponseEntity<>(entity, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);

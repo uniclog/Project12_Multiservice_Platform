@@ -22,18 +22,20 @@ public class EsKeyDataAccessController {
 
     /**
      * Save entity to database
+     *
      * @param entity saved entity
      * @return entity
      */
     @PutMapping("/save")
     public ResponseEntity<EsKeyEntity> save(@RequestBody EsKeyEntity entity) {
         if ((entity = service.save(entity)) != null)
-            return new ResponseEntity<>(entity, HttpStatus.OK);
-        else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.ok().body(entity);
+        else return ResponseEntity.internalServerError().build();
     }
 
     /**
      * Delete entity from database
+     *
      * @param entity entity
      */
     @DeleteMapping("/delete")
@@ -53,19 +55,21 @@ public class EsKeyDataAccessController {
 
     /**
      * Delete by key value
+     *
      * @param key key value
      * @return entity or null
      */
-    @DeleteMapping("/deleteByKey/{entity}")
-    public ResponseEntity<EsKeyEntity> deleteByKey(@PathVariable("entity") String key) {
+    @DeleteMapping("/deleteByKey/{key}")
+    public ResponseEntity<EsKeyEntity> deleteByKey(@PathVariable String key) {
         var entity = service.deleteByKey(key);
         return (entity != null)
-                ? new ResponseEntity<>(entity, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                ? ResponseEntity.ok().body(entity)
+                : ResponseEntity.notFound().build();
     }
 
     /**
      * Find by key after date
+     *
      * @param date date
      * @return list of entities
      */
@@ -73,32 +77,34 @@ public class EsKeyDataAccessController {
     public ResponseEntity<List<EsKeyEntity>> findByDateAfter(@RequestBody LocalDateTime date) {
         var entityList = service.findByDateAfter(date);
         return (entityList != null)
-                ? new ResponseEntity<>(entityList, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                ? ResponseEntity.ok().body(entityList)
+                : ResponseEntity.notFound().build();
     }
 
     /**
      * Find all entities
+     *
      * @return List of entities
      */
     @GetMapping("/findAll")
     public ResponseEntity<List<EsKeyEntity>> findAll() {
         var entityList = service.findAll();
         return (entityList != null)
-                ? new ResponseEntity<>(entityList, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                ? ResponseEntity.ok().body(entityList)
+                : ResponseEntity.notFound().build();
     }
 
     /**
      * Get by key value
+     *
      * @param key key value
      * @return EsKey entity
      */
     @GetMapping("/findByKey/{key}")
-    public ResponseEntity<EsKeyEntity> findByKey(@PathVariable("key") String key) {
+    public ResponseEntity<EsKeyEntity> findByKey(@PathVariable String key) {
         var entity = service.findByKey(key);
         return (entity != null)
-                ? new ResponseEntity<>(entity, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                ? ResponseEntity.ok().body(entity)
+                : ResponseEntity.notFound().build();
     }
 }

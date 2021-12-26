@@ -45,7 +45,7 @@ public class EsKeyDataAccessController {
     }
 
     /**
-     * Delete entity
+     * Delete all entity
      */
     @DeleteMapping("/deleteAll")
     @ResponseStatus(HttpStatus.OK)

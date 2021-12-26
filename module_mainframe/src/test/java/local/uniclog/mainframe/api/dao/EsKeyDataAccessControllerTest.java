@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Unit tests for EsKeyDataAccessController
  */
-@WebMvcTest
+@WebMvcTest(controllers = EsKeyDataAccessController.class)
 class EsKeyDataAccessControllerTest {
     private static final String api = "/api/EsKeyDataAccessController";
     @MockBean

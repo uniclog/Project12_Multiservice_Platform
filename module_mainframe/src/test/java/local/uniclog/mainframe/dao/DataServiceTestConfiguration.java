@@ -1,5 +1,6 @@
 package local.uniclog.mainframe.dao;
 
+import local.uniclog.mainframe.dao.common.DataUtilsService;
 import local.uniclog.mainframe.dao.extensions.service_ekey.repository.EsKeyRepository;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.impl.EsKeyEntityDataServiceImpl;
@@ -27,6 +28,7 @@ public class DataServiceTestConfiguration {
     private final TelegramMyFitnessUserRepository beanTelegramMyFitnessUserRepository;
     private final TelegramTORGUserRepository beanTelegramTORGUserRepository;
     private final TelegramUnicBotCoreRepository beanTelegramUnicBotCoreRepository;
+    private final DataUtilsService beanDataUtilsService;
 
     @Bean
     public EsKeyEntityDataService entityDataService() {
@@ -35,7 +37,7 @@ public class DataServiceTestConfiguration {
 
     @Bean("beanTeamspeakUserEntityDataServiceTest")
     public TeamspeakUserEntityDataService teamspeakEntityDataService() {
-        return new TeamspeakUserEntityDataServiceImpl(beanTeamspeakUserRepository);
+        return new TeamspeakUserEntityDataServiceImpl(beanTeamspeakUserRepository, beanDataUtilsService);
     }
 
     @Bean("beanTelegramMyFitnessUserEntityDataServiceTest")

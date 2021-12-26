@@ -1,5 +1,6 @@
 package local.uniclog.mainframe.dao.teamspeak.service;
 
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.teamspeak.entity.TeamspeakUserEntity;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface TeamspeakUserEntityDataService {
      *
      * @param user {@link TeamspeakUserEntity} сущность пользователя
      */
-    void save(TeamspeakUserEntity user);
+    TeamspeakUserEntity save(TeamspeakUserEntity user);
 
     /**
      * Обновление полей для записи
@@ -64,4 +65,18 @@ public interface TeamspeakUserEntityDataService {
      * @return List&lt;{@link TeamspeakUserEntity}&gt; список сущностей
      */
     List<TeamspeakUserEntity> deleteByTeamspeakToken(String token);
+
+    /**
+     * Convert entity to Dto object
+     * @param entity {@link TeamspeakUserEntity}
+     * @return {@link TeamspeakUserEntityDataTransferObject}
+     */
+    TeamspeakUserEntityDataTransferObject convertToDataTransferObject(TeamspeakUserEntity entity);
+
+    /**
+     * Convert Dto object to entity
+     * @param dto {@link TeamspeakUserEntityDataTransferObject}
+     * @return {@link TeamspeakUserEntity}
+     */
+    TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject dto);
 }

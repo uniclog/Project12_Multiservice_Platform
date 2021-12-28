@@ -19,8 +19,10 @@ import local.uniclog.mainframe.dao.telegram.service.impl.TelegramUnicBotCoreUser
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
-@TestConfiguration
+@TestConfiguration(value = "testConfiguration_JpaTests")
+@ComponentScan({"local.uniclog.mainframe.dao.common"})
 @RequiredArgsConstructor
 public class DataServiceTestConfiguration {
     private final EsKeyRepository beanEsKeyRepository;
@@ -28,10 +30,11 @@ public class DataServiceTestConfiguration {
     private final TelegramMyFitnessUserRepository beanTelegramMyFitnessUserRepository;
     private final TelegramTORGUserRepository beanTelegramTORGUserRepository;
     private final TelegramUnicBotCoreRepository beanTelegramUnicBotCoreRepository;
+
     private final DataUtilsService beanDataUtilsService;
 
-    @Bean
-    public EsKeyEntityDataService entityDataService() {
+    @Bean("beanEsKeyEntityDataService")
+    public EsKeyEntityDataService esKeyEntityDataService() {
         return new EsKeyEntityDataServiceImpl(beanEsKeyRepository);
     }
 

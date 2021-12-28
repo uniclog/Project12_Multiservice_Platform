@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,10 +47,10 @@ public class TelegramTORGUserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         TelegramTORGUserEntity that = (TelegramTORGUserEntity) o;
-        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId)
-                && userName.equals(that.userName) && subscriber.equals(that.subscriber);
+        return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId)
+                && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber);
     }
 
     @Override

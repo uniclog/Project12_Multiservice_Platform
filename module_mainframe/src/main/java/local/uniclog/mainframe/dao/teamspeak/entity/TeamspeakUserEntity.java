@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -38,12 +39,14 @@ public class TeamspeakUserEntity {
      */
     private Boolean subscriber = true;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        TeamspeakUserEntity that = (TeamspeakUserEntity) o;
-        return id.equals(that.id) && teamspeakToken.equals(that.teamspeakToken) && subscriber.equals(that.subscriber);
+        if (o == null || getClass() != o.getClass()) return false;
+        TeamspeakUserEntity entity = (TeamspeakUserEntity) o;
+        return Objects.equals(id, entity.id) && Objects.equals(teamspeakToken, entity.teamspeakToken)
+                && Objects.equals(subscriber, entity.subscriber);
     }
 
     @Override

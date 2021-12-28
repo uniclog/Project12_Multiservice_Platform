@@ -4,9 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -51,7 +52,7 @@ public class TelegramMyFitnessUserEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         TelegramMyFitnessUserEntity that = (TelegramMyFitnessUserEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId)
                 && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber)

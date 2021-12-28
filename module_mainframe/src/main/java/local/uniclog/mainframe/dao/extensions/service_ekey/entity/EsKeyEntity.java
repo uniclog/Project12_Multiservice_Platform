@@ -1,7 +1,8 @@
 package local.uniclog.mainframe.dao.extensions.service_ekey.entity;
 
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,9 +32,9 @@ public class EsKeyEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        EsKeyEntity that = (EsKeyEntity) o;
-        return keyValue.equals(that.keyValue) && date.equals(that.date);
+        if (o == null || getClass() != o.getClass()) return false;
+        EsKeyEntity entity = (EsKeyEntity) o;
+        return Objects.equals(keyValue, entity.keyValue) && Objects.equals(date, entity.date);
     }
 
     @Override

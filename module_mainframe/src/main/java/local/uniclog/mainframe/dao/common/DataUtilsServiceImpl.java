@@ -1,8 +1,8 @@
 package local.uniclog.mainframe.dao.common;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
@@ -13,13 +13,9 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class DataUtilsServiceImpl implements DataUtilsService {
-    private ModelMapper mapper;
-
-    @Autowired
-    public void setModelMapper(ModelMapper mapper) {
-        this.mapper = mapper;
-    }
+    private final ModelMapper mapper;
 
     /**
      * Convert to Dto

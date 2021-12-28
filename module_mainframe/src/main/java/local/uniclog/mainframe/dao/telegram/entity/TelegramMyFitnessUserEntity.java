@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -25,11 +27,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
-@Table(name = "telegram_my_fitness_users")
+@Entity(name = "telegram_my_fitness_users")
 public class TelegramMyFitnessUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     /**
      * Telegram-Id пользователя

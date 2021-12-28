@@ -5,7 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 /**
@@ -24,11 +26,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Entity
-@Table(name = "telegram_torg_users")
+@Entity(name = "telegram_torg_users")
 public class TelegramTORGUserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
     /**
      * Telegram-Id пользователя
@@ -48,8 +49,8 @@ public class TelegramTORGUserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TelegramTORGUserEntity that = (TelegramTORGUserEntity) o;
-        return id.equals(that.id) && userTelegramId.equals(that.userTelegramId)
-                && userName.equals(that.userName) && subscriber.equals(that.subscriber);
+        return Objects.equals(id, that.id) && Objects.equals(userTelegramId, that.userTelegramId)
+                && Objects.equals(userName, that.userName) && Objects.equals(subscriber, that.subscriber);
     }
 
     @Override

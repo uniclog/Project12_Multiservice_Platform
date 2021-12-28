@@ -1,5 +1,7 @@
 package local.uniclog.mainframe.dao.teamspeak.service.impl;
 
+import local.uniclog.mainframe.dao.common.DataUtilsService;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.teamspeak.entity.TeamspeakUserEntity;
 import local.uniclog.mainframe.dao.teamspeak.repository.TeamspeakUserRepository;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataService;
@@ -16,15 +18,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDataService {
     private final TeamspeakUserRepository teamspeakUserRepository;
+    private final DataUtilsService dataUtilsService;
 
     @Override
-    public void save(TeamspeakUserEntity user) {
+    public TeamspeakUserEntity save(TeamspeakUserEntity user) {
         TeamspeakUserEntity userEntity = teamspeakUserRepository.findByTeamspeakToken(user.getTeamspeakToken());
         if (userEntity != null) {
             update(user);
-            return;
+            return null;
         }
-        teamspeakUserRepository.save(user);
+        return teamspeakUserRepository.save(user);
     }
 
     @Override
@@ -59,5 +62,15 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
         if (users.isEmpty()) return null;
         teamspeakUserRepository.deleteAllByTeamspeakToken(token);
         return users;
+    }
+
+    @Override
+    public TeamspeakUserEntityDataTransferObject convertToDataTransferObject(TeamspeakUserEntity entity) {
+        return dataUtilsService.convertToDataTransferObject(entity, TeamspeakUserEntityDataTransferObject.class);
+    }
+
+    @Override
+    public TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject dto) {
+        return dataUtilsService.convertFromDataTransferObject(dto, TeamspeakUserEntity.class);
     }
 }

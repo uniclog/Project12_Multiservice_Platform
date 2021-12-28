@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class EsKeyEntityDataServiceImplTest {
     @Autowired
+    @Qualifier("beanEsKeyEntityDataService")
     private EsKeyEntityDataService entityDataService;
 
     private String key;

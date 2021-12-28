@@ -27,21 +27,14 @@ public class EsKeyEntity {
     @Id
     private String keyValue;
     /** Дата создания ключа (генерируется при создании сушности) */
-    private LocalDateTime date;
-
-    /**
-     * Задает дату при создании ключа
-     */
-    public EsKeyEntity() {
-        this.setDate(LocalDateTime.now());
-    }
+    private LocalDateTime date = LocalDateTime.now();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EsKeyEntity that = (EsKeyEntity) o;
-        return keyValue.equals(that.keyValue) && date.equals(that.date);
+        EsKeyEntity entity = (EsKeyEntity) o;
+        return Objects.equals(keyValue, entity.keyValue) && Objects.equals(date, entity.date);
     }
 
     @Override

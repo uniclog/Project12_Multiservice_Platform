@@ -1,5 +1,6 @@
 package local.uniclog.mainframe.dao;
 
+import local.uniclog.mainframe.dao.common.DataUtilsService;
 import local.uniclog.mainframe.dao.extensions.service_ekey.repository.EsKeyRepository;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.impl.EsKeyEntityDataServiceImpl;
@@ -18,8 +19,10 @@ import local.uniclog.mainframe.dao.telegram.service.impl.TelegramUnicBotCoreUser
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
-@TestConfiguration
+@TestConfiguration(value = "testConfiguration_JpaTests")
+@ComponentScan({"local.uniclog.mainframe.dao.common"})
 @RequiredArgsConstructor
 public class DataServiceTestConfiguration {
     private final EsKeyRepository beanEsKeyRepository;
@@ -28,14 +31,16 @@ public class DataServiceTestConfiguration {
     private final TelegramTORGUserRepository beanTelegramTORGUserRepository;
     private final TelegramUnicBotCoreRepository beanTelegramUnicBotCoreRepository;
 
-    @Bean
-    public EsKeyEntityDataService entityDataService() {
+    private final DataUtilsService beanDataUtilsService;
+
+    @Bean("beanEsKeyEntityDataService")
+    public EsKeyEntityDataService esKeyEntityDataService() {
         return new EsKeyEntityDataServiceImpl(beanEsKeyRepository);
     }
 
     @Bean("beanTeamspeakUserEntityDataServiceTest")
     public TeamspeakUserEntityDataService teamspeakEntityDataService() {
-        return new TeamspeakUserEntityDataServiceImpl(beanTeamspeakUserRepository);
+        return new TeamspeakUserEntityDataServiceImpl(beanTeamspeakUserRepository, beanDataUtilsService);
     }
 
     @Bean("beanTelegramMyFitnessUserEntityDataServiceTest")

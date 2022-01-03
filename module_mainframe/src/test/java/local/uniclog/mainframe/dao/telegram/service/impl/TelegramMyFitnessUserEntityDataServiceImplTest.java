@@ -1,6 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramMyFitnessUserEntity;
 import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,16 +24,14 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TelegramMyFitnessUserEntityDataServiceImplTest {
-    @Autowired
-    @Qualifier("beanTelegramMyFitnessUserEntityDataServiceTest")
-    private TelegramMyFitnessUserEntityDataService entityDataService;
-
-    private TelegramMyFitnessUserEntity entity;
-
     private final Long telegramId = 123L;
     private final String userName = "Name";
     private final Boolean subscriber = true;
     private final Integer waterCount = 0;
+    @Autowired
+    @Qualifier("beanTelegramMyFitnessUserEntityDataServiceTest")
+    private TelegramMyFitnessUserEntityDataService entityDataService;
+    private TelegramMyFitnessUserEntity entity;
 
     @BeforeEach
     void setUp() {
@@ -97,7 +96,7 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
     void findByUserTelegramId() {
         TelegramMyFitnessUserEntity newEntity = entityDataService.findByUserTelegramId(telegramId);
         assertEquals(entity, newEntity);
-        newEntity = entityDataService.findByUserTelegramId(telegramId+1);
+        newEntity = entityDataService.findByUserTelegramId(telegramId + 1);
         assertNull(newEntity);
     }
 
@@ -132,7 +131,7 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
 
     @Test
     void deleteAllByUserTelegramId() {
-        TelegramMyFitnessUserEntity user  = new TelegramMyFitnessUserEntity();
+        TelegramMyFitnessUserEntity user = new TelegramMyFitnessUserEntity();
         user.setUserTelegramId(456L);
         entityDataService.save(user);
         TelegramMyFitnessUserEntity delUser = entityDataService.findByUserTelegramId(user.getUserTelegramId());
@@ -143,5 +142,24 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
                 () -> assertEquals(1, deleted.size()),
                 () -> assertTrue(notFoundEntity.isEmpty())
         );
+    }
+
+    @Test
+    void convertToDataTransferObject() {
+        TelegramMyFitnessUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(entity);
+        TelegramMyFitnessUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
+
+        assertEquals(entity, entityFromDto);
+    }
+
+    @Test
+    void convertFromDataTransferObject() {
+        TelegramMyFitnessUserEntity temp = new TelegramMyFitnessUserEntity();
+        temp.setUserTelegramId(123123123L);
+        temp.setSubscriber(true);
+
+        TelegramMyFitnessUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(temp);
+        TelegramMyFitnessUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
+        assertEquals(temp, entityFromDto);
     }
 }

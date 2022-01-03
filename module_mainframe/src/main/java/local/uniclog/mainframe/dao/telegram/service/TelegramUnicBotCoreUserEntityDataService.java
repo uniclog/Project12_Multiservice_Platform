@@ -1,5 +1,6 @@
 package local.uniclog.mainframe.dao.telegram.service;
 
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 
 import java.util.List;
@@ -66,4 +67,20 @@ public interface TelegramUnicBotCoreUserEntityDataService {
      * @return List&lt;{@link TelegramUnicBotCoreUserEntity}&gt; список удаленных сущностей
      */
     List<TelegramUnicBotCoreUserEntity> deleteAllByUserTelegramId(Long id);
+
+    /**
+     * Convert entity to Dto object
+     *
+     * @param entity {@link TelegramUnicBotCoreUserEntity}
+     * @return {@link TelegramUnicBotCoreUserEntityDataTransferObject}
+     */
+    TelegramUnicBotCoreUserEntityDataTransferObject convertToDataTransferObject(TelegramUnicBotCoreUserEntity entity);
+
+    /**
+     * Convert Dto object to entity
+     *
+     * @param dto {@link TelegramUnicBotCoreUserEntityDataTransferObject}
+     * @return {@link TelegramUnicBotCoreUserEntity}
+     */
+    TelegramUnicBotCoreUserEntity convertFromDataTransferObject(TelegramUnicBotCoreUserEntityDataTransferObject dto);
 }

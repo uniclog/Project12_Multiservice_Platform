@@ -20,12 +20,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TeamspeakUserEntityDataServiceImplTest {
+    private final String token = "token";
+    private final Boolean subscriber = true;
     @Autowired
     @Qualifier("beanTeamspeakUserEntityDataServiceTest")
     private TeamspeakUserEntityDataService entityDataService;
-
-    private final String token = "token";
-    private final Boolean subscriber = true;
     private TeamspeakUserEntity entity;
 
     @BeforeEach
@@ -45,14 +44,14 @@ class TeamspeakUserEntityDataServiceImplTest {
     @Test
     void save() {
         assertNotNull(entityDataService.findByTeamspeakToken(token));
-        assertEquals(entity.getSubscriber(),entityDataService.findByTeamspeakToken(token).getSubscriber());
+        assertEquals(entity.getSubscriber(), entityDataService.findByTeamspeakToken(token).getSubscriber());
 
         TeamspeakUserEntity temp = new TeamspeakUserEntity();
         temp.setTeamspeakToken(token);
         temp.setSubscriber(!subscriber);
         entityDataService.save(temp);
 
-        assertEquals(!subscriber,entityDataService.findByTeamspeakToken(token).getSubscriber());
+        assertEquals(!subscriber, entityDataService.findByTeamspeakToken(token).getSubscriber());
     }
 
     @Test

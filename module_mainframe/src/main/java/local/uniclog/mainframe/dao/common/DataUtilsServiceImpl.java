@@ -29,7 +29,6 @@ public class DataUtilsServiceImpl implements DataUtilsService {
     @Override
     public <E, T> T convertToDataTransferObject(E entity, Type type) {
         return Objects.isNull(entity) ? null : mapper.map(entity, type);
-
     }
 
     /**

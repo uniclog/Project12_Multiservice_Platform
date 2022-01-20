@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 /**
  * Реализация сервиса {@link TeamspeakUserEntityDataService}
+ *
  * @version 0.1
  */
 @Service
@@ -24,21 +27,19 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
     public TeamspeakUserEntity save(TeamspeakUserEntity user) {
         TeamspeakUserEntity userEntity = teamspeakUserRepository.findByTeamspeakToken(user.getTeamspeakToken());
         if (userEntity != null) {
-            update(user);
-            return null;
+            return update(user);
         }
         return teamspeakUserRepository.save(user);
     }
 
     @Override
-    public void update(TeamspeakUserEntity user) {
+    public TeamspeakUserEntity update(TeamspeakUserEntity user) {
         TeamspeakUserEntity userEntity = teamspeakUserRepository.findByTeamspeakToken(user.getTeamspeakToken());
         if (userEntity == null) {
-            save(user);
-            return;
+            return save(user);
         }
         user.setId(userEntity.getId());
-        teamspeakUserRepository.save(user);
+        return teamspeakUserRepository.save(user);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
     @Override
     public List<TeamspeakUserEntity> deleteByTeamspeakToken(String token) {
         List<TeamspeakUserEntity> users = teamspeakUserRepository.findAllByTeamspeakToken(token);
-        if (users.isEmpty()) return null;
+        if (users.isEmpty()) return emptyList();
         teamspeakUserRepository.deleteAllByTeamspeakToken(token);
         return users;
     }

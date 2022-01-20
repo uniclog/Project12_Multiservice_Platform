@@ -1,5 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
+import local.uniclog.mainframe.dao.common.DataUtilsService;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramUnicBotCoreRepository;
 import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataService;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUnicBotCoreUserEntityDataService {
     private final TelegramUnicBotCoreRepository telegramUnicBotCoreRepository;
+    private final DataUtilsService dataUtilsService;
 
     @Override
     public void save(TelegramUnicBotCoreUserEntity user) {
@@ -68,5 +71,15 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
         if (users.isEmpty()) return Collections.emptyList();
         telegramUnicBotCoreRepository.deleteAllByUserTelegramId(id);
         return users;
+    }
+
+    @Override
+    public TelegramUnicBotCoreUserEntityDataTransferObject convertToDataTransferObject(TelegramUnicBotCoreUserEntity entity) {
+        return dataUtilsService.convertToDataTransferObject(entity, TelegramUnicBotCoreUserEntityDataTransferObject.class);
+    }
+
+    @Override
+    public TelegramUnicBotCoreUserEntity convertFromDataTransferObject(TelegramUnicBotCoreUserEntityDataTransferObject dto) {
+        return dataUtilsService.convertFromDataTransferObject(dto, TelegramUnicBotCoreUserEntity.class);
     }
 }

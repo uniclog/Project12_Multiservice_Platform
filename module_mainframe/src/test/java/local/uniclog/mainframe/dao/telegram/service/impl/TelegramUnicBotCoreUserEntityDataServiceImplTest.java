@@ -1,6 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,15 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TelegramUnicBotCoreUserEntityDataServiceImplTest {
-    @Autowired
-    @Qualifier("beanTelegramUnicBotCoreUserEntityDataServiceTest")
-    private TelegramUnicBotCoreUserEntityDataService entityDataService;
-
-    private TelegramUnicBotCoreUserEntity entity;
-
     private final Long telegramId = 123L;
     private final String userName = "Name";
     private final Boolean subscriber = true;
+    @Autowired
+    @Qualifier("beanTelegramUnicBotCoreUserEntityDataServiceTest")
+    private TelegramUnicBotCoreUserEntityDataService entityDataService;
+    private TelegramUnicBotCoreUserEntity entity;
 
     @BeforeEach
     void setUp() {
@@ -139,5 +138,24 @@ class TelegramUnicBotCoreUserEntityDataServiceImplTest {
                 () -> assertEquals(1, deleted.size()),
                 () -> assertTrue(notFoundEntity.isEmpty())
         );
+    }
+
+    @Test
+    void convertToDataTransferObject() {
+        TelegramUnicBotCoreUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(entity);
+        TelegramUnicBotCoreUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
+
+        assertEquals(entity, entityFromDto);
+    }
+
+    @Test
+    void convertFromDataTransferObject() {
+        TelegramUnicBotCoreUserEntity temp = new TelegramUnicBotCoreUserEntity();
+        temp.setUserTelegramId(123123123L);
+        temp.setSubscriber(true);
+
+        TelegramUnicBotCoreUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(temp);
+        TelegramUnicBotCoreUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
+        assertEquals(temp, entityFromDto);
     }
 }

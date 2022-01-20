@@ -1,6 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,15 +24,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TelegramTORGUserEntityDataServiceImplTest {
-    @Autowired
-    @Qualifier("beanTelegramTORGUserEntityDataServiceTest")
-    private TelegramTORGUserEntityDataService entityDataService;
-
-    private TelegramTORGUserEntity entity;
-
     private final Long telegramId = 123L;
     private final String userName = "Name";
     private final Boolean subscriber = true;
+    @Autowired
+    @Qualifier("beanTelegramTORGUserEntityDataServiceTest")
+    private TelegramTORGUserEntityDataService entityDataService;
+    private TelegramTORGUserEntity entity;
 
     @BeforeEach
     void setUp() {
@@ -139,5 +138,24 @@ class TelegramTORGUserEntityDataServiceImplTest {
                 () -> assertEquals(1, deleted.size()),
                 () -> assertTrue(notFoundEntity.isEmpty())
         );
+    }
+
+    @Test
+    void convertToDataTransferObject() {
+        TelegramTORGUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(entity);
+        TelegramTORGUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
+
+        assertEquals(entity, entityFromDto);
+    }
+
+    @Test
+    void convertFromDataTransferObject() {
+        TelegramTORGUserEntity temp = new TelegramTORGUserEntity();
+        temp.setUserTelegramId(123123123L);
+        temp.setSubscriber(true);
+
+        TelegramTORGUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(temp);
+        TelegramTORGUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
+        assertEquals(temp, entityFromDto);
     }
 }

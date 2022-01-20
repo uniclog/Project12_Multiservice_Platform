@@ -1,5 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
+import local.uniclog.mainframe.dao.common.DataUtilsService;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramMyFitnessUserEntity;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramMyFitnessUserRepository;
 import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFitnessUserEntityDataService {
     private final TelegramMyFitnessUserRepository telegramMyFitnessUserRepository;
+    private final DataUtilsService dataUtilsService;
 
     @Override
     public void save(TelegramMyFitnessUserEntity user) {
@@ -68,5 +71,15 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
         if (users.isEmpty()) return Collections.emptyList();
         telegramMyFitnessUserRepository.deleteAllByUserTelegramId(id);
         return users;
+    }
+
+    @Override
+    public TelegramMyFitnessUserEntityDataTransferObject convertToDataTransferObject(TelegramMyFitnessUserEntity entity) {
+        return dataUtilsService.convertToDataTransferObject(entity, TelegramMyFitnessUserEntityDataTransferObject.class);
+    }
+
+    @Override
+    public TelegramMyFitnessUserEntity convertFromDataTransferObject(TelegramMyFitnessUserEntityDataTransferObject dto) {
+        return dataUtilsService.convertFromDataTransferObject(dto, TelegramMyFitnessUserEntity.class);
     }
 }

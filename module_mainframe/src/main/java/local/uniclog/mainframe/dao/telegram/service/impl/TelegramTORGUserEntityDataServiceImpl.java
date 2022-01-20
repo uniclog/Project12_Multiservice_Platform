@@ -1,5 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
+import local.uniclog.mainframe.dao.common.DataUtilsService;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramTORGUserRepository;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEntityDataService {
     private final TelegramTORGUserRepository telegramTORGUserRepository;
+    private final DataUtilsService dataUtilsService;
 
     @Override
     public void save(TelegramTORGUserEntity user) {
@@ -68,5 +71,15 @@ public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEn
         if (users.isEmpty()) return Collections.emptyList();
         telegramTORGUserRepository.deleteAllByUserTelegramId(id);
         return users;
+    }
+
+    @Override
+    public TelegramTORGUserEntityDataTransferObject convertToDataTransferObject(TelegramTORGUserEntity entity) {
+        return dataUtilsService.convertToDataTransferObject(entity, TelegramTORGUserEntityDataTransferObject.class);
+    }
+
+    @Override
+    public TelegramTORGUserEntity convertFromDataTransferObject(TelegramTORGUserEntityDataTransferObject dto) {
+        return dataUtilsService.convertFromDataTransferObject(dto, TelegramTORGUserEntity.class);
     }
 }

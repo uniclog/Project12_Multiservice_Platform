@@ -26,6 +26,7 @@ public interface TeamspeakUserEntityDataService {
      * Сохранение сущности в бд
      *
      * @param user {@link TeamspeakUserEntity} сущность пользователя
+     * @return {@link TeamspeakUserEntity} сущность пользователя
      */
     TeamspeakUserEntity save(TeamspeakUserEntity user);
 
@@ -33,8 +34,9 @@ public interface TeamspeakUserEntityDataService {
      * Обновление полей для записи
      *
      * @param user {@link TeamspeakUserEntity} сущность пользователя
+     * @return {@link TeamspeakUserEntity} обновленная сущность пользователя
      */
-    void update(TeamspeakUserEntity user);
+    TeamspeakUserEntity update(TeamspeakUserEntity user);
 
     /**
      * Возвращает запись по token

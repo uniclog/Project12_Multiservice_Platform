@@ -45,16 +45,16 @@ public class DataServiceTestConfiguration {
 
     @Bean("beanTelegramMyFitnessUserEntityDataServiceTest")
     public TelegramMyFitnessUserEntityDataService telegramMyFitnessUserEntityDataService() {
-        return new TelegramMyFitnessUserEntityDataServiceImpl(beanTelegramMyFitnessUserRepository);
+        return new TelegramMyFitnessUserEntityDataServiceImpl(beanTelegramMyFitnessUserRepository, beanDataUtilsService);
     }
 
     @Bean("beanTelegramTORGUserEntityDataServiceTest")
     public TelegramTORGUserEntityDataService telegramTORGUserEntityDataService() {
-        return new TelegramTORGUserEntityDataServiceImpl(beanTelegramTORGUserRepository);
+        return new TelegramTORGUserEntityDataServiceImpl(beanTelegramTORGUserRepository, beanDataUtilsService);
     }
 
     @Bean("beanTelegramUnicBotCoreUserEntityDataServiceTest")
     public TelegramUnicBotCoreUserEntityDataService telegramUnicBotCoreUserEntityDataService() {
-        return new TelegramUnicBotCoreUserEntityDataServiceImpl(beanTelegramUnicBotCoreRepository);
+        return new TelegramUnicBotCoreUserEntityDataServiceImpl(beanTelegramUnicBotCoreRepository, beanDataUtilsService);
     }
 }

@@ -27,15 +27,17 @@ public interface TelegramMyFitnessUserEntityDataService {
      * Сохранение сущности в бд
      *
      * @param user {@link TelegramMyFitnessUserEntity} сущность пользователя
+     * @return {@link TelegramMyFitnessUserEntity} сущность пользователя
      */
-    void save(TelegramMyFitnessUserEntity user);
+    TelegramMyFitnessUserEntity save(TelegramMyFitnessUserEntity user);
 
     /**
      * Обновление полей для записи
      *
      * @param user {@link TelegramMyFitnessUserEntity} сущность пользователя
+     * @return {@link TelegramMyFitnessUserEntity} сущность пользователя
      */
-    void update(TelegramMyFitnessUserEntity user);
+    TelegramMyFitnessUserEntity update(TelegramMyFitnessUserEntity user);
 
     /**
      * Возвращает запись по Telegram-Id пользователя

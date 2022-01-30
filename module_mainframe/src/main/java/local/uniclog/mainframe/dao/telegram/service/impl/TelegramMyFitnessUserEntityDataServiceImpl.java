@@ -25,24 +25,22 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
     private final DataUtilsService dataUtilsService;
 
     @Override
-    public void save(TelegramMyFitnessUserEntity user) {
+    public TelegramMyFitnessUserEntity save(TelegramMyFitnessUserEntity user) {
         TelegramMyFitnessUserEntity userEntity = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
         if (userEntity != null) {
-            update(user);
-            return;
+            return update(user);
         }
-        telegramMyFitnessUserRepository.save(user);
+        return telegramMyFitnessUserRepository.save(user);
     }
 
     @Override
-    public void update(TelegramMyFitnessUserEntity user) {
+    public TelegramMyFitnessUserEntity update(TelegramMyFitnessUserEntity user) {
         TelegramMyFitnessUserEntity userEntity = telegramMyFitnessUserRepository.findByUserTelegramId(user.getUserTelegramId());
         if (userEntity == null) {
-            save(user);
-            return;
+            return save(user);
         }
         user.setId(userEntity.getId());
-        telegramMyFitnessUserRepository.save(user);
+        return telegramMyFitnessUserRepository.save(user);
     }
 
     @Override

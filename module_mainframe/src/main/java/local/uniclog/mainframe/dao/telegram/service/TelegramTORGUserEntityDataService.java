@@ -28,15 +28,17 @@ public interface TelegramTORGUserEntityDataService {
      * Сохранение сущности в бд
      *
      * @param user {@link TelegramTORGUserEntity} сущность пользователя
+     * @return {@link TelegramTORGUserEntity} сущность пользователя
      */
-    void save(TelegramTORGUserEntity user);
+    TelegramTORGUserEntity save(TelegramTORGUserEntity user);
 
     /**
      * Обновление полей для записи
      *
      * @param user {@link TelegramTORGUserEntity} сущность пользователя
+     * @return {@link TelegramTORGUserEntity} сущность пользователя
      */
-    void update(TelegramTORGUserEntity user);
+    TelegramTORGUserEntity update(TelegramTORGUserEntity user);
 
     /**
      * Возвращает запись по Telegram-Id пользователя

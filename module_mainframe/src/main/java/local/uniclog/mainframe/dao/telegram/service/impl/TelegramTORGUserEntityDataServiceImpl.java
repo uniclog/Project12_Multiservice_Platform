@@ -25,24 +25,22 @@ public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEn
     private final DataUtilsService dataUtilsService;
 
     @Override
-    public void save(TelegramTORGUserEntity user) {
+    public TelegramTORGUserEntity save(TelegramTORGUserEntity user) {
         TelegramTORGUserEntity userEntity = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
         if (userEntity != null) {
-            update(user);
-            return;
+            return update(user);
         }
-        telegramTORGUserRepository.save(user);
+        return telegramTORGUserRepository.save(user);
     }
 
     @Override
-    public void update(TelegramTORGUserEntity user) {
+    public TelegramTORGUserEntity update(TelegramTORGUserEntity user) {
         TelegramTORGUserEntity userFromDb = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
         if (userFromDb == null) {
-            save(user);
-            return;
+            return save(user);
         }
         user.setId(userFromDb.getId());
-        telegramTORGUserRepository.save(user);
+        return telegramTORGUserRepository.save(user);
     }
 
     @Override

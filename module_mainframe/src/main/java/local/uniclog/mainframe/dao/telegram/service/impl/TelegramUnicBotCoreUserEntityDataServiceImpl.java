@@ -25,24 +25,22 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
     private final DataUtilsService dataUtilsService;
 
     @Override
-    public void save(TelegramUnicBotCoreUserEntity user) {
+    public TelegramUnicBotCoreUserEntity save(TelegramUnicBotCoreUserEntity user) {
         TelegramUnicBotCoreUserEntity userEntity = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
         if (userEntity != null) {
-            update(user);
-            return;
+            return update(user);
         }
-        telegramUnicBotCoreRepository.save(user);
+        return telegramUnicBotCoreRepository.save(user);
     }
 
     @Override
-    public void update(TelegramUnicBotCoreUserEntity user) {
+    public TelegramUnicBotCoreUserEntity update(TelegramUnicBotCoreUserEntity user) {
         TelegramUnicBotCoreUserEntity userFromDB = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
         if (userFromDB == null) {
-            save(user);
-            return;
+            return save(user);
         }
         user.setId(userFromDB.getId());
-        telegramUnicBotCoreRepository.save(user);
+        return telegramUnicBotCoreRepository.save(user);
     }
 
     @Override

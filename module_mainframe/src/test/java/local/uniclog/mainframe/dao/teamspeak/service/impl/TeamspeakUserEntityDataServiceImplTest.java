@@ -108,7 +108,7 @@ class TeamspeakUserEntityDataServiceImplTest {
         assertAll(
                 () -> assertEquals(1, deletedList.size()),
                 () -> assertNotNull(deletedList),
-                () -> assertNull(notFoundEntity)
+                () -> assertTrue(notFoundEntity.isEmpty())
         );
     }
 

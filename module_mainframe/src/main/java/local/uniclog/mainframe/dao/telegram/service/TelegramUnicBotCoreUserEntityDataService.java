@@ -27,15 +27,17 @@ public interface TelegramUnicBotCoreUserEntityDataService {
      * Сохранение сущности в бд
      *
      * @param user {@link TelegramUnicBotCoreUserEntity} сущность пользователя
+     * @return {@link TelegramUnicBotCoreUserEntity} сущность пользователя
      */
-    void save(TelegramUnicBotCoreUserEntity user);
+    TelegramUnicBotCoreUserEntity save(TelegramUnicBotCoreUserEntity user);
 
     /**
      * Обновление полей для записи
      *
      * @param user {@link TelegramUnicBotCoreUserEntity} сущность пользователя
+     * @return {@link TelegramUnicBotCoreUserEntity} сущность пользователя
      */
-    void update(TelegramUnicBotCoreUserEntity user);
+    TelegramUnicBotCoreUserEntity update(TelegramUnicBotCoreUserEntity user);
 
     /**
      * Возвращает запись по Telegram-Id пользователя

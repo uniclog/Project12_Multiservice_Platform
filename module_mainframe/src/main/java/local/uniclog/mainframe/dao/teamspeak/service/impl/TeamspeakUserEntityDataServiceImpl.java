@@ -15,7 +15,7 @@ import static java.util.Collections.emptyList;
 /**
  * Реализация сервиса {@link TeamspeakUserEntityDataService}
  *
- * @version 0.1
+ * @version 0.2
  */
 @Service
 @RequiredArgsConstructor
@@ -24,22 +24,20 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
     private final DataUtilsService dataUtilsService;
 
     @Override
-    public TeamspeakUserEntity save(TeamspeakUserEntity user) {
-        TeamspeakUserEntity userEntity = teamspeakUserRepository.findByTeamspeakToken(user.getTeamspeakToken());
-        if (userEntity != null) {
-            return update(user);
+    public <T> TeamspeakUserEntity save(T object) {
+        if (object instanceof TeamspeakUserEntity entity) {
+            var entityByToken = this.findByTeamspeakToken(entity.getTeamspeakToken());
+            if (entityByToken != null) {
+                entity.setId(entityByToken.getId());
+            }
+            return teamspeakUserRepository.save(entity);
         }
-        return teamspeakUserRepository.save(user);
+        return null;
     }
 
     @Override
-    public TeamspeakUserEntity update(TeamspeakUserEntity user) {
-        TeamspeakUserEntity userEntity = teamspeakUserRepository.findByTeamspeakToken(user.getTeamspeakToken());
-        if (userEntity == null) {
-            return save(user);
-        }
-        user.setId(userEntity.getId());
-        return teamspeakUserRepository.save(user);
+    public <T> TeamspeakUserEntity update(T object) {
+        return this.save(object);
     }
 
     @Override

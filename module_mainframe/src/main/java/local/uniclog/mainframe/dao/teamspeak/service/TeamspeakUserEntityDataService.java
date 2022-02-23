@@ -9,8 +9,8 @@ import java.util.List;
  * Сервис работы с репозиторием
  * для сущности {@link TeamspeakUserEntity}
  * <ul>
- * <li>сохранение сущности в бд {@link TeamspeakUserEntityDataService#save(TeamspeakUserEntity)}</li>
- * <li>обновление полей для записи {@link TeamspeakUserEntityDataService#update(TeamspeakUserEntity)}</li>
+ * <li>сохранение сущности в бд {@link TeamspeakUserEntityDataService#save(Object)}</li>
+ * <li>обновление полей для записи {@link TeamspeakUserEntityDataService#update(Object)}</li>
  * <li>возвращает запись по token {@link TeamspeakUserEntityDataService#findByTeamspeakToken(String)}</li>
  * <li>возвращает все записи с флагом subscribe {@link TeamspeakUserEntityDataService#findAllSubscribers()}</li>
  * <li>возвращает все записи из бд {@link TeamspeakUserEntityDataService#findAll()}</li>
@@ -25,18 +25,20 @@ public interface TeamspeakUserEntityDataService {
     /**
      * Сохранение сущности в бд
      *
-     * @param user {@link TeamspeakUserEntity} сущность пользователя
+     * @param user {@link TeamspeakUserEntity} объект для обновления / сущность пользователя
+     * @param <T>  объект для сохранения
      * @return {@link TeamspeakUserEntity} сущность пользователя
      */
-    TeamspeakUserEntity save(TeamspeakUserEntity user);
+    <T> TeamspeakUserEntity save(T user);
 
     /**
      * Обновление полей для записи
      *
-     * @param user {@link TeamspeakUserEntity} сущность пользователя
+     * @param user {@link TeamspeakUserEntity} объект для обновления / сущность пользователя
+     * @param <T>  объект для обновления
      * @return {@link TeamspeakUserEntity} обновленная сущность пользователя
      */
-    TeamspeakUserEntity update(TeamspeakUserEntity user);
+    <T> TeamspeakUserEntity update(T user);
 
     /**
      * Возвращает запись по token
@@ -70,6 +72,7 @@ public interface TeamspeakUserEntityDataService {
 
     /**
      * Convert entity to Dto object
+     *
      * @param entity {@link TeamspeakUserEntity}
      * @return {@link TeamspeakUserEntityDataTransferObject}
      */
@@ -77,6 +80,7 @@ public interface TeamspeakUserEntityDataService {
 
     /**
      * Convert Dto object to entity
+     *
      * @param dto {@link TeamspeakUserEntityDataTransferObject}
      * @return {@link TeamspeakUserEntity}
      */

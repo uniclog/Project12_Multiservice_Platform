@@ -8,18 +8,20 @@ public interface TeamspeakUserEntityDataAccessService {
     /**
      * Обертка для сохранения сущности в бд
      *
-     * @param user {@link TeamspeakUserEntityDataTransferObject}
+     * @param object user {@link Object}
+     * @param <T>    объект для метода save
      * @return {@link TeamspeakUserEntityDataTransferObject}
      */
-    TeamspeakUserEntityDataTransferObject save(TeamspeakUserEntityDataTransferObject user);
+    <T> TeamspeakUserEntityDataTransferObject save(T object);
 
     /**
      * Обертка для обновления полей записи
      *
-     * @param user {@link TeamspeakUserEntityDataTransferObject}
+     * @param object {@link Object}
+     * @param <T>    объект для метода update
      * @return {@link TeamspeakUserEntityDataTransferObject}
      */
-    TeamspeakUserEntityDataTransferObject update(TeamspeakUserEntityDataTransferObject user);
+    <T> TeamspeakUserEntityDataTransferObject update(T object);
 
     /**
      * Обертка для получения пользователя по его token

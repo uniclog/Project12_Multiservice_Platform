@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Реализация сервиса {@link TeamspeakUserEntityDataAccessService}
  *
- * @version 0.1
+ * @version 0.2
  */
 @Slf4j
 @Service
@@ -24,17 +24,23 @@ public class TeamspeakUserEntityDataAccessServiceImpl implements TeamspeakUserEn
     public final TeamspeakUserEntityDataService service;
 
     @Override
-    public TeamspeakUserEntityDataTransferObject save(TeamspeakUserEntityDataTransferObject user) {
-        var entity = service.convertFromDataTransferObject(user);
-        entity = service.save(entity);
-        return (entity == null) ? null : service.convertToDataTransferObject(entity);
+    public <T> TeamspeakUserEntityDataTransferObject save(T object) {
+        if (object instanceof TeamspeakUserEntityDataTransferObject entityDto) {
+            var entity = service.convertFromDataTransferObject(entityDto);
+            entity = service.save(entity);
+            return service.convertToDataTransferObject(entity);
+        }
+        return null;
     }
 
     @Override
-    public TeamspeakUserEntityDataTransferObject update(TeamspeakUserEntityDataTransferObject user) {
-        var entity = service.convertFromDataTransferObject(user);
-        entity = service.update(entity);
-        return (entity == null) ? null : service.convertToDataTransferObject(entity);
+    public <T> TeamspeakUserEntityDataTransferObject update(T object) {
+        if (object instanceof TeamspeakUserEntityDataTransferObject entityDto) {
+            var entity = service.convertFromDataTransferObject(entityDto);
+            entity = service.update(entity);
+            return service.convertToDataTransferObject(entity);
+        }
+        return null;
     }
 
     @Override

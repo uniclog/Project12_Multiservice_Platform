@@ -48,8 +48,8 @@ public class TeamspeakUserDataAccessController {
      * @param token teamspeak token
      * @return entity
      */
-    @GetMapping("/findByTeamspeakToken")
-    public ResponseEntity<TeamspeakUserEntityDataTransferObject> findByTeamspeakToken(@RequestParam String token) {
+    @GetMapping("/findByTeamspeakToken/{token}")
+    public ResponseEntity<TeamspeakUserEntityDataTransferObject> findByTeamspeakToken(@PathVariable String token) {
         var transferObject = service.findByTeamspeakToken(token);
         return (transferObject == null)
                 ? ResponseEntity.notFound().build()
@@ -88,8 +88,8 @@ public class TeamspeakUserDataAccessController {
      * @param token teamspeak token
      * @return list of entities
      */
-    @DeleteMapping("/deleteByTeamspeakToken")
-    public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> deleteByTeamspeakToken(@RequestBody String token) {
+    @DeleteMapping("/deleteByTeamspeakToken/{token}")
+    public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> deleteByTeamspeakToken(@PathVariable String token) {
         var transferObjectList = service.deleteByTeamspeakToken(token);
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()

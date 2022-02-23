@@ -55,6 +55,12 @@ class TeamspeakUserEntityDataServiceImplTest {
     }
 
     @Test
+    void saveNegativeTest() {
+        assertNull(entityDataService.save("null"));
+        assertNull(entityDataService.save(null));
+    }
+
+    @Test
     void update() {
         TeamspeakUserEntity temp = entityDataService.findByTeamspeakToken(token);
         temp.setSubscriber(!subscriber);
@@ -65,6 +71,12 @@ class TeamspeakUserEntityDataServiceImplTest {
         temp.setTeamspeakToken(token + token);
         entityDataService.update(temp);
         assertNotNull(entityDataService.findByTeamspeakToken(token + token));
+    }
+
+    @Test
+    void updateNegativeTest() {
+        assertNull(entityDataService.update("null"));
+        assertNull(entityDataService.update(null));
     }
 
     @Test

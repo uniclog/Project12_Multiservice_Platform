@@ -1,19 +1,18 @@
 package local.uniclog.mainframe.api.dao;
 
 import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
-import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataService;
+import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/TeamspeakUserDataAccessController")
 @RequiredArgsConstructor
 public class TeamspeakUserDataAccessController {
-    private final TeamspeakUserEntityDataService service;
+    private final TeamspeakUserEntityDataAccessService service;
 
     /**
      * Save entity to database
@@ -23,10 +22,10 @@ public class TeamspeakUserDataAccessController {
      */
     @PutMapping("/save")
     public ResponseEntity<TeamspeakUserEntityDataTransferObject> save(@RequestBody TeamspeakUserEntityDataTransferObject entity) {
-        var teamspeakUserEntity = service.convertFromDataTransferObject(entity);
-        if ((teamspeakUserEntity = service.save(teamspeakUserEntity)) != null)
-            return ResponseEntity.ok().body(service.convertToDataTransferObject(teamspeakUserEntity));
-        else return ResponseEntity.internalServerError().build();
+        var transferObject = service.save(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -37,10 +36,10 @@ public class TeamspeakUserDataAccessController {
      */
     @PatchMapping("/update")
     public ResponseEntity<TeamspeakUserEntityDataTransferObject> update(@RequestBody TeamspeakUserEntityDataTransferObject entity) {
-        var teamspeakUserEntity = service.convertFromDataTransferObject(entity);
-        if ((teamspeakUserEntity = service.update(teamspeakUserEntity)) != null)
-            return ResponseEntity.ok().body(service.convertToDataTransferObject(teamspeakUserEntity));
-        else return ResponseEntity.internalServerError().build();
+        var transferObject = service.update(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -51,11 +50,10 @@ public class TeamspeakUserDataAccessController {
      */
     @GetMapping("/findByTeamspeakToken")
     public ResponseEntity<TeamspeakUserEntityDataTransferObject> findByTeamspeakToken(@RequestParam String token) {
-        var entity = service.findByTeamspeakToken(token);
-        var dto = service.convertToDataTransferObject(entity);
-        return (dto == null)
+        var transferObject = service.findByTeamspeakToken(token);
+        return (transferObject == null)
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dto);
+                : ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -65,12 +63,10 @@ public class TeamspeakUserDataAccessController {
      */
     @GetMapping("/findAllSubscribers")
     public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> findAllSubscribers() {
-        var dtoList = service.findAllSubscribers().stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.findAllSubscribers();
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 
     /**
@@ -80,12 +76,10 @@ public class TeamspeakUserDataAccessController {
      */
     @GetMapping("/findAll")
     public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> findAll() {
-        var dtoList = service.findAll().stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.findAll();
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 
     /**
@@ -96,11 +90,9 @@ public class TeamspeakUserDataAccessController {
      */
     @DeleteMapping("/deleteByTeamspeakToken")
     public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> deleteByTeamspeakToken(@RequestBody String token) {
-        var dtoList = service.deleteByTeamspeakToken(token).stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.deleteByTeamspeakToken(token);
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 }

@@ -9,8 +9,8 @@ import java.util.List;
  * Сервис работы с репозиторием
  * для сущности {@link TelegramMyFitnessUserEntity}
  * <ul>
- * <li>сохранение сущности в бд {@link TelegramMyFitnessUserEntityDataService#save(TelegramMyFitnessUserEntity)}</li>
- * <li>обновление полей для записи {@link TelegramMyFitnessUserEntityDataService#update(TelegramMyFitnessUserEntity)}</li>
+ * <li>сохранение сущности в бд {@link TelegramMyFitnessUserEntityDataService#save(Object)}</li>
+ * <li>обновление полей для записи {@link TelegramMyFitnessUserEntityDataService#update(Object)}</li>
  * <li>возвращает запись по Telegram-Id пользователя {@link TelegramMyFitnessUserEntityDataService#findByUserTelegramId(Long)}</li>
  * <li>возвращает все записи с флагом subscribe {@link TelegramMyFitnessUserEntityDataService#findAllSubscribers()}</li>
  * <li>возвращает все записи из бд {@link TelegramMyFitnessUserEntityDataService#findAll()}</li>
@@ -26,18 +26,21 @@ public interface TelegramMyFitnessUserEntityDataService {
     /**
      * Сохранение сущности в бд
      *
-     * @param user {@link TelegramMyFitnessUserEntity} сущность пользователя
+     * @param object {@link TelegramMyFitnessUserEntity} сущность пользователя
+     * @param <T>    объект для сохранения
      * @return {@link TelegramMyFitnessUserEntity} сущность пользователя
      */
-    TelegramMyFitnessUserEntity save(TelegramMyFitnessUserEntity user);
+    <T> TelegramMyFitnessUserEntity save(T object);
+
 
     /**
      * Обновление полей для записи
      *
-     * @param user {@link TelegramMyFitnessUserEntity} сущность пользователя
+     * @param object {@link TelegramMyFitnessUserEntity} сущность пользователя
+     * @param <T>    объект для обновления
      * @return {@link TelegramMyFitnessUserEntity} сущность пользователя
      */
-    TelegramMyFitnessUserEntity update(TelegramMyFitnessUserEntity user);
+    <T> TelegramMyFitnessUserEntity update(T object);
 
     /**
      * Возвращает запись по Telegram-Id пользователя

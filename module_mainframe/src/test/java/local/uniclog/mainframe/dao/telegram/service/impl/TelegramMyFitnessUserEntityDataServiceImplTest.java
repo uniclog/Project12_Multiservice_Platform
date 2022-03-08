@@ -72,6 +72,12 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
     }
 
     @Test
+    void saveNegativeTest() {
+        assertNull(entityDataService.save("null"));
+        assertNull(entityDataService.save(null));
+    }
+
+    @Test
     void update() {
         assertEquals(entity, entityDataService.findByUserTelegramId(telegramId));
 
@@ -90,6 +96,12 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
         temp.setUserTelegramId(1234567890L);
         entityDataService.update(temp);
         assertNotNull(entityDataService.findByUserTelegramId(1234567890L));
+    }
+
+    @Test
+    void updateNegativeTest() {
+        assertNull(entityDataService.update("null"));
+        assertNull(entityDataService.update(null));
     }
 
     @Test

@@ -25,22 +25,20 @@ public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEn
     private final DataUtilsService dataUtilsService;
 
     @Override
-    public TelegramTORGUserEntity save(TelegramTORGUserEntity user) {
-        TelegramTORGUserEntity userEntity = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
-        if (userEntity != null) {
-            return update(user);
+    public <T> TelegramTORGUserEntity save(T object) {
+        if (object instanceof TelegramTORGUserEntity entity) {
+            var entityByToken = this.findByUserTelegramId(entity.getUserTelegramId());
+            if (entityByToken != null) {
+                entity.setId(entityByToken.getId());
+            }
+            return telegramTORGUserRepository.save(entity);
         }
-        return telegramTORGUserRepository.save(user);
+        return null;
     }
 
     @Override
-    public TelegramTORGUserEntity update(TelegramTORGUserEntity user) {
-        TelegramTORGUserEntity userFromDb = telegramTORGUserRepository.findByUserTelegramId(user.getUserTelegramId());
-        if (userFromDb == null) {
-            return save(user);
-        }
-        user.setId(userFromDb.getId());
-        return telegramTORGUserRepository.save(user);
+    public <T> TelegramTORGUserEntity update(T object) {
+        return this.save(object);
     }
 
     @Override
@@ -73,11 +71,11 @@ public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEn
 
     @Override
     public TelegramTORGUserEntityDataTransferObject convertToDataTransferObject(TelegramTORGUserEntity entity) {
-        return dataUtilsService.convertToDataTransferObject(entity, TelegramTORGUserEntityDataTransferObject.class);
+        return dataUtilsService.convertData(entity, TelegramTORGUserEntityDataTransferObject.class);
     }
 
     @Override
     public TelegramTORGUserEntity convertFromDataTransferObject(TelegramTORGUserEntityDataTransferObject dto) {
-        return dataUtilsService.convertFromDataTransferObject(dto, TelegramTORGUserEntity.class);
+        return dataUtilsService.convertData(dto, TelegramTORGUserEntity.class);
     }
 }

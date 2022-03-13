@@ -12,14 +12,8 @@ import local.uniclog.mainframe.dao.teamspeak.service.impl.TeamspeakUserEntityDat
 import local.uniclog.mainframe.dao.telegram.repository.TelegramMyFitnessUserRepository;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramTORGUserRepository;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramUnicBotCoreRepository;
-import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataAccessService;
-import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
-import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
-import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataService;
-import local.uniclog.mainframe.dao.telegram.service.impl.TelegramMyFitnessUserEntityDataAccessServiceImpl;
-import local.uniclog.mainframe.dao.telegram.service.impl.TelegramMyFitnessUserEntityDataServiceImpl;
-import local.uniclog.mainframe.dao.telegram.service.impl.TelegramTORGUserEntityDataServiceImpl;
-import local.uniclog.mainframe.dao.telegram.service.impl.TelegramUnicBotCoreUserEntityDataServiceImpl;
+import local.uniclog.mainframe.dao.telegram.service.*;
+import local.uniclog.mainframe.dao.telegram.service.impl.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -70,5 +64,15 @@ public class DataServiceTestConfiguration {
     @Bean("beanTelegramMyFitnessUserEntityDataAccessServiceTest")
     public TelegramMyFitnessUserEntityDataAccessService telegramMyFitnessEntityDataAccessService() {
         return new TelegramMyFitnessUserEntityDataAccessServiceImpl(telegramMyFitnessUserEntityDataService());
+    }
+
+    @Bean("beanTelegramTORGUserEntityDataAccessServiceTest")
+    public TelegramTORGUserEntityDataAccessService telegramTORGEntityDataAccessService() {
+        return new TelegramTORGUserEntityDataAccessServiceImpl(telegramTORGUserEntityDataService());
+    }
+
+    @Bean("beanTelegramUnicBotCoreUserEntityDataAccessServiceTest")
+    public TelegramUnicBotCoreUserEntityDataAccessService telegramUnicBotCoreEntityDataAccessService() {
+        return new TelegramUnicBotCoreUserEntityDataAccessServiceImpl(telegramUnicBotCoreUserEntityDataService());
     }
 }

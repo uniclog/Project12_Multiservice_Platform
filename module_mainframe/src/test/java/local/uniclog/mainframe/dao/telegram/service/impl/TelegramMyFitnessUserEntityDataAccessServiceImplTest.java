@@ -38,7 +38,7 @@ class TelegramMyFitnessUserEntityDataAccessServiceImplTest {
     }
 
     @Test
-    void teamspeakUserEntityDataAccessService() {
+    void telegramMyFitnessUserEntityDataAccessService() {
         assertNotNull(service);
     }
 

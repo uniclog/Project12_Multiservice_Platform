@@ -15,10 +15,12 @@ import java.util.List;
  * <li>возвращает все записи с флагом subscribe {@link TeamspeakUserEntityDataService#findAllSubscribers()}</li>
  * <li>возвращает все записи из бд {@link TeamspeakUserEntityDataService#findAll()}</li>
  * <li>удаление записи по token пользователя {@link TeamspeakUserEntityDataService#deleteByTeamspeakToken(String)}</li>
+ * <li>конвертирование DTO в объект пользователя {@link TeamspeakUserEntityDataService#convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject)} (String)}</li>
+ * <li>конвертирование объекта в DTO {@link TeamspeakUserEntityDataService#convertToDataTransferObject(TeamspeakUserEntity)} (String)}</li>
  * </ul>
  *
  * @author uniclog
- * @version 0.1
+ * @version 0.2
  * @see TeamspeakUserEntity
  */
 public interface TeamspeakUserEntityDataService {

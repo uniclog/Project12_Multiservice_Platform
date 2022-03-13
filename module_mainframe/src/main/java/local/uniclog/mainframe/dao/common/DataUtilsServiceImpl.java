@@ -18,30 +18,16 @@ public class DataUtilsServiceImpl implements DataUtilsService {
     private final ModelMapper mapper;
 
     /**
-     * Convert to Dto
+     * Objects convert
      *
-     * @param entity entity
+     * @param object object
      * @param type   entity type
      * @param <E>    entity type
      * @param <T>    dto type
      * @return Dto object
      */
     @Override
-    public <E, T> T convertToDataTransferObject(E entity, Type type) {
-        return Objects.isNull(entity) ? null : mapper.map(entity, type);
-    }
-
-    /**
-     * Convert from Dto
-     *
-     * @param dto  data transfer object
-     * @param type entity type
-     * @param <E>  dto type
-     * @param <T>  entity type
-     * @return Entity object
-     */
-    @Override
-    public <E, T> T convertFromDataTransferObject(E dto, Type type) {
-        return Objects.isNull(dto) ? null : mapper.map(dto, type);
+    public <E, T> T convertData(E object, Type type) {
+        return Objects.isNull(object) ? null : mapper.map(object, type);
     }
 }

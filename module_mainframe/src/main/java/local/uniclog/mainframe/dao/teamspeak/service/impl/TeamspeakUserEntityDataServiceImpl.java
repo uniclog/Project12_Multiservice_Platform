@@ -65,11 +65,11 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
 
     @Override
     public TeamspeakUserEntityDataTransferObject convertToDataTransferObject(TeamspeakUserEntity entity) {
-        return dataUtilsService.convertToDataTransferObject(entity, TeamspeakUserEntityDataTransferObject.class);
+        return dataUtilsService.convertData(entity, TeamspeakUserEntityDataTransferObject.class);
     }
 
     @Override
     public TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject dto) {
-        return dataUtilsService.convertFromDataTransferObject(dto, TeamspeakUserEntity.class);
+        return dataUtilsService.convertData(dto, TeamspeakUserEntity.class);
     }
 }

@@ -71,11 +71,11 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
 
     @Override
     public TelegramMyFitnessUserEntityDataTransferObject convertToDataTransferObject(TelegramMyFitnessUserEntity entity) {
-        return dataUtilsService.convertToDataTransferObject(entity, TelegramMyFitnessUserEntityDataTransferObject.class);
+        return dataUtilsService.convertData(entity, TelegramMyFitnessUserEntityDataTransferObject.class);
     }
 
     @Override
     public TelegramMyFitnessUserEntity convertFromDataTransferObject(TelegramMyFitnessUserEntityDataTransferObject dto) {
-        return dataUtilsService.convertFromDataTransferObject(dto, TelegramMyFitnessUserEntity.class);
+        return dataUtilsService.convertData(dto, TelegramMyFitnessUserEntity.class);
     }
 }

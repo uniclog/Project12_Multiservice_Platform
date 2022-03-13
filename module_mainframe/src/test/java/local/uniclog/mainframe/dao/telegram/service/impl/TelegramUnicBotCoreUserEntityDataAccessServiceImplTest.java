@@ -1,8 +1,8 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
-import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataAccessService;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,29 +16,27 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @DataJpaTest
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
-class TelegramMyFitnessUserEntityDataAccessServiceImplTest {
+class TelegramUnicBotCoreUserEntityDataAccessServiceImplTest {
     private final Long userTelegramId = 123L;
     private final String userName = "userName";
     private final Boolean subscriber = true;
-    private final Integer waterCount = 0;
     @Autowired
-    @Qualifier("beanTelegramMyFitnessUserEntityDataAccessServiceTest")
-    private TelegramMyFitnessUserEntityDataAccessService service;
-    private TelegramMyFitnessUserEntityDataTransferObject entity;
+    @Qualifier("beanTelegramUnicBotCoreUserEntityDataAccessServiceTest")
+    private TelegramUnicBotCoreUserEntityDataAccessService service;
+    private TelegramUnicBotCoreUserEntityDataTransferObject entity;
 
 
     @BeforeEach
     void setUp() {
-        entity = TelegramMyFitnessUserEntityDataTransferObject.builder()
+        entity = TelegramUnicBotCoreUserEntityDataTransferObject.builder()
                 .userTelegramId(userTelegramId)
                 .userName(userName)
-                .waterCount(waterCount)
                 .subscriber(subscriber)
                 .build();
     }
 
     @Test
-    void telegramMyFitnessUserEntityDataAccessService() {
+    void telegramUnicBotCoreUserEntityDataAccessService() {
         assertNotNull(service);
     }
 

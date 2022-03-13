@@ -25,22 +25,20 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
     private final DataUtilsService dataUtilsService;
 
     @Override
-    public TelegramUnicBotCoreUserEntity save(TelegramUnicBotCoreUserEntity user) {
-        TelegramUnicBotCoreUserEntity userEntity = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
-        if (userEntity != null) {
-            return update(user);
+    public <T> TelegramUnicBotCoreUserEntity save(T object) {
+        if (object instanceof TelegramUnicBotCoreUserEntity entity) {
+            var entityByToken = this.findByUserTelegramId(entity.getUserTelegramId());
+            if (entityByToken != null) {
+                entity.setId(entityByToken.getId());
+            }
+            return telegramUnicBotCoreRepository.save(entity);
         }
-        return telegramUnicBotCoreRepository.save(user);
+        return null;
     }
 
     @Override
-    public TelegramUnicBotCoreUserEntity update(TelegramUnicBotCoreUserEntity user) {
-        TelegramUnicBotCoreUserEntity userFromDB = telegramUnicBotCoreRepository.findByUserTelegramId(user.getUserTelegramId());
-        if (userFromDB == null) {
-            return save(user);
-        }
-        user.setId(userFromDB.getId());
-        return telegramUnicBotCoreRepository.save(user);
+    public <T> TelegramUnicBotCoreUserEntity update(T object) {
+        return this.save(object);
     }
 
     @Override
@@ -73,11 +71,11 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
 
     @Override
     public TelegramUnicBotCoreUserEntityDataTransferObject convertToDataTransferObject(TelegramUnicBotCoreUserEntity entity) {
-        return dataUtilsService.convertToDataTransferObject(entity, TelegramUnicBotCoreUserEntityDataTransferObject.class);
+        return dataUtilsService.convertData(entity, TelegramUnicBotCoreUserEntityDataTransferObject.class);
     }
 
     @Override
     public TelegramUnicBotCoreUserEntity convertFromDataTransferObject(TelegramUnicBotCoreUserEntityDataTransferObject dto) {
-        return dataUtilsService.convertFromDataTransferObject(dto, TelegramUnicBotCoreUserEntity.class);
+        return dataUtilsService.convertData(dto, TelegramUnicBotCoreUserEntity.class);
     }
 }

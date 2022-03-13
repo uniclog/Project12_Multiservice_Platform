@@ -9,8 +9,8 @@ import java.util.List;
  * Сервис работы с репозиторием
  * для сущности {@link TelegramUnicBotCoreUserEntity}
  * <ul>
- * <li>сохранение сущности в бд {@link TelegramUnicBotCoreUserEntityDataService#save(TelegramUnicBotCoreUserEntity)}</li>
- * <li>обновление полей для записи {@link TelegramUnicBotCoreUserEntityDataService#update(TelegramUnicBotCoreUserEntity)}</li>
+ * <li>сохранение сущности в бд {@link TelegramUnicBotCoreUserEntityDataService#save(Object)}</li>
+ * <li>обновление полей для записи {@link TelegramUnicBotCoreUserEntityDataService#update(Object)}</li>
  * <li>возвращает запись по Telegram-Id пользователя {@link TelegramUnicBotCoreUserEntityDataService#findByUserTelegramId(Long)}</li>
  * <li>возвращает все записи с флагом subscribe {@link TelegramUnicBotCoreUserEntityDataService#findAllSubscribers()}</li>
  * <li>возвращает все записи из бд {@link TelegramUnicBotCoreUserEntityDataService#findAll()}</li>
@@ -26,18 +26,20 @@ public interface TelegramUnicBotCoreUserEntityDataService {
     /**
      * Сохранение сущности в бд
      *
-     * @param user {@link TelegramUnicBotCoreUserEntity} сущность пользователя
+     * @param object {@link TelegramUnicBotCoreUserEntity} объект пользователя
+     * @param <T>    abstract object
      * @return {@link TelegramUnicBotCoreUserEntity} сущность пользователя
      */
-    TelegramUnicBotCoreUserEntity save(TelegramUnicBotCoreUserEntity user);
+    <T> TelegramUnicBotCoreUserEntity save(T object);
 
     /**
      * Обновление полей для записи
      *
-     * @param user {@link TelegramUnicBotCoreUserEntity} сущность пользователя
+     * @param object {@link TelegramUnicBotCoreUserEntity} объект пользователя
+     * @param <T>    abstract object
      * @return {@link TelegramUnicBotCoreUserEntity} сущность пользователя
      */
-    TelegramUnicBotCoreUserEntity update(TelegramUnicBotCoreUserEntity user);
+    <T> TelegramUnicBotCoreUserEntity update(T object);
 
     /**
      * Возвращает запись по Telegram-Id пользователя

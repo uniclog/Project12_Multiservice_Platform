@@ -69,6 +69,12 @@ class TelegramTORGUserEntityDataServiceImplTest {
     }
 
     @Test
+    void updateNegativeTest() {
+        assertNull(entityDataService.update("null"));
+        assertNull(entityDataService.update(null));
+    }
+
+    @Test
     void update() {
         assertEquals(entity, entityDataService.findByUserTelegramId(telegramId));
 

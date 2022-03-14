@@ -1,19 +1,24 @@
 package local.uniclog.mainframe.api.dao;
 
 import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
-import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
+import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * Rest Api Controller for Telegram MyFitness Data Access Service
+ *
+ * @author uniclog
+ * @version 0.2
+ */
 @RestController
 @RequestMapping("/api/TelegramMyFitnessUserDataAccessController")
 @RequiredArgsConstructor
 public class TelegramMyFitnessUserDataAccessController {
-    private final TelegramMyFitnessUserEntityDataService service;
+    private final TelegramMyFitnessUserEntityDataAccessService service;
 
     /**
      * Save entity to database
@@ -23,10 +28,10 @@ public class TelegramMyFitnessUserDataAccessController {
      */
     @PutMapping("/save")
     public ResponseEntity<TelegramMyFitnessUserEntityDataTransferObject> save(@RequestBody TelegramMyFitnessUserEntityDataTransferObject entity) {
-        var teamspeakUserEntity = service.convertFromDataTransferObject(entity);
-        if ((teamspeakUserEntity = service.save(teamspeakUserEntity)) != null)
-            return ResponseEntity.ok().body(service.convertToDataTransferObject(teamspeakUserEntity));
-        else return ResponseEntity.internalServerError().build();
+        var transferObject = service.save(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -37,10 +42,10 @@ public class TelegramMyFitnessUserDataAccessController {
      */
     @PatchMapping("/update")
     public ResponseEntity<TelegramMyFitnessUserEntityDataTransferObject> update(@RequestBody TelegramMyFitnessUserEntityDataTransferObject entity) {
-        var teamspeakUserEntity = service.convertFromDataTransferObject(entity);
-        if ((teamspeakUserEntity = service.update(teamspeakUserEntity)) != null)
-            return ResponseEntity.ok().body(service.convertToDataTransferObject(teamspeakUserEntity));
-        else return ResponseEntity.internalServerError().build();
+        var transferObject = service.update(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -49,13 +54,12 @@ public class TelegramMyFitnessUserDataAccessController {
      * @param id telegram id
      * @return entity
      */
-    @GetMapping("/findByUserTelegramId")
-    public ResponseEntity<TelegramMyFitnessUserEntityDataTransferObject> findByUserTelegramId(@RequestParam Long id) {
-        var entity = service.findByUserTelegramId(id);
-        var dto = service.convertToDataTransferObject(entity);
-        return (dto == null)
+    @GetMapping("/findByUserTelegramId/{id}")
+    public ResponseEntity<TelegramMyFitnessUserEntityDataTransferObject> findByUserTelegramId(@PathVariable Long id) {
+        var transferObject = service.findByUserTelegramId(id);
+        return (transferObject == null)
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dto);
+                : ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -65,12 +69,10 @@ public class TelegramMyFitnessUserDataAccessController {
      */
     @GetMapping("/findAllSubscribers")
     public ResponseEntity<List<TelegramMyFitnessUserEntityDataTransferObject>> findAllSubscribers() {
-        var dtoList = service.findAllSubscribers().stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.findAllSubscribers();
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 
     /**
@@ -80,12 +82,10 @@ public class TelegramMyFitnessUserDataAccessController {
      */
     @GetMapping("/findAll")
     public ResponseEntity<List<TelegramMyFitnessUserEntityDataTransferObject>> findAll() {
-        var dtoList = service.findAll().stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.findAll();
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 
     /**
@@ -94,13 +94,11 @@ public class TelegramMyFitnessUserDataAccessController {
      * @param id telegram id
      * @return list of entities
      */
-    @DeleteMapping("/deleteAllByUserTelegramId")
-    public ResponseEntity<List<TelegramMyFitnessUserEntityDataTransferObject>> deleteAllByUserTelegramId(@RequestBody Long id) {
-        var dtoList = service.deleteAllByUserTelegramId(id).stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+    @DeleteMapping("/deleteAllByUserTelegramId/{id}")
+    public ResponseEntity<List<TelegramMyFitnessUserEntityDataTransferObject>> deleteAllByUserTelegramId(@PathVariable Long id) {
+        var transferObjectList = service.deleteAllByUserTelegramId(id);
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 }

@@ -11,9 +11,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Rest Api Controller for EsKey Service
+ * Rest Api Controller for EsKey Data Access Service
+ *
+ * @author uniclog
+ * @version 0.2
  */
-
 @RestController
 @RequestMapping("/api/EsKeyDataAccessController")
 @RequiredArgsConstructor

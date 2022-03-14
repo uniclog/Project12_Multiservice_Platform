@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Rest Api Controller for Telegram MyFitness Data Access Service
+ *
+ * @author uniclog
+ * @version 0.2
+ */
 @RestController
 @RequestMapping("/api/TelegramMyFitnessUserDataAccessController")
 @RequiredArgsConstructor

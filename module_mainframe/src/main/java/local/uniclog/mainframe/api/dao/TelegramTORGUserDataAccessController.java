@@ -1,19 +1,18 @@
 package local.uniclog.mainframe.api.dao;
 
 import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
-import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
+import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/TelegramTORGUserDataAccessController")
 @RequiredArgsConstructor
 public class TelegramTORGUserDataAccessController {
-    private final TelegramTORGUserEntityDataService service;
+    private final TelegramTORGUserEntityDataAccessService service;
 
     /**
      * Save entity to database
@@ -23,10 +22,10 @@ public class TelegramTORGUserDataAccessController {
      */
     @PutMapping("/save")
     public ResponseEntity<TelegramTORGUserEntityDataTransferObject> save(@RequestBody TelegramTORGUserEntityDataTransferObject entity) {
-        var teamspeakUserEntity = service.convertFromDataTransferObject(entity);
-        if ((teamspeakUserEntity = service.save(teamspeakUserEntity)) != null)
-            return ResponseEntity.ok().body(service.convertToDataTransferObject(teamspeakUserEntity));
-        else return ResponseEntity.internalServerError().build();
+        var transferObject = service.save(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -37,10 +36,10 @@ public class TelegramTORGUserDataAccessController {
      */
     @PatchMapping("/update")
     public ResponseEntity<TelegramTORGUserEntityDataTransferObject> update(@RequestBody TelegramTORGUserEntityDataTransferObject entity) {
-        var teamspeakUserEntity = service.convertFromDataTransferObject(entity);
-        if ((teamspeakUserEntity = service.update(teamspeakUserEntity)) != null)
-            return ResponseEntity.ok().body(service.convertToDataTransferObject(teamspeakUserEntity));
-        else return ResponseEntity.internalServerError().build();
+        var transferObject = service.update(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -49,13 +48,12 @@ public class TelegramTORGUserDataAccessController {
      * @param id telegram id
      * @return entity
      */
-    @GetMapping("/findByUserTelegramId")
-    public ResponseEntity<TelegramTORGUserEntityDataTransferObject> findByUserTelegramId(@RequestParam Long id) {
-        var entity = service.findByUserTelegramId(id);
-        var dto = service.convertToDataTransferObject(entity);
-        return (dto == null)
+    @GetMapping("/findByUserTelegramId/{id}")
+    public ResponseEntity<TelegramTORGUserEntityDataTransferObject> findByUserTelegramId(@PathVariable Long id) {
+        var transferObject = service.findByUserTelegramId(id);
+        return (transferObject == null)
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dto);
+                : ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -65,12 +63,10 @@ public class TelegramTORGUserDataAccessController {
      */
     @GetMapping("/findAllSubscribers")
     public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> findAllSubscribers() {
-        var dtoList = service.findAllSubscribers().stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.findAllSubscribers();
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 
     /**
@@ -80,12 +76,10 @@ public class TelegramTORGUserDataAccessController {
      */
     @GetMapping("/findAll")
     public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> findAll() {
-        var dtoList = service.findAll().stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+        var transferObjectList = service.findAll();
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 
     /**
@@ -94,13 +88,11 @@ public class TelegramTORGUserDataAccessController {
      * @param id telegram id
      * @return list of entities
      */
-    @DeleteMapping("/deleteAllByUserTelegramId")
-    public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> deleteAllByUserTelegramId(@RequestBody Long id) {
-        var dtoList = service.deleteAllByUserTelegramId(id).stream()
-                .map(service::convertToDataTransferObject)
-                .collect(Collectors.toList());
-        return (dtoList.isEmpty())
+    @DeleteMapping("/deleteAllByUserTelegramId/{id}")
+    public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> deleteAllByUserTelegramId(@PathVariable Long id) {
+        var transferObjectList = service.deleteAllByUserTelegramId(id);
+        return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()
-                : ResponseEntity.ok().body(dtoList);
+                : ResponseEntity.ok().body(transferObjectList);
     }
 }

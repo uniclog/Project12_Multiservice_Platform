@@ -4,6 +4,12 @@ import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransfer
 
 import java.util.List;
 
+/**
+ * Data Access Service for TeamspeakUserEntity
+ *
+ * @author uniclog
+ * @version 0.1
+ */
 public interface TeamspeakUserEntityDataAccessService {
     /**
      * Обертка для сохранения сущности в бд

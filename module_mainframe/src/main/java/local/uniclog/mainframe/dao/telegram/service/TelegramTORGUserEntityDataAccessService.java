@@ -4,6 +4,13 @@ import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransf
 
 import java.util.List;
 
+/**
+ * Обёртка для сервиса {@link TelegramTORGUserEntityDataService}
+ *
+ * @author uniclog
+ * @version 0.1
+ * @see TelegramTORGUserEntityDataService
+ */
 public interface TelegramTORGUserEntityDataAccessService {
     /**
      * Сохранение сущности в бд

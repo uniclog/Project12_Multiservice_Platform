@@ -47,6 +47,10 @@ java {
     withSourcesJar()
 }
 
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
 tasks.named('jar') {
     manifest {
         attributes('Implementation-Title': project.name,

@@ -4,6 +4,13 @@ import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDat
 
 import java.util.List;
 
+/**
+ * Обёртка для сервиса {@link TelegramUnicBotCoreUserEntityDataService}
+ *
+ * @author uniclog
+ * @version 0.1
+ * @see TelegramUnicBotCoreUserEntityDataService
+ */
 public interface TelegramUnicBotCoreUserEntityDataAccessService {
     /**
      * Сохранение сущности в бд

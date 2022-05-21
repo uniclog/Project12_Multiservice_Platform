@@ -1,9 +1,9 @@
 package local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.impl;
 
+import local.ts3snet.unicbot_ms_spring.core.entity.TeamspeakUserEntity;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.MessageType;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.model.uniccore_messages.TeamspeakMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_teamspeak.service.impl.utils.TeamspeakMessageSender;
-import local.uniclog.frame_dataaccess.entity.TeamspeakUserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;

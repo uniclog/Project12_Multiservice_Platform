@@ -1,7 +1,7 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.myfitness_messages;
 
+import local.ts3snet.unicbot_ms_spring.core.service.TelegramMyFitnessUserService;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.MessageInterface;
-import local.uniclog.frame_dataaccess.service.TelegramMyFitnessUserService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

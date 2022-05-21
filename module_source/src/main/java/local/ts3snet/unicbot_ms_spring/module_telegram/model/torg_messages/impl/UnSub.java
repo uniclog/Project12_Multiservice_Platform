@@ -1,8 +1,8 @@
 package local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.impl;
 
+import local.ts3snet.unicbot_ms_spring.core.entity.TelegramTORGUserEntity;
 import local.ts3snet.unicbot_ms_spring.module_telegram.model.torg_messages.UnicBotTORGMessageAbstract;
 import local.ts3snet.unicbot_ms_spring.module_telegram.service.TelegramBotService;
-import local.uniclog.frame_dataaccess.entity.TelegramTORGUserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;

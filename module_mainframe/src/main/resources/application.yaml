@@ -1,0 +1,41 @@
+# Server
+server:
+  port: 27097
+
+spring:
+  application.name: Uniclog Mainframe module
+  banner.location: logo.txt
+  task.scheduling.pool.size: 4
+
+  # Database Properties
+  sql.init.platform: h2
+  datasource:
+    url: jdbc:h2:file:./data/uniclogdb_mainframe
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-db-console
+      settings.web-allow-others: true
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: update
+
+  # Logs
+  main.log-startup-info: false
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate: INFO
+      springframework.web: INFO
+      #file.name: unicbotlogs.log
+  logback.rollingpolicy.max-history: 30
+  charset.file: utf-8
+  pattern:
+    file: "%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}} --- %-40.40logger : %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+    #console: "%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}} --- %-40.40logger : %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"

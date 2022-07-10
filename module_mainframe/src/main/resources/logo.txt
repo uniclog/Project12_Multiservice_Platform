@@ -19,5 +19,5 @@
 ██████╔╝██║░░░░░██║░░██║██║██║░╚███║╚██████╔╝
 ╚═════╝░╚═╝░░░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝░╚═════╝░
 
- :: App Version ::                (${application.version})
- :: Spring Boot ::                (${spring-boot.version})
+ :: App Name ::                           (${spring.application.name})
+ :: Spring Boot Version ::                (${spring-boot.version})

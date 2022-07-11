@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "org.sonarqube" version "3.4.0.2513"
+    id 'jacoco'
 }
 group = 'local.ts3snet'
 version = '0.0.1-SNAPSHOT'

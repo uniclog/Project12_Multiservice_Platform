@@ -2,7 +2,7 @@ name: "SonarCloud Analyze"
 
 on:
   push:
-    branches: [ master ]
+    branches: [ all ]
   pull_request:
     types: [ opened, synchronize, reopened ]
   schedule:

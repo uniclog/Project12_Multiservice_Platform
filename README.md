@@ -1,3 +1,6 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=uniclog_Uniclog_Multiservice_Platform&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=uniclog_Uniclog_Multiservice_Platform)
+<br>
+<br>
 ![Alt text](icon.svg?raw=true "Uniclog Multiservice Platform")
 # Uniclog Multiservice Platform 
 

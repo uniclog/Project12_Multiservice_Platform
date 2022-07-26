@@ -1,4 +1,5 @@
 rootProject.name = 'UnicBotGESpring'
 include 'module_mainframe'
 include 'module_source'
+include 'module_eureka'
 

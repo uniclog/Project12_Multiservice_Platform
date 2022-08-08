@@ -1,4 +1,4 @@
-rootProject.name = 'UnicBotGESpring'
+rootProject.name = 'Project12MultiServicePlatform'
 include 'module_mainframe'
 include 'module_eureka'
 

@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.api.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataAccessService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,11 +33,11 @@ class TelegramTORGUserDataAccessControllerTest {
     private ObjectMapper objectMapper;
     @Autowired
     private MockMvc mockMvc;
-    private TelegramTORGUserEntityDataTransferObject entity;
+    private TelegramTORGUserEntityDto entity;
 
     @BeforeEach
     void setUp() {
-        entity = TelegramTORGUserEntityDataTransferObject.builder()
+        entity = TelegramTORGUserEntityDto.builder()
                 .id(1L)
                 .userTelegramId(userTelegramId)
                 .subscriber(true)

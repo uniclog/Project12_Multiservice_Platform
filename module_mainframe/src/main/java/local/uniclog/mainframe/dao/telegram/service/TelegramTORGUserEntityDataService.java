@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service;
 
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDto;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
 
 import java.util.List;
@@ -77,15 +77,15 @@ public interface TelegramTORGUserEntityDataService {
      * Convert entity to Dto object
      *
      * @param entity {@link TelegramTORGUserEntity}
-     * @return {@link TelegramMyFitnessUserEntityDataTransferObject}
+     * @return {@link TelegramMyFitnessUserEntityDto}
      */
-    TelegramTORGUserEntityDataTransferObject convertToDataTransferObject(TelegramTORGUserEntity entity);
+    TelegramTORGUserEntityDto convertToDataTransferObject(TelegramTORGUserEntity entity);
 
     /**
      * Convert Dto object to entity
      *
-     * @param dto {@link TelegramMyFitnessUserEntityDataTransferObject}
+     * @param dto {@link TelegramMyFitnessUserEntityDto}
      * @return {@link TelegramTORGUserEntity}
      */
-    TelegramTORGUserEntity convertFromDataTransferObject(TelegramTORGUserEntityDataTransferObject dto);
+    TelegramTORGUserEntity convertFromDataTransferObject(TelegramTORGUserEntityDto dto);
 }

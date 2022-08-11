@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -148,7 +148,7 @@ class TelegramUnicBotCoreUserEntityDataServiceImplTest {
 
     @Test
     void convertToDataTransferObject() {
-        TelegramUnicBotCoreUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(entity);
+        TelegramUnicBotCoreUserEntityDto dto = entityDataService.convertToDataTransferObject(entity);
         TelegramUnicBotCoreUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
 
         assertEquals(entity, entityFromDto);
@@ -160,7 +160,7 @@ class TelegramUnicBotCoreUserEntityDataServiceImplTest {
         temp.setUserTelegramId(123123123L);
         temp.setSubscriber(true);
 
-        TelegramUnicBotCoreUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(temp);
+        TelegramUnicBotCoreUserEntityDto dto = entityDataService.convertToDataTransferObject(temp);
         TelegramUnicBotCoreUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
         assertEquals(temp, entityFromDto);
     }

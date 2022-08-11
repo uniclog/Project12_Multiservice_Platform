@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.dao.teamspeak.service;
 
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 
 import java.util.List;
 
@@ -16,46 +16,46 @@ public interface TeamspeakUserEntityDataAccessService {
      *
      * @param object user {@link Object}
      * @param <T>    объект для метода save
-     * @return {@link TeamspeakUserEntityDataTransferObject}
+     * @return {@link TeamspeakUserEntityDto}
      */
-    <T> TeamspeakUserEntityDataTransferObject save(T object);
+    <T> TeamspeakUserEntityDto save(T object);
 
     /**
      * Обертка для обновления полей записи
      *
      * @param object {@link Object}
      * @param <T>    объект для метода update
-     * @return {@link TeamspeakUserEntityDataTransferObject}
+     * @return {@link TeamspeakUserEntityDto}
      */
-    <T> TeamspeakUserEntityDataTransferObject update(T object);
+    <T> TeamspeakUserEntityDto update(T object);
 
     /**
      * Обертка для получения пользователя по его token
      *
      * @param token teamspeak-token
-     * @return {@link TeamspeakUserEntityDataTransferObject}
+     * @return {@link TeamspeakUserEntityDto}
      */
-    TeamspeakUserEntityDataTransferObject findByTeamspeakToken(String token);
+    TeamspeakUserEntityDto findByTeamspeakToken(String token);
 
     /**
      * Обертка для получения всх записей с флагом subscribe
      *
-     * @return List&lt;{@link TeamspeakUserEntityDataTransferObject}&gt;
+     * @return List&lt;{@link TeamspeakUserEntityDto}&gt;
      */
-    List<TeamspeakUserEntityDataTransferObject> findAllSubscribers();
+    List<TeamspeakUserEntityDto> findAllSubscribers();
 
     /**
      * Обертка для получения всех записей из бд
      *
-     * @return List&lt;{@link TeamspeakUserEntityDataTransferObject}&gt;
+     * @return List&lt;{@link TeamspeakUserEntityDto}&gt;
      */
-    List<TeamspeakUserEntityDataTransferObject> findAll();
+    List<TeamspeakUserEntityDto> findAll();
 
     /**
      * Обертка для удаления записи по token
      *
      * @param token teamspeak-token
-     * @return List&lt;{@link TeamspeakUserEntityDataTransferObject}&gt;
+     * @return List&lt;{@link TeamspeakUserEntityDto}&gt;
      */
-    List<TeamspeakUserEntityDataTransferObject> deleteByTeamspeakToken(String token);
+    List<TeamspeakUserEntityDto> deleteByTeamspeakToken(String token);
 }

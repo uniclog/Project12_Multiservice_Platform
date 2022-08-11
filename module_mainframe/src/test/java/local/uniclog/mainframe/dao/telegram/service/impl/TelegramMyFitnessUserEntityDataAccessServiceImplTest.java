@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,18 +18,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TelegramMyFitnessUserEntityDataAccessServiceImplTest {
     private final Long userTelegramId = 123L;
-    private final String userName = "userName";
     private final Boolean subscriber = true;
-    private final Integer waterCount = 0;
     @Autowired
     @Qualifier("beanTelegramMyFitnessUserEntityDataAccessServiceTest")
     private TelegramMyFitnessUserEntityDataAccessService service;
-    private TelegramMyFitnessUserEntityDataTransferObject entity;
+    private TelegramMyFitnessUserEntityDto entity;
 
 
     @BeforeEach
     void setUp() {
-        entity = TelegramMyFitnessUserEntityDataTransferObject.builder()
+        Integer waterCount = 0;
+        String userName = "userName";
+        entity = TelegramMyFitnessUserEntityDto.builder()
                 .userTelegramId(userTelegramId)
                 .userName(userName)
                 .waterCount(waterCount)

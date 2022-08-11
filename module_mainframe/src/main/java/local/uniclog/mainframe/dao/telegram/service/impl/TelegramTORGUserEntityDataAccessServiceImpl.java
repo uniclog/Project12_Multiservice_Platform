@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
-import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataAccessService;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +24,8 @@ public class TelegramTORGUserEntityDataAccessServiceImpl implements TelegramTORG
     public final TelegramTORGUserEntityDataService service;
 
     @Override
-    public <T> TelegramTORGUserEntityDataTransferObject save(T object) {
-        if (object instanceof TelegramTORGUserEntityDataTransferObject entityDto) {
+    public <T> TelegramTORGUserEntityDto save(T object) {
+        if (object instanceof TelegramTORGUserEntityDto entityDto) {
             var entity = service.convertFromDataTransferObject(entityDto);
             entity = service.save(entity);
             return service.convertToDataTransferObject(entity);
@@ -34,8 +34,8 @@ public class TelegramTORGUserEntityDataAccessServiceImpl implements TelegramTORG
     }
 
     @Override
-    public <T> TelegramTORGUserEntityDataTransferObject update(T object) {
-        if (object instanceof TelegramTORGUserEntityDataTransferObject entityDto) {
+    public <T> TelegramTORGUserEntityDto update(T object) {
+        if (object instanceof TelegramTORGUserEntityDto entityDto) {
             var entity = service.convertFromDataTransferObject(entityDto);
             entity = service.update(entity);
             return service.convertToDataTransferObject(entity);
@@ -44,13 +44,13 @@ public class TelegramTORGUserEntityDataAccessServiceImpl implements TelegramTORG
     }
 
     @Override
-    public TelegramTORGUserEntityDataTransferObject findByUserTelegramId(Long userTelegramId) {
+    public TelegramTORGUserEntityDto findByUserTelegramId(Long userTelegramId) {
         var entity = service.findByUserTelegramId(userTelegramId);
         return (entity == null) ? null : service.convertToDataTransferObject(entity);
     }
 
     @Override
-    public List<TelegramTORGUserEntityDataTransferObject> findAllSubscribers() {
+    public List<TelegramTORGUserEntityDto> findAllSubscribers() {
         var entities = service.findAllSubscribers();
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
@@ -58,7 +58,7 @@ public class TelegramTORGUserEntityDataAccessServiceImpl implements TelegramTORG
     }
 
     @Override
-    public List<TelegramTORGUserEntityDataTransferObject> findAll() {
+    public List<TelegramTORGUserEntityDto> findAll() {
         var entities = service.findAll();
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
@@ -66,7 +66,7 @@ public class TelegramTORGUserEntityDataAccessServiceImpl implements TelegramTORG
     }
 
     @Override
-    public List<TelegramTORGUserEntityDataTransferObject> deleteAllByUserTelegramId(Long id) {
+    public List<TelegramTORGUserEntityDto> deleteAllByUserTelegramId(Long id) {
         var entities = service.deleteAllByUserTelegramId(id);
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)

@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.api.dao;
 
-import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class TelegramTORGUserDataAccessController {
      * @return entity
      */
     @PutMapping("/save")
-    public ResponseEntity<TelegramTORGUserEntityDataTransferObject> save(@RequestBody TelegramTORGUserEntityDataTransferObject entity) {
+    public ResponseEntity<TelegramTORGUserEntityDto> save(@RequestBody TelegramTORGUserEntityDto entity) {
         var transferObject = service.save(entity);
         if (transferObject == null)
             return ResponseEntity.internalServerError().build();
@@ -41,7 +41,7 @@ public class TelegramTORGUserDataAccessController {
      * @return entity
      */
     @PatchMapping("/update")
-    public ResponseEntity<TelegramTORGUserEntityDataTransferObject> update(@RequestBody TelegramTORGUserEntityDataTransferObject entity) {
+    public ResponseEntity<TelegramTORGUserEntityDto> update(@RequestBody TelegramTORGUserEntityDto entity) {
         var transferObject = service.update(entity);
         if (transferObject == null)
             return ResponseEntity.internalServerError().build();
@@ -55,7 +55,7 @@ public class TelegramTORGUserDataAccessController {
      * @return entity
      */
     @GetMapping("/findByUserTelegramId/{id}")
-    public ResponseEntity<TelegramTORGUserEntityDataTransferObject> findByUserTelegramId(@PathVariable Long id) {
+    public ResponseEntity<TelegramTORGUserEntityDto> findByUserTelegramId(@PathVariable Long id) {
         var transferObject = service.findByUserTelegramId(id);
         return (transferObject == null)
                 ? ResponseEntity.notFound().build()
@@ -68,7 +68,7 @@ public class TelegramTORGUserDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAllSubscribers")
-    public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> findAllSubscribers() {
+    public ResponseEntity<List<TelegramTORGUserEntityDto>> findAllSubscribers() {
         var transferObjectList = service.findAllSubscribers();
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
@@ -81,7 +81,7 @@ public class TelegramTORGUserDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAll")
-    public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> findAll() {
+    public ResponseEntity<List<TelegramTORGUserEntityDto>> findAll() {
         var transferObjectList = service.findAll();
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
@@ -95,7 +95,7 @@ public class TelegramTORGUserDataAccessController {
      * @return list of entities
      */
     @DeleteMapping("/deleteAllByUserTelegramId/{id}")
-    public ResponseEntity<List<TelegramTORGUserEntityDataTransferObject>> deleteAllByUserTelegramId(@PathVariable Long id) {
+    public ResponseEntity<List<TelegramTORGUserEntityDto>> deleteAllByUserTelegramId(@PathVariable Long id) {
         var transferObjectList = service.deleteAllByUserTelegramId(id);
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()

@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramMyFitnessUserEntity;
 import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -158,7 +158,7 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
 
     @Test
     void convertToDataTransferObject() {
-        TelegramMyFitnessUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(entity);
+        TelegramMyFitnessUserEntityDto dto = entityDataService.convertToDataTransferObject(entity);
         TelegramMyFitnessUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
 
         assertEquals(entity, entityFromDto);
@@ -170,7 +170,7 @@ class TelegramMyFitnessUserEntityDataServiceImplTest {
         temp.setUserTelegramId(123123123L);
         temp.setSubscriber(true);
 
-        TelegramMyFitnessUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(temp);
+        TelegramMyFitnessUserEntityDto dto = entityDataService.convertToDataTransferObject(temp);
         TelegramMyFitnessUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
         assertEquals(temp, entityFromDto);
     }

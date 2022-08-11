@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.common.DataUtilsService;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramTORGUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramTORGUserRepository;
 import local.uniclog.mainframe.dao.telegram.service.TelegramTORGUserEntityDataService;
@@ -70,12 +70,12 @@ public class TelegramTORGUserEntityDataServiceImpl implements TelegramTORGUserEn
     }
 
     @Override
-    public TelegramTORGUserEntityDataTransferObject convertToDataTransferObject(TelegramTORGUserEntity entity) {
-        return dataUtilsService.convertData(entity, TelegramTORGUserEntityDataTransferObject.class);
+    public TelegramTORGUserEntityDto convertToDataTransferObject(TelegramTORGUserEntity entity) {
+        return dataUtilsService.convertData(entity, TelegramTORGUserEntityDto.class);
     }
 
     @Override
-    public TelegramTORGUserEntity convertFromDataTransferObject(TelegramTORGUserEntityDataTransferObject dto) {
+    public TelegramTORGUserEntity convertFromDataTransferObject(TelegramTORGUserEntityDto dto) {
         return dataUtilsService.convertData(dto, TelegramTORGUserEntity.class);
     }
 }

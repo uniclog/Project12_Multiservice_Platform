@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.teamspeak.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,11 +23,11 @@ class TeamspeakUserEntityDataAccessServiceImplTest {
     @Autowired
     @Qualifier("beanTeamspeakUserEntityDataAccessServiceTest")
     private TeamspeakUserEntityDataAccessService service;
-    private TeamspeakUserEntityDataTransferObject entity;
+    private TeamspeakUserEntityDto entity;
 
     @BeforeEach
     void setUp() {
-        entity = TeamspeakUserEntityDataTransferObject.builder()
+        entity = TeamspeakUserEntityDto.builder()
                 .teamspeakToken(token)
                 .subscriber(subscriber)
                 .build();

@@ -1,19 +1,19 @@
 package local.uniclog.mainframe.dao.telegram.dto;
 
-import local.uniclog.mainframe.dao.telegram.entity.TelegramMyFitnessUserEntity;
+import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Data Transfer Object for {@link TelegramMyFitnessUserEntity}
+ * Data Transfer Object for {@link TelegramTORGUserEntity}
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramMyFitnessUserEntityDataTransferObject {
+public class TelegramTORGUserEntityDto {
     /**
      * DataBase-Id пользователя
      */
@@ -30,8 +30,4 @@ public class TelegramMyFitnessUserEntityDataTransferObject {
      * Флаг подписки на бота
      */
     private Boolean subscriber;
-    /**
-     * Поле содержит количество выпитых стаканов
-     */
-    private Integer waterCount;
 }

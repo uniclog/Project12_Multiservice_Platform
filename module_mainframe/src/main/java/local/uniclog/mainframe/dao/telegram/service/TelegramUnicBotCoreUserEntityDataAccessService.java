@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.dao.telegram.service;
 
-import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDto;
 
 import java.util.List;
 
@@ -15,49 +15,49 @@ public interface TelegramUnicBotCoreUserEntityDataAccessService {
     /**
      * Сохранение сущности в бд
      *
-     * @param object {@link TelegramUnicBotCoreUserEntityDataTransferObject} объект пользователя
+     * @param object {@link TelegramUnicBotCoreUserEntityDto} объект пользователя
      * @param <T>    abstract object
-     * @return {@link TelegramUnicBotCoreUserEntityDataTransferObject} сущность пользователя
+     * @return {@link TelegramUnicBotCoreUserEntityDto} сущность пользователя
      */
-    <T> TelegramUnicBotCoreUserEntityDataTransferObject save(T object);
+    <T> TelegramUnicBotCoreUserEntityDto save(T object);
 
     /**
      * Обновление полей для записи
      *
-     * @param object {@link TelegramUnicBotCoreUserEntityDataTransferObject} объект пользователя
+     * @param object {@link TelegramUnicBotCoreUserEntityDto} объект пользователя
      * @param <T>    abstract object
-     * @return {@link TelegramUnicBotCoreUserEntityDataTransferObject} сущность пользователя
+     * @return {@link TelegramUnicBotCoreUserEntityDto} сущность пользователя
      */
-    <T> TelegramUnicBotCoreUserEntityDataTransferObject update(T object);
+    <T> TelegramUnicBotCoreUserEntityDto update(T object);
 
     /**
      * Возвращает запись по Telegram-Id пользователя
      *
      * @param userTelegramId Telegram-Id пользователя
-     * @return {@link TelegramUnicBotCoreUserEntityDataTransferObject} сущность пользователя
+     * @return {@link TelegramUnicBotCoreUserEntityDto} сущность пользователя
      */
-    TelegramUnicBotCoreUserEntityDataTransferObject findByUserTelegramId(Long userTelegramId);
+    TelegramUnicBotCoreUserEntityDto findByUserTelegramId(Long userTelegramId);
 
     /**
      * Возвращает все записи с флагом subscribe
      *
-     * @return List&lt;{@link TelegramUnicBotCoreUserEntityDataTransferObject}&gt; список сущностей
+     * @return List&lt;{@link TelegramUnicBotCoreUserEntityDto}&gt; список сущностей
      */
-    List<TelegramUnicBotCoreUserEntityDataTransferObject> findAllSubscribers();
+    List<TelegramUnicBotCoreUserEntityDto> findAllSubscribers();
 
     /**
      * Возвращает все записи из бд
      *
-     * @return List&lt;{@link TelegramUnicBotCoreUserEntityDataTransferObject}&gt; список сущностей
+     * @return List&lt;{@link TelegramUnicBotCoreUserEntityDto}&gt; список сущностей
      */
-    List<TelegramUnicBotCoreUserEntityDataTransferObject> findAll();
+    List<TelegramUnicBotCoreUserEntityDto> findAll();
 
     /**
      * Удаление всех записей по Telegram-Id пользователя,
      * если записей нессколько удалятся все
      *
      * @param id Telegram-Id пользователя
-     * @return List&lt;{@link TelegramUnicBotCoreUserEntityDataTransferObject}&gt; список удаленных сущностей
+     * @return List&lt;{@link TelegramUnicBotCoreUserEntityDto}&gt; список удаленных сущностей
      */
-    List<TelegramUnicBotCoreUserEntityDataTransferObject> deleteAllByUserTelegramId(Long id);
+    List<TelegramUnicBotCoreUserEntityDto> deleteAllByUserTelegramId(Long id);
 }

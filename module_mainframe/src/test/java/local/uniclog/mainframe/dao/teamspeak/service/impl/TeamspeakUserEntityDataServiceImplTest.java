@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.teamspeak.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 import local.uniclog.mainframe.dao.teamspeak.entity.TeamspeakUserEntity;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataService;
 import lombok.extern.slf4j.Slf4j;
@@ -126,7 +126,7 @@ class TeamspeakUserEntityDataServiceImplTest {
 
     @Test
     void convertToDataTransferObject() {
-        TeamspeakUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(entity);
+        TeamspeakUserEntityDto dto = entityDataService.convertToDataTransferObject(entity);
         TeamspeakUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
 
         assertEquals(entity, entityFromDto);
@@ -138,7 +138,7 @@ class TeamspeakUserEntityDataServiceImplTest {
         temp.setTeamspeakToken("otherTokenTrue");
         temp.setSubscriber(true);
 
-        TeamspeakUserEntityDataTransferObject dto = entityDataService.convertToDataTransferObject(temp);
+        TeamspeakUserEntityDto dto = entityDataService.convertToDataTransferObject(temp);
         TeamspeakUserEntity entityFromDto = entityDataService.convertFromDataTransferObject(dto);
         assertEquals(temp, entityFromDto);
     }

@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.dao.teamspeak.service;
 
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 import local.uniclog.mainframe.dao.teamspeak.entity.TeamspeakUserEntity;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * <li>возвращает все записи с флагом subscribe {@link TeamspeakUserEntityDataService#findAllSubscribers()}</li>
  * <li>возвращает все записи из бд {@link TeamspeakUserEntityDataService#findAll()}</li>
  * <li>удаление записи по token пользователя {@link TeamspeakUserEntityDataService#deleteByTeamspeakToken(String)}</li>
- * <li>конвертирование DTO в объект пользователя {@link TeamspeakUserEntityDataService#convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject)} (String)}</li>
+ * <li>конвертирование DTO в объект пользователя {@link TeamspeakUserEntityDataService#convertFromDataTransferObject(TeamspeakUserEntityDto)} (String)}</li>
  * <li>конвертирование объекта в DTO {@link TeamspeakUserEntityDataService#convertToDataTransferObject(TeamspeakUserEntity)} (String)}</li>
  * </ul>
  *
@@ -76,15 +76,15 @@ public interface TeamspeakUserEntityDataService {
      * Convert entity to Dto object
      *
      * @param entity {@link TeamspeakUserEntity}
-     * @return {@link TeamspeakUserEntityDataTransferObject}
+     * @return {@link TeamspeakUserEntityDto}
      */
-    TeamspeakUserEntityDataTransferObject convertToDataTransferObject(TeamspeakUserEntity entity);
+    TeamspeakUserEntityDto convertToDataTransferObject(TeamspeakUserEntity entity);
 
     /**
      * Convert Dto object to entity
      *
-     * @param dto {@link TeamspeakUserEntityDataTransferObject}
+     * @param dto {@link TeamspeakUserEntityDto}
      * @return {@link TeamspeakUserEntity}
      */
-    TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject dto);
+    TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDto dto);
 }

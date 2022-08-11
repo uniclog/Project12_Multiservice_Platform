@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamspeakUserEntityDataTransferObject {
+public class TeamspeakUserEntityDto {
     /**
      * User id
      */

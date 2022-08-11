@@ -1,19 +1,19 @@
 package local.uniclog.mainframe.dao.telegram.dto;
 
-import local.uniclog.mainframe.dao.telegram.entity.TelegramTORGUserEntity;
+import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Data Transfer Object for {@link TelegramTORGUserEntity}
+ * Data Transfer Object for {@link TelegramUnicBotCoreUserEntity}
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelegramTORGUserEntityDataTransferObject {
+public class TelegramUnicBotCoreUserEntityDto {
     /**
      * DataBase-Id пользователя
      */

@@ -2,8 +2,8 @@ package local.uniclog.mainframe.api.dao;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import local.uniclog.mainframe.dao.extensions.service_ekey.entity.EsKeyEntity;
-import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
+import local.uniclog.mainframe.dao.extensions.service_ekey.dto.EsKeyEntityDto;
+import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataAccessService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +29,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EsKeyDataAccessControllerTest {
     private static final String api = "/api/EsKeyDataAccessController";
     @MockBean
-    private EsKeyEntityDataService service;
+    private EsKeyEntityDataAccessService service;
     @Autowired
     private ObjectMapper objectMapper;
     @Autowired
     private MockMvc mockMvc;
 
-    private EsKeyEntity entity;
+    private EsKeyEntityDto entity;
     private String key;
     private LocalDateTime date;
 
     @BeforeEach
     void setUp() {
-        entity = new EsKeyEntity();
         key = "1234-1234-1234-1234-1234";
-        entity.setKeyValue(key);
+        entity = EsKeyEntityDto.builder()
+                .keyValue(key)
+                .date(LocalDateTime.now())
+                .build();
         date = entity.getDate();
     }
 

@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.teamspeak.service.impl;
 
 import local.uniclog.mainframe.dao.common.DataUtilsService;
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 import local.uniclog.mainframe.dao.teamspeak.entity.TeamspeakUserEntity;
 import local.uniclog.mainframe.dao.teamspeak.repository.TeamspeakUserRepository;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataService;
@@ -64,12 +64,12 @@ public class TeamspeakUserEntityDataServiceImpl implements TeamspeakUserEntityDa
     }
 
     @Override
-    public TeamspeakUserEntityDataTransferObject convertToDataTransferObject(TeamspeakUserEntity entity) {
-        return dataUtilsService.convertData(entity, TeamspeakUserEntityDataTransferObject.class);
+    public TeamspeakUserEntityDto convertToDataTransferObject(TeamspeakUserEntity entity) {
+        return dataUtilsService.convertData(entity, TeamspeakUserEntityDto.class);
     }
 
     @Override
-    public TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDataTransferObject dto) {
+    public TeamspeakUserEntity convertFromDataTransferObject(TeamspeakUserEntityDto dto) {
         return dataUtilsService.convertData(dto, TeamspeakUserEntity.class);
     }
 }

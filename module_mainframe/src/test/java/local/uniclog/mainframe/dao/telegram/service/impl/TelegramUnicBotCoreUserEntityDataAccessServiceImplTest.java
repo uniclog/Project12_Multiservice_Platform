@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.DataServiceTestConfiguration;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataAccessService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,17 +18,17 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = DataServiceTestConfiguration.class)
 class TelegramUnicBotCoreUserEntityDataAccessServiceImplTest {
     private final Long userTelegramId = 123L;
-    private final String userName = "userName";
     private final Boolean subscriber = true;
     @Autowired
     @Qualifier("beanTelegramUnicBotCoreUserEntityDataAccessServiceTest")
     private TelegramUnicBotCoreUserEntityDataAccessService service;
-    private TelegramUnicBotCoreUserEntityDataTransferObject entity;
+    private TelegramUnicBotCoreUserEntityDto entity;
 
 
     @BeforeEach
     void setUp() {
-        entity = TelegramUnicBotCoreUserEntityDataTransferObject.builder()
+        String userName = "userName";
+        entity = TelegramUnicBotCoreUserEntityDto.builder()
                 .userTelegramId(userTelegramId)
                 .userName(userName)
                 .subscriber(subscriber)

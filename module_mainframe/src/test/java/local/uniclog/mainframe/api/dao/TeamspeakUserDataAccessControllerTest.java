@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.api.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataAccessService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,11 +32,11 @@ class TeamspeakUserDataAccessControllerTest {
     private ObjectMapper objectMapper;
     @Autowired
     private MockMvc mockMvc;
-    private TeamspeakUserEntityDataTransferObject entity;
+    private TeamspeakUserEntityDto entity;
 
     @BeforeEach
     void setUp() {
-        entity = TeamspeakUserEntityDataTransferObject.builder()
+        entity = TeamspeakUserEntityDto.builder()
                 .id(1)
                 .teamspeakToken(token)
                 .subscriber(true)

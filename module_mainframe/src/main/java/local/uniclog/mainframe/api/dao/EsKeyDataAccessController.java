@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.api.dao;
 
-import local.uniclog.mainframe.dao.extensions.service_ekey.entity.EsKeyEntity;
-import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
+import local.uniclog.mainframe.dao.extensions.service_ekey.dto.EsKeyEntityDto;
+import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/api/EsKeyDataAccessController")
 @RequiredArgsConstructor
 public class EsKeyDataAccessController {
-    private final EsKeyEntityDataService service;
+    private final EsKeyEntityDataAccessService service;
 
     /**
      * Save entity to database
@@ -29,10 +29,11 @@ public class EsKeyDataAccessController {
      * @return entity
      */
     @PutMapping("/save")
-    public ResponseEntity<EsKeyEntity> save(@RequestBody EsKeyEntity entity) {
-        if ((entity = service.save(entity)) != null)
-            return ResponseEntity.ok().body(entity);
-        else return ResponseEntity.internalServerError().build();
+    public ResponseEntity<EsKeyEntityDto> save(@RequestBody EsKeyEntityDto entity) {
+        var transferObject = service.save(entity);
+        if (transferObject == null)
+            return ResponseEntity.internalServerError().build();
+        else return ResponseEntity.ok().body(transferObject);
     }
 
     /**
@@ -41,9 +42,8 @@ public class EsKeyDataAccessController {
      * @param entity entity
      */
     @DeleteMapping("/delete")
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@RequestBody EsKeyEntity entity) {
-        service.delete(entity);
+    public ResponseEntity<Boolean> delete(@RequestBody EsKeyEntityDto entity) {
+        return ResponseEntity.ok().body(service.delete(entity));
     }
 
     /**
@@ -62,7 +62,7 @@ public class EsKeyDataAccessController {
      * @return entity or null
      */
     @DeleteMapping("/deleteByKey/{key}")
-    public ResponseEntity<EsKeyEntity> deleteByKey(@PathVariable String key) {
+    public ResponseEntity<EsKeyEntityDto> deleteByKey(@PathVariable String key) {
         var entity = service.deleteByKey(key);
         return (entity != null)
                 ? ResponseEntity.ok().body(entity)
@@ -76,7 +76,7 @@ public class EsKeyDataAccessController {
      * @return list of entities
      */
     @PostMapping("/findByDateAfter")
-    public ResponseEntity<List<EsKeyEntity>> findByDateAfter(@RequestBody LocalDateTime date) {
+    public ResponseEntity<List<EsKeyEntityDto>> findByDateAfter(@RequestBody LocalDateTime date) {
         var entityList = service.findByDateAfter(date);
         return (entityList != null)
                 ? ResponseEntity.ok().body(entityList)
@@ -89,7 +89,7 @@ public class EsKeyDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAll")
-    public ResponseEntity<List<EsKeyEntity>> findAll() {
+    public ResponseEntity<List<EsKeyEntityDto>> findAll() {
         var entityList = service.findAll();
         return (entityList != null)
                 ? ResponseEntity.ok().body(entityList)
@@ -103,7 +103,7 @@ public class EsKeyDataAccessController {
      * @return EsKey entity
      */
     @GetMapping("/findByKey/{key}")
-    public ResponseEntity<EsKeyEntity> findByKey(@PathVariable String key) {
+    public ResponseEntity<EsKeyEntityDto> findByKey(@PathVariable String key) {
         var entity = service.findByKey(key);
         return (entity != null)
                 ? ResponseEntity.ok().body(entity)

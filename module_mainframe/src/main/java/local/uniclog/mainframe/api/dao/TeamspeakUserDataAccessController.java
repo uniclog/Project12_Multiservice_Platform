@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.api.dao;
 
-import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.teamspeak.dto.TeamspeakUserEntityDto;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class TeamspeakUserDataAccessController {
      * @return entity
      */
     @PutMapping("/save")
-    public ResponseEntity<TeamspeakUserEntityDataTransferObject> save(@RequestBody TeamspeakUserEntityDataTransferObject entity) {
+    public ResponseEntity<TeamspeakUserEntityDto> save(@RequestBody TeamspeakUserEntityDto entity) {
         var transferObject = service.save(entity);
         if (transferObject == null)
             return ResponseEntity.internalServerError().build();
@@ -41,7 +41,7 @@ public class TeamspeakUserDataAccessController {
      * @return entity
      */
     @PatchMapping("/update")
-    public ResponseEntity<TeamspeakUserEntityDataTransferObject> update(@RequestBody TeamspeakUserEntityDataTransferObject entity) {
+    public ResponseEntity<TeamspeakUserEntityDto> update(@RequestBody TeamspeakUserEntityDto entity) {
         var transferObject = service.update(entity);
         if (transferObject == null)
             return ResponseEntity.internalServerError().build();
@@ -55,7 +55,7 @@ public class TeamspeakUserDataAccessController {
      * @return entity
      */
     @GetMapping("/findByTeamspeakToken/{token}")
-    public ResponseEntity<TeamspeakUserEntityDataTransferObject> findByTeamspeakToken(@PathVariable String token) {
+    public ResponseEntity<TeamspeakUserEntityDto> findByTeamspeakToken(@PathVariable String token) {
         var transferObject = service.findByTeamspeakToken(token);
         return (transferObject == null)
                 ? ResponseEntity.notFound().build()
@@ -68,7 +68,7 @@ public class TeamspeakUserDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAllSubscribers")
-    public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> findAllSubscribers() {
+    public ResponseEntity<List<TeamspeakUserEntityDto>> findAllSubscribers() {
         var transferObjectList = service.findAllSubscribers();
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
@@ -81,7 +81,7 @@ public class TeamspeakUserDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAll")
-    public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> findAll() {
+    public ResponseEntity<List<TeamspeakUserEntityDto>> findAll() {
         var transferObjectList = service.findAll();
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
@@ -95,7 +95,7 @@ public class TeamspeakUserDataAccessController {
      * @return list of entities
      */
     @DeleteMapping("/deleteByTeamspeakToken/{token}")
-    public ResponseEntity<List<TeamspeakUserEntityDataTransferObject>> deleteByTeamspeakToken(@PathVariable String token) {
+    public ResponseEntity<List<TeamspeakUserEntityDto>> deleteByTeamspeakToken(@PathVariable String token) {
         var transferObjectList = service.deleteByTeamspeakToken(token);
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()

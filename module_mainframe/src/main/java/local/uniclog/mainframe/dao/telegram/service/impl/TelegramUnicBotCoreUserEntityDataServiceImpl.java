@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.common.DataUtilsService;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramUnicBotCoreRepository;
 import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataService;
@@ -70,12 +70,12 @@ public class TelegramUnicBotCoreUserEntityDataServiceImpl implements TelegramUni
     }
 
     @Override
-    public TelegramUnicBotCoreUserEntityDataTransferObject convertToDataTransferObject(TelegramUnicBotCoreUserEntity entity) {
-        return dataUtilsService.convertData(entity, TelegramUnicBotCoreUserEntityDataTransferObject.class);
+    public TelegramUnicBotCoreUserEntityDto convertToDataTransferObject(TelegramUnicBotCoreUserEntity entity) {
+        return dataUtilsService.convertData(entity, TelegramUnicBotCoreUserEntityDto.class);
     }
 
     @Override
-    public TelegramUnicBotCoreUserEntity convertFromDataTransferObject(TelegramUnicBotCoreUserEntityDataTransferObject dto) {
+    public TelegramUnicBotCoreUserEntity convertFromDataTransferObject(TelegramUnicBotCoreUserEntityDto dto) {
         return dataUtilsService.convertData(dto, TelegramUnicBotCoreUserEntity.class);
     }
 }

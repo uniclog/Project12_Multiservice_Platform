@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.api.dao;
 
-import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramUnicBotCoreUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.service.TelegramUnicBotCoreUserEntityDataAccessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class TelegramUnicBotCoreUserDataAccessController {
      * @return entity
      */
     @PutMapping("/save")
-    public ResponseEntity<TelegramUnicBotCoreUserEntityDataTransferObject> save(@RequestBody TelegramUnicBotCoreUserEntityDataTransferObject entity) {
+    public ResponseEntity<TelegramUnicBotCoreUserEntityDto> save(@RequestBody TelegramUnicBotCoreUserEntityDto entity) {
         var transferObject = service.save(entity);
         if (transferObject == null)
             return ResponseEntity.internalServerError().build();
@@ -41,7 +41,7 @@ public class TelegramUnicBotCoreUserDataAccessController {
      * @return entity
      */
     @PatchMapping("/update")
-    public ResponseEntity<TelegramUnicBotCoreUserEntityDataTransferObject> update(@RequestBody TelegramUnicBotCoreUserEntityDataTransferObject entity) {
+    public ResponseEntity<TelegramUnicBotCoreUserEntityDto> update(@RequestBody TelegramUnicBotCoreUserEntityDto entity) {
         var transferObject = service.update(entity);
         if (transferObject == null)
             return ResponseEntity.internalServerError().build();
@@ -55,7 +55,7 @@ public class TelegramUnicBotCoreUserDataAccessController {
      * @return entity
      */
     @GetMapping("/findByUserTelegramId/{id}")
-    public ResponseEntity<TelegramUnicBotCoreUserEntityDataTransferObject> findByUserTelegramId(@PathVariable Long id) {
+    public ResponseEntity<TelegramUnicBotCoreUserEntityDto> findByUserTelegramId(@PathVariable Long id) {
         var transferObject = service.findByUserTelegramId(id);
         return (transferObject == null)
                 ? ResponseEntity.notFound().build()
@@ -68,7 +68,7 @@ public class TelegramUnicBotCoreUserDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAllSubscribers")
-    public ResponseEntity<List<TelegramUnicBotCoreUserEntityDataTransferObject>> findAllSubscribers() {
+    public ResponseEntity<List<TelegramUnicBotCoreUserEntityDto>> findAllSubscribers() {
         var transferObjectList = service.findAllSubscribers();
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
@@ -81,7 +81,7 @@ public class TelegramUnicBotCoreUserDataAccessController {
      * @return List of entities
      */
     @GetMapping("/findAll")
-    public ResponseEntity<List<TelegramUnicBotCoreUserEntityDataTransferObject>> findAll() {
+    public ResponseEntity<List<TelegramUnicBotCoreUserEntityDto>> findAll() {
         var transferObjectList = service.findAll();
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.notFound().build()
@@ -95,7 +95,7 @@ public class TelegramUnicBotCoreUserDataAccessController {
      * @return list of entities
      */
     @DeleteMapping("/deleteAllByUserTelegramId/{id}")
-    public ResponseEntity<List<TelegramUnicBotCoreUserEntityDataTransferObject>> deleteAllByUserTelegramId(@PathVariable Long id) {
+    public ResponseEntity<List<TelegramUnicBotCoreUserEntityDto>> deleteAllByUserTelegramId(@PathVariable Long id) {
         var transferObjectList = service.deleteAllByUserTelegramId(id);
         return (transferObjectList.isEmpty())
                 ? ResponseEntity.internalServerError().build()

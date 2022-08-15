@@ -1,7 +1,7 @@
 package local.uniclog.mainframe.dao.telegram.service.impl;
 
 import local.uniclog.mainframe.dao.common.DataUtilsService;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDto;
 import local.uniclog.mainframe.dao.telegram.entity.TelegramMyFitnessUserEntity;
 import local.uniclog.mainframe.dao.telegram.repository.TelegramMyFitnessUserRepository;
 import local.uniclog.mainframe.dao.telegram.service.TelegramMyFitnessUserEntityDataService;
@@ -70,12 +70,12 @@ public class TelegramMyFitnessUserEntityDataServiceImpl implements TelegramMyFit
     }
 
     @Override
-    public TelegramMyFitnessUserEntityDataTransferObject convertToDataTransferObject(TelegramMyFitnessUserEntity entity) {
-        return dataUtilsService.convertData(entity, TelegramMyFitnessUserEntityDataTransferObject.class);
+    public TelegramMyFitnessUserEntityDto convertToDataTransferObject(TelegramMyFitnessUserEntity entity) {
+        return dataUtilsService.convertData(entity, TelegramMyFitnessUserEntityDto.class);
     }
 
     @Override
-    public TelegramMyFitnessUserEntity convertFromDataTransferObject(TelegramMyFitnessUserEntityDataTransferObject dto) {
+    public TelegramMyFitnessUserEntity convertFromDataTransferObject(TelegramMyFitnessUserEntityDto dto) {
         return dataUtilsService.convertData(dto, TelegramMyFitnessUserEntity.class);
     }
 }

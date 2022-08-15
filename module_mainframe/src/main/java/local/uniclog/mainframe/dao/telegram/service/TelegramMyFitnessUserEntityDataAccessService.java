@@ -1,6 +1,6 @@
 package local.uniclog.mainframe.dao.telegram.service;
 
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDataTransferObject;
+import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDto;
 
 import java.util.List;
 
@@ -17,47 +17,47 @@ public interface TelegramMyFitnessUserEntityDataAccessService {
      *
      * @param object {@link Object}
      * @param <T>    объект пользователя
-     * @return {@link TelegramMyFitnessUserEntityDataTransferObject}
+     * @return {@link TelegramMyFitnessUserEntityDto}
      */
-    <T> TelegramMyFitnessUserEntityDataTransferObject save(T object);
+    <T> TelegramMyFitnessUserEntityDto save(T object);
 
     /**
      * Обёртка метода обновления записи
      *
      * @param object {@link Object}
      * @param <T>    объект пользователя
-     * @return {@link TelegramMyFitnessUserEntityDataTransferObject}
+     * @return {@link TelegramMyFitnessUserEntityDto}
      */
-    <T> TelegramMyFitnessUserEntityDataTransferObject update(T object);
+    <T> TelegramMyFitnessUserEntityDto update(T object);
 
     /**
-     * Обертка для получения {@link TelegramMyFitnessUserEntityDataTransferObject} по Telegram-Id
+     * Обертка для получения {@link TelegramMyFitnessUserEntityDto} по Telegram-Id
      *
      * @param userTelegramId Telegram-Id пользователя
-     * @return {@link TelegramMyFitnessUserEntityDataTransferObject}
+     * @return {@link TelegramMyFitnessUserEntityDto}
      */
-    TelegramMyFitnessUserEntityDataTransferObject findByUserTelegramId(Long userTelegramId);
+    TelegramMyFitnessUserEntityDto findByUserTelegramId(Long userTelegramId);
 
     /**
      * Обёртка метода возвращения всех записей с флагом subscribe
      *
-     * @return List&lt;{@link TelegramMyFitnessUserEntityDataTransferObject}&gt; список Dto
+     * @return List&lt;{@link TelegramMyFitnessUserEntityDto}&gt; список Dto
      */
-    List<TelegramMyFitnessUserEntityDataTransferObject> findAllSubscribers();
+    List<TelegramMyFitnessUserEntityDto> findAllSubscribers();
 
     /**
      * Обёртка метода возвращения всех записей из бд
      *
-     * @return List&lt;{@link TelegramMyFitnessUserEntityDataTransferObject}&gt; список Dto
+     * @return List&lt;{@link TelegramMyFitnessUserEntityDto}&gt; список Dto
      */
-    List<TelegramMyFitnessUserEntityDataTransferObject> findAll();
+    List<TelegramMyFitnessUserEntityDto> findAll();
 
     /**
      * Обёртка метода удаления всех записей по Telegram-Id пользователя,
      * если записей несколько удалятся все
      *
      * @param id Telegram-Id пользователя
-     * @return List&lt;{@link TelegramMyFitnessUserEntityDataTransferObject}&gt; список удаленных сущностей в Dto
+     * @return List&lt;{@link TelegramMyFitnessUserEntityDto}&gt; список удаленных сущностей в Dto
      */
-    List<TelegramMyFitnessUserEntityDataTransferObject> deleteAllByUserTelegramId(Long id);
+    List<TelegramMyFitnessUserEntityDto> deleteAllByUserTelegramId(Long id);
 }

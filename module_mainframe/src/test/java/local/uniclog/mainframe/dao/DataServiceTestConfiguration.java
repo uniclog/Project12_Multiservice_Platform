@@ -2,7 +2,9 @@ package local.uniclog.mainframe.dao;
 
 import local.uniclog.mainframe.dao.common.DataUtilsService;
 import local.uniclog.mainframe.dao.extensions.service_ekey.repository.EsKeyRepository;
+import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataAccessService;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
+import local.uniclog.mainframe.dao.extensions.service_ekey.service.impl.EsKeyEntityDataAccessServiceImpl;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.impl.EsKeyEntityDataServiceImpl;
 import local.uniclog.mainframe.dao.teamspeak.repository.TeamspeakUserRepository;
 import local.uniclog.mainframe.dao.teamspeak.service.TeamspeakUserEntityDataAccessService;
@@ -33,7 +35,7 @@ public class DataServiceTestConfiguration {
 
     @Bean("beanEsKeyEntityDataService")
     public EsKeyEntityDataService esKeyEntityDataService() {
-        return new EsKeyEntityDataServiceImpl(beanEsKeyRepository);
+        return new EsKeyEntityDataServiceImpl(beanEsKeyRepository, beanDataUtilsService);
     }
 
     @Bean("beanTeamspeakUserEntityDataServiceTest")
@@ -54,6 +56,11 @@ public class DataServiceTestConfiguration {
     @Bean("beanTelegramUnicBotCoreUserEntityDataServiceTest")
     public TelegramUnicBotCoreUserEntityDataService telegramUnicBotCoreUserEntityDataService() {
         return new TelegramUnicBotCoreUserEntityDataServiceImpl(beanTelegramUnicBotCoreRepository, beanDataUtilsService);
+    }
+
+    @Bean("beanEsKeyEntityDataAccessServiceTest")
+    public EsKeyEntityDataAccessService esKeyEntityDataAccessService() {
+        return new EsKeyEntityDataAccessServiceImpl(esKeyEntityDataService());
     }
 
     @Bean("beanTeamspeakUserEntityDataAccessServiceTest")

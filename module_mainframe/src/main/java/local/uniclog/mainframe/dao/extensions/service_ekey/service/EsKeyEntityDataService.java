@@ -1,5 +1,6 @@
 package local.uniclog.mainframe.dao.extensions.service_ekey.service;
 
+import local.uniclog.mainframe.dao.extensions.service_ekey.dto.EsKeyEntityDto;
 import local.uniclog.mainframe.dao.extensions.service_ekey.entity.EsKeyEntity;
 
 import java.time.LocalDateTime;
@@ -73,4 +74,20 @@ public interface EsKeyEntityDataService {
      * @return {@link EsKeyEntity} сущность ключей
      */
     EsKeyEntity findByKey(String key);
+
+    /**
+     * Convert entity to Dto object
+     *
+     * @param entity {@link EsKeyEntity}
+     * @return {@link EsKeyEntityDto}
+     */
+    EsKeyEntityDto convertToDataTransferObject(EsKeyEntity entity);
+
+    /**
+     * Convert Dto object to entity
+     *
+     * @param dto {@link EsKeyEntityDto}
+     * @return {@link EsKeyEntity}
+     */
+    EsKeyEntity convertFromDataTransferObject(EsKeyEntityDto dto);
 }

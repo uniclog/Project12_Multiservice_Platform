@@ -22,8 +22,8 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
-    private final DataUtilsService dataUtilsService;
     private final EsKeyRepository repository;
+    private final DataUtilsService dataUtilsService;
 
     @Override
     public EsKeyEntity save(EsKeyEntity key) {

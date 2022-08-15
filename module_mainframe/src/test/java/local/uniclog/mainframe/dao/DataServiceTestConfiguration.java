@@ -33,7 +33,7 @@ public class DataServiceTestConfiguration {
 
     @Bean("beanEsKeyEntityDataService")
     public EsKeyEntityDataService esKeyEntityDataService() {
-        return new EsKeyEntityDataServiceImpl(beanEsKeyRepository);
+        return new EsKeyEntityDataServiceImpl(beanEsKeyRepository, beanDataUtilsService);
     }
 
     @Bean("beanTeamspeakUserEntityDataServiceTest")

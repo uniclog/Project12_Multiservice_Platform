@@ -5,8 +5,6 @@ import local.uniclog.mainframe.dao.extensions.service_ekey.dto.EsKeyEntityDto;
 import local.uniclog.mainframe.dao.extensions.service_ekey.entity.EsKeyEntity;
 import local.uniclog.mainframe.dao.extensions.service_ekey.repository.EsKeyRepository;
 import local.uniclog.mainframe.dao.extensions.service_ekey.service.EsKeyEntityDataService;
-import local.uniclog.mainframe.dao.telegram.dto.TelegramMyFitnessUserEntityDto;
-import local.uniclog.mainframe.dao.telegram.entity.TelegramUnicBotCoreUserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,11 +63,11 @@ public class EsKeyEntityDataServiceImpl implements EsKeyEntityDataService {
 
     @Override
     public EsKeyEntityDto convertToDataTransferObject(EsKeyEntity entity) {
-        return dataUtilsService.convertData(entity, TelegramMyFitnessUserEntityDto.class);
+        return dataUtilsService.convertData(entity, EsKeyEntityDto.class);
     }
 
     @Override
     public EsKeyEntity convertFromDataTransferObject(EsKeyEntityDto dto) {
-        return dataUtilsService.convertData(dto, TelegramUnicBotCoreUserEntity.class);
+        return dataUtilsService.convertData(dto, EsKeyEntity.class);
     }
 }

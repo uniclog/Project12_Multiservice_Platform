@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
 
 /**
  * Реализация сервиса {@link EsKeyEntityDataAccessService}
@@ -60,7 +59,7 @@ public class EsKeyEntityDataAccessServiceImpl implements EsKeyEntityDataAccessSe
         var entities = service.findByDateAfter(date);
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
-                .collect(toList());
+                .toList();
     }
 
     @Override
@@ -68,7 +67,7 @@ public class EsKeyEntityDataAccessServiceImpl implements EsKeyEntityDataAccessSe
         var entities = service.findAll();
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
-                .collect(toList());
+                .toList();
     }
 
     @Override

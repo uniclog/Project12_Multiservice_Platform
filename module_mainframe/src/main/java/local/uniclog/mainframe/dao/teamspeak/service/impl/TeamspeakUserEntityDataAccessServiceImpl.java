@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
 
 /**
  * Реализация сервиса {@link TeamspeakUserEntityDataAccessService}
@@ -54,7 +53,7 @@ public class TeamspeakUserEntityDataAccessServiceImpl implements TeamspeakUserEn
         var entities = service.findAllSubscribers();
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
-                .collect(toList());
+                .toList();
     }
 
     @Override
@@ -62,7 +61,7 @@ public class TeamspeakUserEntityDataAccessServiceImpl implements TeamspeakUserEn
         var entities = service.findAll();
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
-                .collect(toList());
+                .toList();
     }
 
     @Override
@@ -70,6 +69,6 @@ public class TeamspeakUserEntityDataAccessServiceImpl implements TeamspeakUserEn
         var entities = service.deleteByTeamspeakToken(token);
         return (entities.isEmpty()) ? emptyList() : entities.stream()
                 .map(service::convertToDataTransferObject)
-                .collect(toList());
+                .toList();
     }
 }
